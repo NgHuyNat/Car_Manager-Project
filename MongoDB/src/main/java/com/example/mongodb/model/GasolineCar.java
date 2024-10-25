@@ -12,6 +12,5 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Setter
 
 public class GasolineCar extends Car {
-    private Long Lper100Km;
-    private String ElectricEngine;
+    private Integer kmperfullfill;
 }

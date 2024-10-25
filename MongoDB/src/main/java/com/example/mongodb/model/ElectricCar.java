@@ -12,5 +12,5 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Setter
 
 public class ElectricCar extends Car {
-    private Long kmpercharge;
+    private Integer kmpercharge;
 }

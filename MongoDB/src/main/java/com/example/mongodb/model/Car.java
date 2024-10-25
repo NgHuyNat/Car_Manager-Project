@@ -19,4 +19,6 @@ public class Car {
     private String type;
     private String brand;
     private String color;
+    private String engine;
+    private String information;
 }

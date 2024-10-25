@@ -8,5 +8,4 @@ import java.util.List;
 
 public interface CarRepository extends MongoRepository<Car, Integer> {
     List<Car> findByBrand(String brand);
-    List<ElectricCar> findBykmpercharge(String kmpercharge);
 }
