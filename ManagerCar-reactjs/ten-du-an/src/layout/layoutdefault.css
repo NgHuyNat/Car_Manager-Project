@@ -1,0 +1,169 @@
+*{
+    list-style: none;
+}
+/* header */
+.header{
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    background-color: #001529;
+    color: #fff;
+}
+
+.header-logo img{
+    width: 182px;
+    height: 79px;
+    margin-left: 15px; 
+    cursor: pointer;
+}   
+.header-users--avatar{
+    position: relative;
+    display: inline-block;
+}
+.header-users--avatar .avatar{
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 20px;
+    cursor: pointer;
+    
+}
+.Logout{
+    position: absolute;
+    color: #fff;
+    text-decoration: none;
+    right: 1px;
+    top: 35px;
+    display: none;
+    white-space: nowrap;
+}
+.header-users--avatar:hover .Logout{
+    display: block;
+}
+.header-users--register{
+    cursor: pointer;
+    margin-right: 20px;
+   
+}
+.register{
+    color: #fff;
+    text-decoration: none;
+}
+.Login{
+    color: #fff;
+    text-decoration: none;
+}
+
+/* end header */
+.index{
+    display: flex;
+}
+/* tab */
+.tab{
+    width: 216px;
+    height: 120vh;
+    background-color: #001529;
+    padding: 10px;
+    color: #9EA6AD;
+    font-size: 19px;
+    font-weight: 500;
+    
+    overflow-y: auto;
+}
+.tab-menu{
+padding-left: 30px;
+
+}
+.tab-menu--home{
+    margin-bottom: 14px;
+   
+    a {
+        text-decoration: none;
+        color: #fff;
+    }
+    .active{
+        color: #ccc5c5;
+    }
+}
+
+.tab-menu--cars{
+    margin-bottom: 14px;
+    a {
+        text-decoration: none   ;
+        color: #fff;
+       
+    }
+    .active{
+        color: #ccc5c5;
+    }
+}
+.tab-menu--customs{
+    margin-bottom: 14px;
+    a {
+        text-decoration: none   ;
+        color: #fff;
+    }
+    .active{
+        color: #ccc5c5;
+    }
+}
+.tab-menu--warehouse{
+    margin-bottom: 14px;
+    a {
+        text-decoration: none   ;
+        color: #fff;
+    }
+    .active{
+        color: #ccc5c5;
+    }
+}
+.tab-menu--calendar{
+    margin-bottom: 14px;
+    a {
+        text-decoration: none   ;
+        color: #fff;
+    }
+    .active{
+        color: #ccc5c5;
+    }
+}
+.tab-menu--profile{
+    margin-bottom: 14px;
+    a {
+        text-decoration: none   ;
+        color: #fff;
+    }
+    .active{
+        color: #ccc5c5;
+    }
+}
+.tab-menu--profile:hover{
+    color: #fff;
+    cursor: pointer;
+}
+.tab-menu--calendar:hover{
+    color: #fff;
+    cursor: pointer;
+}
+.tab-menu--warehouse:hover{
+    color: #fff;
+    cursor: pointer;
+}
+.tab-menu--customs:hover{
+    color: #fff;
+    cursor: pointer;
+}
+.tab-menu--cars:hover{
+    color: #fff;
+    cursor: pointer;
+}
+.tab-menu--home:hover{
+    color: #fff;
+    cursor: pointer;
+}
+/* end tab */
+.header-users--relog{
+    cursor: pointer;
+    margin-right: 20px;
+    display: flex;
+}
