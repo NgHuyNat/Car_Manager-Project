@@ -1,0 +1,60 @@
+package com.nghuytan.carmanager.model;
+
+import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
+
+@Setter
+@Getter
+@Entity
+@Table(name = "employee")
+public class Employee {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
+
+    @Column(name = "username", nullable = false, unique = true)
+    private String username;
+
+    @Column(name = "password", nullable = false)
+    private String password;
+
+    @Column(name = "role", nullable = false)
+    private String role;
+
+    @Column(name = "name", nullable = false)
+    private String name;
+
+    @Column(name = "phone_number")
+    private String phoneNumber;
+
+    @Column(name = "email")
+    private String email;
+
+    @Column(name = "address")
+    private String address;
+
+    @Column(name = "salary")
+    private String salary;
+
+    @Column(name = "bonus_salary")
+    private String bonusSalary;
+
+    @Column(name = "default_salary")
+    private String defaultSalary;
+
+    @Column(name = "cars_sold_total")
+    private int carsSoldTotal;
+
+    @ManyToOne
+    @JoinColumn(name = "manager_id")
+    private Manager manager;
+
+    public Integer getManagerId() {
+        return manager != null ? manager.getId() : null; // Trả về ID từ Manager
+    }
+
+    public void setManagerId(int managerId) {
+    }
+}
