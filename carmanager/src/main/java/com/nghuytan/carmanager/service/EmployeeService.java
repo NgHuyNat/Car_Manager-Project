@@ -79,4 +79,12 @@ public class EmployeeService {
                 .orElseThrow(() -> new RuntimeException("Manager not found with username: " + username));
         return manager.getId();
     }
+
+    public Employee findById(int id) {
+        return employeeRepository.findById(id).orElse(null);
+    }
+
+    public Employee save(Employee existingEmployee) {
+        return employeeRepository.save(existingEmployee);
+    }
 }

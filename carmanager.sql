@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th10 21, 2024 lúc 10:05 AM
+-- Thời gian đã tạo: Th10 21, 2024 lúc 08:01 PM
 -- Phiên bản máy phục vụ: 10.4.32-MariaDB
 -- Phiên bản PHP: 8.0.30
 
@@ -34,7 +34,7 @@ CREATE TABLE `customer` (
   `id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
-  `phone_number` varchar(255) NOT NULL,
+  `phonenumber` varchar(255) NOT NULL,
   `address` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -56,13 +56,13 @@ CREATE TABLE `employee` (
   `password` varchar(255) NOT NULL,
   `role` varchar(255) NOT NULL,
   `name` varchar(255) NOT NULL,
-  `phone_number` varchar(255) DEFAULT NULL,
+  `phonenumber` varchar(255) DEFAULT NULL,
   `email` varchar(255) DEFAULT NULL,
   `address` varchar(255) DEFAULT NULL,
   `salary` varchar(255) DEFAULT NULL,
-  `bonus_salary` varchar(255) DEFAULT NULL,
-  `default_salary` varchar(255) DEFAULT NULL,
-  `cars_sold_total` int(11) DEFAULT NULL,
+  `bonussalary` varchar(255) DEFAULT NULL,
+  `defaultsalary` varchar(255) DEFAULT NULL,
+  `carssoldtotal` int(11) DEFAULT NULL,
   `manager_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -75,8 +75,8 @@ TRUNCATE TABLE `employee`;
 -- Đang đổ dữ liệu cho bảng `employee`
 --
 
-INSERT INTO `employee` (`id`, `username`, `password`, `role`, `name`, `phone_number`, `email`, `address`, `salary`, `bonus_salary`, `default_salary`, `cars_sold_total`, `manager_id`) VALUES
-(1, 'employee1', '$2a$10$O1A5L.nz6X.VHtO8ye9aKuzmdrGBn80W3okE.rWxTwArAqJZBrMjq', 'ROLE_EMPLOYEE', 'Jane Smith', '987654321', 'employee1@example.com', '456 Elm St', '3000', '500', '2500', 0, NULL),
+INSERT INTO `employee` (`id`, `username`, `password`, `role`, `name`, `phonenumber`, `email`, `address`, `salary`, `bonussalary`, `defaultsalary`, `carssoldtotal`, `manager_id`) VALUES
+(1, 'employee1', '1', 'employee', 'Jane Smithhhhhh', '987654321', 'employee1@example.com', '456 Elm St', '3000', '500', '2500', 0, NULL),
 (2, 'employee2', '$2a$10$FK1dRtxrEGWdiT9.MKfXYuqDHrLb8aw2YtiFhSocBocjfFeRMeaBK', 'ROLE_EMPLOYEE', 'Jane Smith', '987654321', 'employee1@example.com', '456 Elm St', '3000', '500', '2500', 0, NULL);
 
 -- --------------------------------------------------------
@@ -92,12 +92,12 @@ CREATE TABLE `manager` (
   `password` varchar(255) NOT NULL,
   `role` varchar(255) NOT NULL,
   `name` varchar(255) NOT NULL,
-  `phone_number` varchar(255) DEFAULT NULL,
   `email` varchar(255) DEFAULT NULL,
   `address` varchar(255) DEFAULT NULL,
   `salary` varchar(255) DEFAULT NULL,
-  `bonus_salary` varchar(255) DEFAULT NULL,
-  `default_salary` varchar(255) DEFAULT NULL
+  `bonussalary` varchar(255) DEFAULT NULL,
+  `defaultsalary` varchar(255) DEFAULT NULL,
+  `phonenumber` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -109,7 +109,7 @@ TRUNCATE TABLE `manager`;
 -- Đang đổ dữ liệu cho bảng `manager`
 --
 
-INSERT INTO `manager` (`id`, `username`, `password`, `role`, `name`, `phone_number`, `email`, `address`, `salary`, `bonus_salary`, `default_salary`) VALUES
+INSERT INTO `manager` (`id`, `username`, `password`, `role`, `name`, `email`, `address`, `salary`, `bonussalary`, `defaultsalary`, `phonenumber`) VALUES
 (2, 'manager1', '$2a$10$EqDvccovJ0.XtgV9e59pPuENoWzGF/ySXbqBv3sM0u4SNbVdBpJpa', 'ROLE_MANAGER', 'John Doe', NULL, NULL, NULL, NULL, NULL, NULL);
 
 --

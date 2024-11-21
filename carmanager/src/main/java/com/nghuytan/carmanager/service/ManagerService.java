@@ -1,6 +1,5 @@
 package com.nghuytan.carmanager.service;
 
-
 import com.nghuytan.carmanager.model.Manager;
 import com.nghuytan.carmanager.repository.ManagerRepository;
 import org.springframework.stereotype.Service;

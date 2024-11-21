@@ -1,5 +1,6 @@
 package com.nghuytan.carmanager.controller;
 
+import com.nghuytan.carmanager.dto.request.LoginRequest;
 import com.nghuytan.carmanager.dto.request.RegisterRequest;
 import com.nghuytan.carmanager.model.Employee;
 import com.nghuytan.carmanager.model.Manager;
@@ -68,4 +69,26 @@ public class AuthController {
 
         return ResponseEntity.ok("Đăng ký thành công!");
     }
+
+    @PostMapping("/login")
+    public ResponseEntity<?> login(@RequestBody LoginRequest loginRequest) {
+        var managerOpt = managerRepository.findByUsername(loginRequest.getUsername());
+        if (managerOpt.isPresent()) {
+            Manager manager = managerOpt.get();
+            if (passwordEncoder.matches(loginRequest.getPassword(), manager.getPassword())) {
+                return ResponseEntity.ok("Đăng nhập thành công với vai trò Quản lý!");
+            }
+        }
+
+        var employeeOpt = employeeRepository.findByUsername(loginRequest.getUsername());
+        if (employeeOpt.isPresent()) {
+            Employee employee = employeeOpt.get();
+            if (passwordEncoder.matches(loginRequest.getPassword(), employee.getPassword())) {
+                return ResponseEntity.ok("Đăng nhập thành công với vai trò Nhân viên!");
+            }
+        }
+
+        return ResponseEntity.badRequest().body("Tên người dùng hoặc mật khẩu không đúng!");
+    }
+
 }
