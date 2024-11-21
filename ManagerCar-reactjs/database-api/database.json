@@ -45,161 +45,158 @@
   ],
   "vehicles": [
     {
-      "id": "1",
-      "MaXe": "001",
-      "TenXe": "Toyota Camry",
-      "HangXe": "Toyota",
-      "NamSanXuat": "2020",
-      "GiaBan": "30000",
-      "LoaiXe": "Sedan",
-      "HinhAnh": "https://img4.thuthuatphanmem.vn/uploads/2020/12/26/hinh-nen-sieu-xe-ngau_020259124.jpg"
-    },
-    {
-      "id": "2",
-      "MaXe": "002",
-      "TenXe": "Honda Civic",
-      "HangXe": "Honda",
-      "NamSanXuat": "2019",
-      "GiaBan": "25000",
-      "LoaiXe": "Sedan",
-      "HinhAnh": "https://img4.thuthuatphanmem.vn/uploads/2020/12/26/hinh-nen-sieu-xe-ngau_020259124.jpg"
+      "Name": "Toyota Camry",
+      "Brand": "Toyota",
+      "Releaseyear": "2020",
+      "Price": "30000",
+      "Type": "Sedan",
+      "img": "https://img4.thuthuatphanmem.vn/uploads/2020/12/26/hinh-nen-sieu-xe-ngau_020259124.jpg",
+      "Battery_capacity": "1",
+      "Range_per_charge": "2",
+      "Fuel_tank_capacity": "3",
+      "Fuel_efficiency": "4",
+      "Enginetype": "5",
+      "id": "1"
     }
   ],
   "Nhanvien": [
     {
       "id": "1",
       "MaNV": 1,
-      "TenNV": "Nguyễn Quốc Cường",
-      "ChucVu": "Tư vấn",
-      "SDT": "0383605017",
-      "Email": "Cuongnguyen2k5s@gmail.com",
-      "DiaChi": "Hà Nội"
+      "name": "Nguyễn Quốc Cường",
+      "role": "Tư vấn",
+      "phonenumber": "0383605017",
+      "email": "Cuongnguyen2k5s@gmail.com",
+      "address": "Hà Nội",
+      "salary": "10000000",
+      "salarybonus": "5000000",
+      "defaultsalary": "10000000",
+      "carsoldtotal": "10"
     }
   ],
   "users": [
     {
       "MaKH": 1,
-      "TenKH": "Nguyễn Văn A",
-      "SDT": "0123456789",
-      "Email": "a@gmail.com",
-      "Diachi": "Hà Nội",
-      "CCCD": "123456789012",
+      "name": "Nguyễn Văn A",
+      "phonenumber": "0123456789",
+      "email": "a@gmail.com",
+      "address": "Hà Nội",
       "id": "1"
     }
   ],
   "purchases": [
     {
-      "id": 1,
+      "id": "1",
       "vehicleId": 101,
-      "customerId": "KH001",
+      "customerName": "KH001",
+      "employeeName": "NV001",
       "purchaseDate": "2024-01-15",
       "details": "Khách hàng mua kèm bảo hiểm 1 năm.",
       "vehicle": {
-        "MaXe": "MX101",
-        "TenXe": "Toyota Corolla",
-        "HangXe": "Toyota",
-        "NamSanXuat": "2023",
-        "GiaBan": "800000000",
-        "LoaiXe": "Sedan",
-        "HinhAnh": "https://example.com/toyota-corolla.jpg"
+        "name": "Toyota Corolla",
+        "brand": "Toyota",
+        "releaseyear": "2023",
+        "price": "800000000",
+        "type": "Sedan",
+        "img": "https://example.com/toyota-corolla.jpg"
       }
     },
     {
-      "id": 2,
+      "id": "2",
       "vehicleId": 102,
-      "customerId": "KH002",
+      "customerName": "KH002",
+      "employeeName": "NV001",
       "purchaseDate": "2024-02-10",
       "details": "Thanh toán bằng hình thức trả góp.",
       "vehicle": {
-        "MaXe": "MX102",
-        "TenXe": "Honda Civic",
-        "HangXe": "Honda",
-        "NamSanXuat": "2022",
-        "GiaBan": "900000000",
-        "LoaiXe": "Sedan",
-        "HinhAnh": "https://example.com/honda-civic.jpg"
+        "name": "Honda Civic",
+        "brand": "Honda",
+        "releaseyear": "2022",
+        "price": "900000000",
+        "type": "Sedan",
+        "img": "https://example.com/honda-civic.jpg"
       }
     },
     {
-      "id": 3,
+      "id": "3",
       "vehicleId": 103,
-      "customerId": "KH003",
+      "customerName": "KH003",
+      "employeeName": "NV001",
       "purchaseDate": "2024-03-05",
       "details": "Khách hàng yêu cầu giao xe vào ngày 2024-03-15.",
       "vehicle": {
-        "MaXe": "MX103",
-        "TenXe": "Ford Ranger",
-        "HangXe": "Ford",
-        "NamSanXuat": "2023",
-        "GiaBan": "1200000000",
-        "LoaiXe": "Pickup",
-        "HinhAnh": "https://example.com/ford-ranger.jpg"
+        "name": "Ford Ranger",
+        "brand": "Ford",
+        "releaseyear": "2023",
+        "price": "1200000000",
+        "type": "Pickup",
+        "img": "https://example.com/ford-ranger.jpg"
       }
     },
     {
-      "id": 4,
+      "id": "4",
       "vehicleId": 104,
-      "customerId": "KH004",
+      "customerName": "KH004",
+      "employeeName": "NV001",
       "purchaseDate": "2024-04-01",
       "details": "Mua kèm phụ kiện camera hành trình.",
       "vehicle": {
-        "MaXe": "MX104",
-        "TenXe": "Mazda CX-5",
-        "HangXe": "Mazda",
-        "NamSanXuat": "2023",
-        "GiaBan": "950000000",
-        "LoaiXe": "SUV",
-        "HinhAnh": "https://example.com/mazda-cx5.jpg"
+        "name": "Mazda CX-5",
+        "brand": "Mazda",
+        "releaseyear": "2023",
+        "price": "950000000",
+        "type": "SUV",
+        "img": "https://example.com/mazda-cx5.jpg"
       }
     },
     {
-      "id": 5,
+      "id": "5",
       "vehicleId": 105,
-      "customerId": "KH005",
+      "customerName": "KH005",
+      "employeeName": "NV001",
       "purchaseDate": "2024-05-20",
       "details": "Khách hàng muốn giao xe tại nhà.",
       "vehicle": {
-        "MaXe": "MX105",
-        "TenXe": "Kia Seltos",
-        "HangXe": "Kia",
-        "NamSanXuat": "2023",
-        "GiaBan": "750000000",
-        "LoaiXe": "SUV",
-        "HinhAnh": "https://example.com/kia-seltos.jpg"
+        "name": "Kia Seltos",
+        "brand": "Kia",
+        "releaseyear": "2023",
+        "price": "750000000",
+        "type": "SUV",
+        "img": "https://example.com/kia-seltos.jpg"
       }
     },
     {
       "id": "bebe",
       "vehicleId": "1",
-      "customerId": "123",
+      "customerName": "123",
+      "employeeName": "NV001",
       "purchaseDate": "2024-11-18",
       "details": "hihi",
       "vehicle": {
         "id": "1",
-        "MaXe": "001",
-        "TenXe": "Toyota Camry",
-        "HangXe": "Toyota",
-        "NamSanXuat": "2020",
-        "GiaBan": "30000",
-        "LoaiXe": "Sedan",
-        "HinhAnh": "https://img4.thuthuatphanmem.vn/uploads/2020/12/26/hinh-nen-sieu-xe-ngau_020259124.jpg"
+        "name": "Toyota Camry",
+        "brand": "Toyota",
+        "releaseyear": "2020",
+        "price": "30000",
+        "type": "Sedan",
+        "img": "https://img4.thuthuatphanmem.vn/uploads/2020/12/26/hinh-nen-sieu-xe-ngau_020259124.jpg"
       }
     },
     {
       "id": "a8d6",
       "vehicleId": "2",
-      "customerId": "1233444",
+      "customerName": "1233444",
+      "employeeName": "NV001",
       "purchaseDate": "2024-11-18",
       "details": "hahahahaha",
       "vehicle": {
         "id": "2",
-        "MaXe": "002",
-        "TenXe": "Honda Civic",
-        "HangXe": "Honda",
-        "NamSanXuat": "2019",
-        "GiaBan": "25000",
-        "LoaiXe": "Sedan",
-        "HinhAnh": "https://img4.thuthuatphanmem.vn/uploads/2020/12/26/hinh-nen-sieu-xe-ngau_020259124.jpg"
+        "name": "Honda Civic",
+        "brand": "Honda",
+        "releaseyear": "2019",
+        "price": "25000",
+        "type": "Sedan",
+        "img": "https://img4.thuthuatphanmem.vn/uploads/2020/12/26/hinh-nen-sieu-xe-ngau_020259124.jpg"
       }
     }
   ]

@@ -7,11 +7,10 @@ function Users() {
   const [error, setError] = useState(null);
   const [newusers, setNewusers] = useState({
     MaKH: "",
-    TenKH: "",
-    SDT: "",
-    Email: "",
-    Diachi: "",
-    CCCD: "",
+    name: "",
+    phonenumber: "",
+    email: "",
+    address: "",
   });
   const [editMode, setEditMode] = useState(false); // Chế độ chỉnh sửa
   const [editUser, setEditUser] = useState(null); // Khách hàng đang chỉnh sửa
@@ -63,11 +62,10 @@ function Users() {
         setCustomers([...customers, data]);
         setNewusers({
           MaKH: "",
-          TenKH: "",
-          SDT: "",
-          Email: "",
-          Diachi: "",
-          CCCD: "",
+          name: "",
+          phonenumber: "",
+          email: "",
+          address: "",
         });
       })
       .catch((error) => {
@@ -122,11 +120,10 @@ function Users() {
         setEditUser(null);
         setNewusers({
           MaKH: "",
-          TenKH: "",
-          SDT: "",
-          Email: "",
-          Diachi: "",
-          CCCD: "",
+          name: "",
+          phonenumber: "",
+          email: "",
+          address: "",
         });
       })
       .catch((error) => {
@@ -153,7 +150,7 @@ function Users() {
               type="text"
               name="TenKH"
               placeholder="Tên khách hàng"
-              value={newusers.TenKH}
+              value={newusers.name}
               onChange={handleInputChange}
               required
             />
@@ -161,7 +158,7 @@ function Users() {
               type="text"
               name="SDT"
               placeholder="Số điện thoại"
-              value={newusers.SDT}
+              value={newusers.phonenumber}
               onChange={handleInputChange}
               required
             />
@@ -169,7 +166,7 @@ function Users() {
               type="email"
               name="Email"
               placeholder="Email"
-              value={newusers.Email}
+              value={newusers.email}
               onChange={handleInputChange}
               required
             />
@@ -177,18 +174,11 @@ function Users() {
               type="text"
               name="Diachi"
               placeholder="Địa chỉ"
-              value={newusers.Diachi}
+              value={newusers.address}
               onChange={handleInputChange}
               required
             />
-            <input
-              type="text"
-              name="CCCD"
-              placeholder="CCCD"
-              value={newusers.CCCD}
-              onChange={handleInputChange}
-              required
-            />
+
             <div className="group-btn">
               <button type="submit">{editMode ? "Cập nhật" : "Thêm"}</button>
             </div>
@@ -199,12 +189,11 @@ function Users() {
       <table>
         <thead>
           <tr>
-            <th>MaKH</th>
+            <th>ID</th>
             <th>TenKH</th>
             <th>SDT</th>
             <th>Email</th>
             <th>Diachi</th>
-            <th>CCCD</th>
             <th>Thay đổi</th>
           </tr>
         </thead>
@@ -212,11 +201,11 @@ function Users() {
           {customers.map((user) => (
             <tr key={user.MaKH}>
               <td>{user.MaKH}</td>
-              <td>{user.TenKH}</td>
-              <td>{user.SDT}</td>
-              <td>{user.Email}</td>
-              <td>{user.Diachi}</td>
-              <td>{user.CCCD}</td>
+              <td>{user.name}</td>
+              <td>{user.phonenumber}</td>
+              <td>{user.email}</td>
+              <td>{user.address}</td>
+
               <td>
                 <button onClick={() => handleEdit(user)}>Sửa</button>
                 <button onClick={() => handleDelete(user.MaKH)}>Xóa</button>

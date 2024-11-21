@@ -7,11 +7,15 @@ function Nhanvien() {
   const [error, setError] = useState(null);
   const [newusers, setNewusers] = useState({
     MaNV: "",
-    TenNV: "",
-    ChucVu: "",
-    SDT: "",
-    Email: "",
-    DiaChi: "",
+    name: "",
+    role: "",
+    phonenumber: "",
+    email: "",
+    address: "",
+    salary: "",
+    salarybonus: "",
+    defaultsalary: "",
+    carsoldtotal: "",
   });
   const [editMode, setEditMode] = useState(false); // Chế độ chỉnh sửa
   const [editUser, setEditUser] = useState(null); // Khách hàng đang chỉnh sửa
@@ -63,11 +67,15 @@ function Nhanvien() {
         setCustomers([...customers, data]);
         setNewusers({
           MaNV: "",
-          TenNV: "",
-          ChucVu: "",
-          SDT: "",
-          Email: "",
-          DiaChi: "",
+          name: "",
+          role: "",
+          phonenumber: "",
+          email: "",
+          address: "",
+          salary: "",
+          salarybonus: "",
+          defaultsalary: "",
+          carsoldtotal: "",
         });
       })
       .catch((error) => {
@@ -122,11 +130,15 @@ function Nhanvien() {
         setEditUser(null);
         setNewusers({
           MaNV: "",
-          TenNV: "",
-          ChucVu: "",
-          SDT: "",
-          Email: "",
-          DiaChi: "",
+          name: "",
+          role: "",
+          phonenumber: "",
+          email: "",
+          address: "",
+          salary: "",
+          salarybonus: "",
+          defaultsalary: "",
+          carsoldtotal: "",
         });
       })
       .catch((error) => {
@@ -153,7 +165,7 @@ function Nhanvien() {
               type="text"
               name="TenNV"
               placeholder="Tên nhân viên"
-              value={newusers.TenNV}
+              value={newusers.name}
               onChange={handleInputChange}
               required
             />
@@ -161,7 +173,7 @@ function Nhanvien() {
               type="text"
               name="ChucVu"
               placeholder="Chức vụ"
-              value={newusers.ChucVu}
+              value={newusers.role}
               onChange={handleInputChange}
               required
             />
@@ -169,7 +181,7 @@ function Nhanvien() {
               type="text"
               name="SDT"
               placeholder="Số điện thoại"
-              value={newusers.SDT}
+              value={newusers.phonenumber}
               onChange={handleInputChange}
               required
             />
@@ -177,7 +189,7 @@ function Nhanvien() {
               type="Email"
               name="Email"
               placeholder="email"
-              value={newusers.Email}
+              value={newusers.email}
               onChange={handleInputChange}
               required
             />
@@ -185,7 +197,39 @@ function Nhanvien() {
               type="text"
               name="DiaChi"
               placeholder="Địa chỉ"
-              value={newusers.DiaChi}
+              value={newusers.address}
+              onChange={handleInputChange}
+              required
+            />
+            <input
+              type="text"
+              name="Luong"
+              placeholder="Lương"
+              value={newusers.salary}
+              onChange={handleInputChange}
+              required
+            />
+            <input
+              type="text"
+              name="Luongthuong"
+              placeholder="Lương thưởng"
+              value={newusers.salarybonus}
+              onChange={handleInputChange}
+              required
+            />
+            <input
+              type="text"
+              name="Luongmacdinh"
+              placeholder="Lương mặc định"
+              value={newusers.defaultsalary}
+              onChange={handleInputChange}
+              required
+            />
+            <input
+              type="text"
+              name="SoXeBanDuoc"
+              placeholder="Số xe bán được"
+              value={newusers.carsoldtotal}
               onChange={handleInputChange}
               required
             />
@@ -199,12 +243,16 @@ function Nhanvien() {
       <table>
         <thead>
           <tr>
-            <th>MaNV</th>
+            <th>ID</th>
             <th>TenNV</th>
             <th>ChucVu</th>
             <th>SDT</th>
             <th>Email</th>
             <th>DiaChi</th>
+            <th>Luong</th>
+            <th>Luongthuong</th>
+            <th>Luongmacdinh</th>
+            <th>SoXeBanDuoc</th>
             <th>Thay đổi</th>
           </tr>
         </thead>
@@ -212,11 +260,16 @@ function Nhanvien() {
           {customers.map((user) => (
             <tr key={user.MaNV}>
               <td>{user.MaNV}</td>
-              <td>{user.TenNV}</td>
-              <td>{user.ChucVu}</td>
-              <td>{user.SDT}</td>
-              <td>{user.Email}</td>
-              <td>{user.DiaChi}</td>
+              <td>{user.name}</td>
+              <td>{user.role}</td>
+              <td>{user.phonenumber}</td>
+              <td>{user.email}</td>
+              <td>{user.address}</td>
+              <td>{user.salary}</td>
+              <td>{user.salarybonus}</td>
+              <td>{user.defaultsalary}</td>
+              <td>{user.carsoldtotal}</td>
+
               <td>
                 <button onClick={() => handleEdit(user)}>Sửa</button>
                 <button onClick={() => handleDelete(user.MaNV)}>Xóa</button>

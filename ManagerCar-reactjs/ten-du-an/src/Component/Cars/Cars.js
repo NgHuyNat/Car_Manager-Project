@@ -5,12 +5,16 @@ function Cars() {
   const [vehicles, setVehicles] = useState([]);
   const [formData, setFormData] = useState({
     id: "",
-    MaXe: "",
-    TenXe: "",
-    HangXe: "",
-    NamSanXuat: "",
-    GiaBan: "",
-    LoaiXe: "",
+    Name: "",
+    Brand: "",
+    Releaseyear: "",
+    Price: "",
+    Type: "",
+    Battery_capacity: "",
+    Range_per_charge: "",
+    Fuel_tank_capacity: "",
+    Fuel_efficiency: "",
+    Enginetype: "",
   });
 
   const [editingId, setEditingId] = useState(null);
@@ -54,7 +58,7 @@ function Cars() {
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify(formData),
+          body: JSON.stringify(formData), // không bao gồm MaXe
         });
         fetchVehicles();
         setEditingId(null);
@@ -64,12 +68,12 @@ function Cars() {
     } else {
       try {
         // Thêm xe mới qua API
-        await fetch("API_URL/vehicles", {
+        await fetch("http://localhost:3000/vehicles", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify(formData),
+          body: JSON.stringify(formData), // không bao gồm MaXe
         });
         fetchVehicles();
       } catch (error) {
@@ -78,18 +82,24 @@ function Cars() {
     }
     setFormData({
       id: "",
-      MaXe: "",
-      TenXe: "",
-      HangXe: "",
-      NamSanXuat: "",
-      GiaBan: "",
-      LoaiXe: "",
-      HinhAnh: "",
+      Name: "",
+      Brand: "",
+      Releaseyear: "",
+      Price: "",
+      Type: "",
+      img: "",
+      Battery_capacity: "",
+      Range_per_charge: "",
+      Fuel_tank_capacity: "",
+      Fuel_efficiency: "",
+      Enginetype: "",
     });
   };
+
   const [isPurchaseModalOpen, setIsPurchaseModalOpen] = useState(false);
   const [purchaseData, setPurchaseData] = useState({
-    customerId: "",
+    customerName: "",
+    employeeName: "",
     purchaseDate: "",
     details: "",
   });
@@ -103,7 +113,8 @@ function Cars() {
     try {
       const purchaseInfo = {
         vehicleId: selectedVehicle.id,
-        customerId: purchaseData.customerId,
+        customerName: purchaseData.customerName,
+        employeeName: purchaseData.employeeName,
         purchaseDate: purchaseData.purchaseDate,
         details: purchaseData.details,
         vehicle: { ...selectedVehicle }, // Đính kèm thông tin xe
@@ -120,7 +131,12 @@ function Cars() {
 
       alert("Mua xe thành công!");
       setIsPurchaseModalOpen(false); // Đóng modal mua
-      setPurchaseData({ customerId: "", purchaseDate: "", details: "" }); // Reset form
+      setPurchaseData({
+        customerName: "",
+        employeeName: "",
+        purchaseDate: "",
+        details: "",
+      }); // Reset form
     } catch (error) {
       console.error("Lỗi khi mua xe:", error);
       alert("Đã xảy ra lỗi. Vui lòng thử lại.");
@@ -129,7 +145,19 @@ function Cars() {
 
   const handleEditVehicle = (id) => {
     const vehicle = vehicles.find((v) => v.id === id);
-    setFormData(vehicle);
+    setFormData({
+      Name: vehicle.Name,
+      Brand: vehicle.Brand,
+      Releaseyear: vehicle.Releaseyear,
+      Price: vehicle.Price,
+      Type: vehicle.Type,
+      img: vehicle.img,
+      Battery_capacity: vehicle.Battery_capacity,
+      Range_per_charge: vehicle.Range_per_charge,
+      Fuel_tank_capacity: vehicle.Fuel_tank_capacity,
+      Fuel_efficiency: vehicle.Fuel_efficiency,
+      Enginetype: vehicle.Enginetype,
+    });
     setEditingId(id);
     setModalCar(true);
   };
@@ -176,52 +204,80 @@ function Cars() {
         </button>
         {ModalCar && (
           <form onSubmit={handleAddOrUpdateVehicle} className="form-vehicle">
+            {/* Xóa mã xe */}
             <input
-              name="MaXe"
-              placeholder="Mã xe"
-              value={formData.MaXe}
-              onChange={handleInputChange}
-              required
-            />
-            <input
-              name="TenXe"
+              name="Name"
               placeholder="Tên xe"
-              value={formData.TenXe}
+              value={formData.Name}
               onChange={handleInputChange}
               required
             />
             <input
-              name="HinhAnh"
+              name="img"
               placeholder="URL hình ảnh"
-              value={formData.HinhAnh}
+              value={formData.img}
               onChange={handleInputChange}
             />
-
             <input
-              name="HangXe"
+              name="Brand"
               placeholder="Hãng xe"
-              value={formData.HangXe}
+              value={formData.Brand}
               onChange={handleInputChange}
               required
             />
             <input
-              name="NamSanXuat"
+              name="Releaseyear"
               placeholder="Năm sản xuất"
-              value={formData.NamSanXuat}
+              value={formData.Releaseyear}
               onChange={handleInputChange}
               required
             />
             <input
-              name="GiaBan"
+              name="Price"
               placeholder="Giá bán"
-              value={formData.GiaBan}
+              value={formData.Price}
               onChange={handleInputChange}
               required
             />
             <input
-              name="LoaiXe"
+              name="Type"
               placeholder="Loại xe"
-              value={formData.LoaiXe}
+              value={formData.Type}
+              onChange={handleInputChange}
+              required
+            />
+            <input
+              name="Battery_capacity"
+              placeholder="Dung lượng pin"
+              value={formData.Battery_capacity}
+              onChange={handleInputChange}
+              required
+            />
+            <input
+              name="Range_per_charge"
+              placeholder="Tầm hoạt động mỗi lần sạc"
+              value={formData.Range_per_charge}
+              onChange={handleInputChange}
+              required
+            />
+            <input
+              name="Fuel_tank_capacity"
+              placeholder="Dung tích bình xăng"
+              value={formData.Fuel_tank_capacity}
+              onChange={handleInputChange}
+              required
+            />
+            <input
+              name="Fuel_efficiency"
+              placeholder="Hiệu suất nhiên liệu"
+              value={formData.Fuel_efficiency}
+              onChange={handleInputChange}
+              required
+            />
+            <input
+              name="Enginetype"
+              placeholder="Loại động cơ"
+              value={formData.Enginetype}
               onChange={handleInputChange}
               required
             />
@@ -238,13 +294,17 @@ function Cars() {
               <tr>
                 <th>STT</th>
                 <th>Hình ảnh</th>
-                <th>Mã xe</th>
                 <th>Tên xe</th>
                 <th>Hãng xe</th>
                 <th>Năm sản xuất</th>
                 <th>Giá bán</th>
                 <th>Loại xe</th>
                 <th>Hành động</th>
+                <th>Dung lượng pin</th>
+                <th>Tầm hoạt động mỗi lần sạc</th>
+                <th>Dung tích bình xăng</th>
+                <th>Hiệu suất nhiên liệu</th>
+                <th>Loại động cơ</th>
               </tr>
             </thead>
             <tbody>
@@ -252,10 +312,10 @@ function Cars() {
                 <tr key={vehicle.id}>
                   <td>{index + 1}</td>
                   <td>
-                    {vehicle.HinhAnh ? (
+                    {vehicle.img ? (
                       <img
-                        src={vehicle.HinhAnh}
-                        alt={vehicle.TenXe}
+                        src={vehicle.img}
+                        alt={vehicle.Name}
                         style={{ width: "100px", height: "60px" }}
                         onClick={() => handleSelectVehicle(vehicle.id)}
                       />
@@ -263,18 +323,18 @@ function Cars() {
                       "Không có hình ảnh"
                     )}
                   </td>
-                  <td>{vehicle.MaXe}</td>
-                  <td>{vehicle.TenXe}</td>
-                  <td>{vehicle.HangXe}</td>
-                  <td>{vehicle.NamSanXuat}</td>
-                  <td>{vehicle.GiaBan}</td>
-                  <td>{vehicle.LoaiXe}</td>
+                  <td>{vehicle.Name}</td>
+                  <td>{vehicle.Brand}</td>
+                  <td>{vehicle.Releaseyear}</td>
+                  <td>{vehicle.Price}</td>
+                  <td>{vehicle.Type}</td>
+                  <td>{vehicle.Battery_capacity}</td>
+                  <td>{vehicle.Range_per_charge}</td>
+                  <td>{vehicle.Fuel_tank_capacity}</td>
+                  <td>{vehicle.Fuel_efficiency}</td>
+                  <td>{vehicle.Enginetype}</td>
                   <td>
-                    <button
-                      onClick={() => {
-                        handleEditVehicle(vehicle.id);
-                      }}
-                    >
+                    <button onClick={() => handleEditVehicle(vehicle.id)}>
                       Sửa
                     </button>
                     <button onClick={() => handleDeleteVehicle(vehicle.id)}>
@@ -282,8 +342,7 @@ function Cars() {
                     </button>
                     <button onClick={() => handleOpenPurchaseModal(vehicle.id)}>
                       Mua
-                    </button>{" "}
-                    {/* Nút mua */}
+                    </button>
                   </td>
                 </tr>
               ))}
@@ -301,10 +360,10 @@ function Cars() {
               &times;
             </span>
             <h3>Thông tin xe đã chọn:</h3>
-            {selectedVehicle.HinhAnh && (
+            {selectedVehicle.img && (
               <img
-                src={selectedVehicle.HinhAnh}
-                alt={selectedVehicle.TenXe}
+                src={selectedVehicle.img}
+                alt={selectedVehicle.Name}
                 style={{
                   width: "100%",
                   maxHeight: "200px",
@@ -312,23 +371,37 @@ function Cars() {
                 }}
               />
             )}
+
             <p>
-              <b>Mã xe:</b> {selectedVehicle.MaXe}
+              <b>Tên xe:</b> {selectedVehicle.Name}
             </p>
             <p>
-              <b>Tên xe:</b> {selectedVehicle.TenXe}
+              <b>Hãng xe:</b> {selectedVehicle.Brand}
             </p>
             <p>
-              <b>Hãng xe:</b> {selectedVehicle.HangXe}
+              <b>Năm sản xuất:</b> {selectedVehicle.Releaseyear}
             </p>
             <p>
-              <b>Năm sản xuất:</b> {selectedVehicle.NamSanXuat}
+              <b>Giá bán:</b> {selectedVehicle.Price}
             </p>
             <p>
-              <b>Giá bán:</b> {selectedVehicle.GiaBan}
+              <b>Loại xe:</b> {selectedVehicle.Type}
             </p>
             <p>
-              <b>Loại xe:</b> {selectedVehicle.LoaiXe}
+              <b>Dung lượng pin:</b> {selectedVehicle.Battery_capacity}
+            </p>
+            <p>
+              <b>Tầm hoạt động mỗi lần sạc:</b>
+              {selectedVehicle.Range_per_charge}
+            </p>
+            <p>
+              <b>Dung tích bình xăng:</b> {selectedVehicle.Fuel_tank_capacity}
+            </p>
+            <p>
+              <b>Hiệu suất nhiên liệu:</b> {selectedVehicle.Fuel_efficiency}
+            </p>
+            <p>
+              <b>Loại động cơ:</b> {selectedVehicle.Enginetype}
             </p>
           </div>
         </div>
@@ -350,15 +423,30 @@ function Cars() {
 
             <form onSubmit={handlePurchase}>
               <div>
-                <label>ID Khách hàng:</label>
+                <label>Tên khách hàng:</label>
                 <input
                   type="text"
-                  name="customerId"
-                  value={purchaseData.customerId}
+                  name="customerName"
+                  value={purchaseData.customerName}
                   onChange={(e) =>
                     setPurchaseData({
                       ...purchaseData,
-                      customerId: e.target.value,
+                      customerName: e.target.value,
+                    })
+                  }
+                  required
+                />
+              </div>
+              <div>
+                <label>Tên nhân viên:</label>
+                <input
+                  type="text"
+                  name="employeeName"
+                  value={purchaseData.employeeName}
+                  onChange={(e) =>
+                    setPurchaseData({
+                      ...purchaseData,
+                      employeeName: e.target.value,
                     })
                   }
                   required
@@ -395,13 +483,13 @@ function Cars() {
 
               <h4>Thông tin xe:</h4>
               <p>
-                <b>Tên xe:</b> {selectedVehicle.TenXe}
+                <b>Tên xe:</b> {selectedVehicle.Name}
               </p>
               <p>
-                <b>Hãng xe:</b> {selectedVehicle.HangXe}
+                <b>Hãng xe:</b> {selectedVehicle.Brand}
               </p>
               <p>
-                <b>Giá bán:</b> {selectedVehicle.GiaBan}
+                <b>Giá bán:</b> {selectedVehicle.Price}
               </p>
 
               <button type="submit">Xác nhận mua</button>
