@@ -26,30 +26,22 @@ function Purchases() {
         <thead>
           <tr>
             <th>STT</th>
-            <th>Tên khách hàng</th>
-            <th>Tên nhân viên</th>
-            <th>Tên xe</th>
-            <th>Giá bán</th>
+            <th>ID khách hàng</th>
+            <th>ID nhân viên</th>
+            <th>ID xe</th>
             <th>Ngày mua</th>
             <th>Chi tiết</th>
-            <th>Thao tác</th>
           </tr>
         </thead>
         <tbody>
           {purchases.map((purchase, index) => (
             <tr key={purchase.id}>
               <td>{index + 1}</td>
-              <td>{purchase.customerName}</td>
-              <td>{purchase.employeeName}</td>
-              <td>{purchase.vehicle.type}</td>
-              <td>{purchase.vehicle.price}</td>
+              <td>{purchase.customerId}</td>
+              <td>{purchase.employeeId}</td>
+              <td>{purchase.vehicleId}</td>
               <td>{purchase.purchaseDate}</td>
               <td>{purchase.details}</td>
-              <td>
-                <button>Xem</button>
-                <button>Sửa</button>
-                <button>Đã bán</button>
-              </td>
             </tr>
           ))}
         </tbody>

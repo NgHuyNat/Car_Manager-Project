@@ -6,7 +6,7 @@ function Nhanvien() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [newusers, setNewusers] = useState({
-    MaNV: "",
+    id: "",
     name: "",
     role: "",
     phonenumber: "",
@@ -44,6 +44,7 @@ function Nhanvien() {
   }, []);
 
   const handleInputChange = (e) => {
+    console.log(e);
     const { name, value } = e.target;
     setNewusers({ ...newusers, [name]: value });
   };
@@ -66,7 +67,7 @@ function Nhanvien() {
       .then((data) => {
         setCustomers([...customers, data]);
         setNewusers({
-          MaNV: "",
+          id: "",
           name: "",
           role: "",
           phonenumber: "",
@@ -85,6 +86,7 @@ function Nhanvien() {
 
   // Hàm xử lý xóa khách hàng
   const handleDelete = (id) => {
+    console.log(id);
     fetch(`http://localhost:3000/Nhanvien/${id}`, {
       method: "DELETE",
     })
@@ -92,7 +94,7 @@ function Nhanvien() {
         if (!response.ok) {
           throw new Error("Network response was not ok");
         }
-        setCustomers(customers.filter((user) => user.MaNV !== id));
+        setCustomers(customers.filter((user) => user.id != id));
       })
       .catch((error) => {
         setError(error);
@@ -109,7 +111,7 @@ function Nhanvien() {
 
   const handleUpdateUser = (e) => {
     e.preventDefault();
-    fetch(`http://localhost:3000/Nhanvien/${editUser.MaNV}`, {
+    fetch(`http://localhost:3000/Nhanvien/${editUser.id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -124,12 +126,12 @@ function Nhanvien() {
       })
       .then((data) => {
         setCustomers(
-          customers.map((user) => (user.MaNV === editUser.MaNV ? data : user))
+          customers.map((user) => (user.id == editUser.id ? data : user))
         );
         setEditMode(false);
         setEditUser(null);
         setNewusers({
-          MaNV: "",
+          id: "",
           name: "",
           role: "",
           phonenumber: "",
@@ -163,7 +165,7 @@ function Nhanvien() {
           <div className="add-customer-form--body">
             <input
               type="text"
-              name="TenNV"
+              name="name"
               placeholder="Tên nhân viên"
               value={newusers.name}
               onChange={handleInputChange}
@@ -171,7 +173,7 @@ function Nhanvien() {
             />
             <input
               type="text"
-              name="ChucVu"
+              name="role"
               placeholder="Chức vụ"
               value={newusers.role}
               onChange={handleInputChange}
@@ -179,7 +181,7 @@ function Nhanvien() {
             />
             <input
               type="text"
-              name="SDT"
+              name="phonenumber"
               placeholder="Số điện thoại"
               value={newusers.phonenumber}
               onChange={handleInputChange}
@@ -187,7 +189,7 @@ function Nhanvien() {
             />
             <input
               type="Email"
-              name="Email"
+              name="email"
               placeholder="email"
               value={newusers.email}
               onChange={handleInputChange}
@@ -195,7 +197,7 @@ function Nhanvien() {
             />
             <input
               type="text"
-              name="DiaChi"
+              name="address"
               placeholder="Địa chỉ"
               value={newusers.address}
               onChange={handleInputChange}
@@ -203,7 +205,7 @@ function Nhanvien() {
             />
             <input
               type="text"
-              name="Luong"
+              name="salary"
               placeholder="Lương"
               value={newusers.salary}
               onChange={handleInputChange}
@@ -211,7 +213,7 @@ function Nhanvien() {
             />
             <input
               type="text"
-              name="Luongthuong"
+              name="salarybonus"
               placeholder="Lương thưởng"
               value={newusers.salarybonus}
               onChange={handleInputChange}
@@ -219,7 +221,7 @@ function Nhanvien() {
             />
             <input
               type="text"
-              name="Luongmacdinh"
+              name="defaultsalary"
               placeholder="Lương mặc định"
               value={newusers.defaultsalary}
               onChange={handleInputChange}
@@ -227,7 +229,7 @@ function Nhanvien() {
             />
             <input
               type="text"
-              name="SoXeBanDuoc"
+              name="carsoldtotal"
               placeholder="Số xe bán được"
               value={newusers.carsoldtotal}
               onChange={handleInputChange}
@@ -258,8 +260,8 @@ function Nhanvien() {
         </thead>
         <tbody>
           {customers.map((user) => (
-            <tr key={user.MaNV}>
-              <td>{user.MaNV}</td>
+            <tr key={user.id}>
+              <td>{user.id}</td>
               <td>{user.name}</td>
               <td>{user.role}</td>
               <td>{user.phonenumber}</td>
@@ -272,7 +274,7 @@ function Nhanvien() {
 
               <td>
                 <button onClick={() => handleEdit(user)}>Sửa</button>
-                <button onClick={() => handleDelete(user.MaNV)}>Xóa</button>
+                <button onClick={() => handleDelete(user.id)}>Xóa</button>
               </td>
             </tr>
           ))}

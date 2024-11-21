@@ -45,18 +45,32 @@
   ],
   "vehicles": [
     {
+      "id": "1",
+      "Name": "Nguyễn Quốc Cường",
+      "Brand": "Toyota",
+      "Releaseyear": "2020",
+      "Price": "30000",
+      "Type": "Sedan",
+      "Battery_capacity": "Ha Nam",
+      "Range_per_charge": "2",
+      "Fuel_tank_capacity": "500",
+      "Fuel_efficiency": "4",
+      "Enginetype": "ELECTRIC",
+      "img": "https://th.bing.com/th?id=OIF.ikyo9q%2b4Yb4AznkjW8iNmA&rs=1&pid=ImgDetMain"
+    },
+    {
+      "id": "2",
       "Name": "Toyota Camry",
       "Brand": "Toyota",
       "Releaseyear": "2020",
       "Price": "30000",
       "Type": "Sedan",
-      "img": "https://img4.thuthuatphanmem.vn/uploads/2020/12/26/hinh-nen-sieu-xe-ngau_020259124.jpg",
-      "Battery_capacity": "1",
+      "Battery_capacity": "11111",
       "Range_per_charge": "2",
-      "Fuel_tank_capacity": "3",
-      "Fuel_efficiency": "4",
-      "Enginetype": "5",
-      "id": "1"
+      "Fuel_tank_capacity": "",
+      "Fuel_efficiency": "",
+      "Enginetype": "ELECTRIC",
+      "img": "https://img4.thuthuatphanmem.vn/uploads/2020/12/26/hinh-nen-sieu-xe-ngau_020259124.jpg"
     }
   ],
   "Nhanvien": [
@@ -81,7 +95,8 @@
       "phonenumber": "0123456789",
       "email": "a@gmail.com",
       "address": "Hà Nội",
-      "id": "1"
+      "id": "1",
+      "SDT": "0123456789s"
     }
   ],
   "purchases": [
@@ -167,7 +182,7 @@
     },
     {
       "id": "bebe",
-      "vehicleId": "1",
+      "vehicleId": null,
       "customerName": "123",
       "employeeName": "NV001",
       "purchaseDate": "2024-11-18",
@@ -197,6 +212,58 @@
         "price": "25000",
         "type": "Sedan",
         "img": "https://img4.thuthuatphanmem.vn/uploads/2020/12/26/hinh-nen-sieu-xe-ngau_020259124.jpg"
+      }
+    },
+    {
+      "id": "eb48",
+      "vehicleId": "1",
+      "customerId": "1",
+      "employeeId": "1",
+      "purchaseDate": "2024-11-21",
+      "details": "hihihi"
+    },
+    {
+      "id": "65fc",
+      "vehicleId": "1",
+      "customerId": "1",
+      "employeeId": "1",
+      "purchaseDate": "2024-11-21",
+      "details": "Ngày nhà giáo Việt Nam",
+      "vehicle": {
+        "id": "1",
+        "Name": "Nguyễn Quốc Cường",
+        "Brand": "Toyota",
+        "Releaseyear": "2020",
+        "Price": "30000",
+        "Type": "Sedan",
+        "Battery_capacity": "Ha Nam",
+        "Range_per_charge": "2",
+        "Fuel_tank_capacity": "500",
+        "Fuel_efficiency": "4",
+        "Enginetype": "ELECTRIC",
+        "img": "https://th.bing.com/th?id=OIF.ikyo9q%2b4Yb4AznkjW8iNmA&rs=1&pid=ImgDetMain"
+      },
+      "customer": {
+        "MaKH": 1,
+        "name": "Nguyễn Văn A",
+        "phonenumber": "0123456789",
+        "email": "a@gmail.com",
+        "address": "Hà Nội",
+        "id": "1",
+        "SDT": "0123456789s"
+      },
+      "employee": {
+        "id": "1",
+        "MaNV": 1,
+        "name": "Nguyễn Quốc Cường",
+        "role": "Tư vấn",
+        "phonenumber": "0383605017",
+        "email": "Cuongnguyen2k5s@gmail.com",
+        "address": "Hà Nội",
+        "salary": "10000000",
+        "salarybonus": "5000000",
+        "defaultsalary": "10000000",
+        "carsoldtotal": "10"
       }
     }
   ]

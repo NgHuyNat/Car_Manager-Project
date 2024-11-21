@@ -6,7 +6,7 @@ function Users() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [newusers, setNewusers] = useState({
-    MaKH: "",
+    id: "",
     name: "",
     phonenumber: "",
     email: "",
@@ -61,7 +61,7 @@ function Users() {
       .then((data) => {
         setCustomers([...customers, data]);
         setNewusers({
-          MaKH: "",
+          id: "",
           name: "",
           phonenumber: "",
           email: "",
@@ -82,7 +82,7 @@ function Users() {
         if (!response.ok) {
           throw new Error("Network response was not ok");
         }
-        setCustomers(customers.filter((user) => user.MaKH !== id));
+        setCustomers(customers.filter((user) => user.id != id));
       })
       .catch((error) => {
         setError(error);
@@ -99,7 +99,7 @@ function Users() {
 
   const handleUpdateUser = (e) => {
     e.preventDefault();
-    fetch(`http://localhost:3000/users/${editUser.MaKH}`, {
+    fetch(`http://localhost:3000/users/${editUser.id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -114,12 +114,12 @@ function Users() {
       })
       .then((data) => {
         setCustomers(
-          customers.map((user) => (user.MaKH === editUser.MaKH ? data : user))
+          customers.map((user) => (user.id == editUser.id ? data : user))
         );
         setEditMode(false);
         setEditUser(null);
         setNewusers({
-          MaKH: "",
+          id: "",
           name: "",
           phonenumber: "",
           email: "",
@@ -148,7 +148,7 @@ function Users() {
           <div className="add-customer-form--body">
             <input
               type="text"
-              name="TenKH"
+              name="name"
               placeholder="Tên khách hàng"
               value={newusers.name}
               onChange={handleInputChange}
@@ -156,7 +156,7 @@ function Users() {
             />
             <input
               type="text"
-              name="SDT"
+              name="phonenumber"
               placeholder="Số điện thoại"
               value={newusers.phonenumber}
               onChange={handleInputChange}
@@ -164,7 +164,7 @@ function Users() {
             />
             <input
               type="email"
-              name="Email"
+              name="email"
               placeholder="Email"
               value={newusers.email}
               onChange={handleInputChange}
@@ -172,7 +172,7 @@ function Users() {
             />
             <input
               type="text"
-              name="Diachi"
+              name="address"
               placeholder="Địa chỉ"
               value={newusers.address}
               onChange={handleInputChange}
@@ -199,8 +199,8 @@ function Users() {
         </thead>
         <tbody>
           {customers.map((user) => (
-            <tr key={user.MaKH}>
-              <td>{user.MaKH}</td>
+            <tr key={user.id}>
+              <td>{user.id}</td>
               <td>{user.name}</td>
               <td>{user.phonenumber}</td>
               <td>{user.email}</td>
@@ -208,7 +208,7 @@ function Users() {
 
               <td>
                 <button onClick={() => handleEdit(user)}>Sửa</button>
-                <button onClick={() => handleDelete(user.MaKH)}>Xóa</button>
+                <button onClick={() => handleDelete(user.id)}>Xóa</button>
               </td>
             </tr>
           ))}
