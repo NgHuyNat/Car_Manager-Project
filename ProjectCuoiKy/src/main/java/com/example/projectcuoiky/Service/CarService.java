@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 @Service
 public class CarService {
@@ -20,6 +21,20 @@ public class CarService {
         return carRepository.findAll();
     }
 
+    public List<car> getCarBySoldStatus(int sold){
+        return carRepository.findBySold(sold);
+    }
+
+    public String updateCarSoldStatus(Integer id){
+        Optional<car> carOptional = carRepository.findById(id);
+        if(carOptional.isPresent()){
+            car car = carOptional.get();
+            car.setSold(1);
+            carRepository.save(car);
+            return "car with ID" + id + "have been sold";
+        }
+        return "car with ID" + id + " not found";
+    }
 
     public car saveCar(car car){
         return carRepository.save(car);
@@ -36,6 +51,8 @@ public class CarService {
             electricCar.setType((String) payload.get("type"));
             electricCar.setReleaseyear((Integer) payload.get("releaseyear"));
             electricCar.setPrice((String) payload.get("price"));
+            electricCar.setImage((String) payload.get("image"));
+            electricCar.setSold((Integer) payload.get("sold"));
             electricCar.setBattery_capacity((Integer) payload.get("battery_capacity"));
             electricCar.setRange_per_charge((Integer) payload.get("range_per_charge"));
             return carRepository.save(electricCar);
@@ -46,6 +63,8 @@ public class CarService {
             gasolineCar.setType((String) payload.get("type"));
             gasolineCar.setReleaseyear((Integer) payload.get("releaseyear"));
             gasolineCar.setPrice((String) payload.get("price"));
+            gasolineCar.setSold((Integer) payload.get("sold"));
+            gasolineCar.setImage((String) payload.get("image"));
             gasolineCar.setFuel_tank_capacity((Integer) payload.get("fuel_tank_capacity"));
             gasolineCar.setFuel_efficiency((Integer) payload.get("fuel_efficiency"));
             return carRepository.save(gasolineCar);

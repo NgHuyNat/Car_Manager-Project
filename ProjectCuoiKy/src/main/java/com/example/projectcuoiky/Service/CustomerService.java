@@ -14,6 +14,7 @@ import java.util.Map;
 public class CustomerService {
     @Autowired
     private CustomerRepository customerRepository;
+
     public List<customer> findAll(){
         return customerRepository.findAll();
     }

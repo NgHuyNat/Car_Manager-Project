@@ -22,4 +22,5 @@ public class car {
     private Integer releaseyear;
     private String price;
     private Integer sold;
+    private String image;
 }

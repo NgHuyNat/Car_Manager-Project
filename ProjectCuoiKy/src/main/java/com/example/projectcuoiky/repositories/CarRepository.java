@@ -6,5 +6,5 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 @Repository
 public interface CarRepository extends JpaRepository<car, Integer> {
-
+    public List<car> findBySold(Integer sold);
 }
