@@ -2,7 +2,6 @@ package com.nghuytan.carmanager.controller;
 
 import com.nghuytan.carmanager.model.Manager;
 import com.nghuytan.carmanager.service.ManagerService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,8 +11,11 @@ import java.util.List;
 @RequestMapping("/api/managers")
 public class ManagerController {
 
-    @Autowired
-    private ManagerService managerService;
+    private final ManagerService managerService;
+
+    public ManagerController(ManagerService managerService) {
+        this.managerService = managerService;
+    }
 
     // Lấy danh sách tất cả các Manager
     @GetMapping

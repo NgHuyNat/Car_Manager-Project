@@ -4,7 +4,6 @@ import com.nghuytan.carmanager.dto.request.EmployeeRequest;
 import com.nghuytan.carmanager.dto.response.EmployeeResponse;
 import com.nghuytan.carmanager.model.Employee;
 import com.nghuytan.carmanager.service.EmployeeService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,8 +13,11 @@ import java.util.List;
 @RequestMapping("/api/employees")
 public class EmployeeController {
 
-    @Autowired
-    private EmployeeService employeeService;
+    private final EmployeeService employeeService;
+
+    public EmployeeController(EmployeeService employeeService) {
+        this.employeeService = employeeService;
+    }
 
     @GetMapping
     public List<EmployeeResponse> getAllEmployees() {

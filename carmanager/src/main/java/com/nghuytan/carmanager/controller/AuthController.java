@@ -9,8 +9,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.http.ResponseEntity;
 
-import java.util.Optional;
-
 @RestController
 @RequestMapping("/api/auth")
 public class AuthController {
@@ -25,7 +23,7 @@ public class AuthController {
         this.passwordEncoder = passwordEncoder;
     }
 
-    // Endpoint đăng ký
+
     @PostMapping("/register")
     public ResponseEntity<?> register(@RequestBody RegisterRequest request) {
         // Kiểm tra nếu username đã tồn tại trong cả hai bảng

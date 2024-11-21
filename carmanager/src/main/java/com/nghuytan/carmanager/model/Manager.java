@@ -28,7 +28,7 @@ public class Manager {
     @Column(name = "name", nullable = false)
     private String name;
 
-    @Column(name = "phone_number")
+    @Column(name = "phonenumber")
     private String phoneNumber;
 
     @Column(name = "email")
@@ -40,10 +40,10 @@ public class Manager {
     @Column(name = "salary")
     private String salary;
 
-    @Column(name = "bonus_salary")
+    @Column(name = "bonussalary")
     private String bonusSalary;
 
-    @Column(name = "default_salary")
+    @Column(name = "defaultsalary")
     private String defaultSalary;
 
     @OneToMany(mappedBy = "manager", cascade = CascadeType.ALL, orphanRemoval = true)

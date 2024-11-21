@@ -2,7 +2,6 @@ package com.nghuytan.carmanager.service;
 
 import com.nghuytan.carmanager.model.Customer;
 import com.nghuytan.carmanager.repository.CustomerRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -10,8 +9,11 @@ import java.util.List;
 @Service
 public class CustomerService {
 
-    @Autowired
-    private CustomerRepository customerRepository;
+    private final CustomerRepository customerRepository;
+
+    public CustomerService(CustomerRepository customerRepository) {
+        this.customerRepository = customerRepository;
+    }
 
     public List<Customer> findAllCustomers() {
         return customerRepository.findAll();

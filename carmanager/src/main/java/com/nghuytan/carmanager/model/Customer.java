@@ -20,7 +20,7 @@ public class Customer {
     @Column(name = "email", nullable = false)
     private String email;
 
-    @Column(name = "phone_number", nullable = false)
+    @Column(name = "phonenumber", nullable = false)
     private String phoneNumber;
 
     @Column(name = "address", nullable = false)
