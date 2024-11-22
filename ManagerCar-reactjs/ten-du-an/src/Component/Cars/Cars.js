@@ -5,35 +5,34 @@ function Cars() {
   const [vehicles, setVehicles] = useState([]);
   const [formData, setFormData] = useState({
     id: "",
-    Name: "",
-    Brand: "",
-    Releaseyear: "",
-    Price: "",
-    Type: "",
-    Battery_capacity: "",
-    Range_per_charge: "",
-    Fuel_tank_capacity: "",
-    Fuel_efficiency: "",
-    Enginetype: "",
+    name: "",
+    brand: "",
+    releaseyear: "",
+    price: "",
+    type: "",
+    battery_capacity: "",
+    range_per_charge: "",
+    fuel_tank_capacity: "",
+    fuel_efficiency: "",
+    image: "",
   });
 
   const [editingId, setEditingId] = useState(null);
   const [selectedVehicle, setSelectedVehicle] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [ModalCar, setModalCar] = useState();
+  const [modalCar, setModalCar] = useState();
   const [filterEnginetype, setFilterEnginetype] = useState(""); // Lưu trạng thái loại động cơ được lọc
   const handleopenModal = () => {
-    setModalCar(!ModalCar);
+    setModalCar(!modalCar);
   };
 
-  // Fetch dữ liệu từ API khi component render lần đầu
   useEffect(() => {
     fetchVehicles();
   }, []);
 
   const fetchVehicles = async () => {
     try {
-      const response = await fetch("http://localhost:3000/vehicles"); // Thay API_URL bằng URL API thực tế
+      const response = await fetch("http://localhost:8081/car/sold?sold = 0");
       const data = await response.json();
       setVehicles(data);
     } catch (error) {
@@ -52,13 +51,12 @@ function Cars() {
     e.preventDefault();
     if (editingId) {
       try {
-        // Cập nhật xe qua API
-        await fetch(`http://localhost:3000/vehicles/${editingId}`, {
+        await fetch(`http://localhost:8081/vehicles/${editingId}`, {
           method: "PUT",
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify(formData), // không bao gồm MaXe
+          body: JSON.stringify(formData),
         });
         fetchVehicles();
         setEditingId(null);
@@ -67,13 +65,12 @@ function Cars() {
       }
     } else {
       try {
-        // Thêm xe mới qua API
-        await fetch("http://localhost:3000/vehicles", {
+        await fetch("http://localhost:8081/car/addcar", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify(formData), // không bao gồm MaXe
+          body: JSON.stringify(formData),
         });
         fetchVehicles();
       } catch (error) {
@@ -82,68 +79,48 @@ function Cars() {
     }
     setFormData({
       id: "",
-      Name: "",
-      Brand: "",
-      Releaseyear: "",
-      Price: "",
-      Type: "",
-      img: "",
-      Battery_capacity: "",
-      Range_per_charge: "",
-      Fuel_tank_capacity: "",
-      Fuel_efficiency: "",
-      Enginetype: "",
+      name: "",
+      brand: "",
+      releaseyear: "",
+      price: "",
+      type: "",
+      image: "",
+      battery_capacity: "",
+      range_per_charge: "",
+      fuel_tank_capacity: "",
+      fuel_efficiency: "",
+      enginetype: "",
     });
   };
 
   const [isPurchaseModalOpen, setIsPurchaseModalOpen] = useState(false);
   const [purchaseData, setPurchaseData] = useState({
-    customerName: "",
-    employeeName: "",
-    purchaseDate: "",
-    details: "",
+    customerid: "",
+    employeeid: "",
+    carid: "",
+    date: "",
+    detail: "",
   });
   const handleOpenPurchaseModal = (id) => {
-    const vehicle = vehicles.find((v) => v.id === id);
-    setSelectedVehicle(vehicle); // Lưu xe được chọn
-    setIsPurchaseModalOpen(true); // Mở modal mua
+    setPurchaseData({
+      ...purchaseData,
+      carid: id,
+    });
+    setIsPurchaseModalOpen(true);
   };
+
   const handlePurchase = async (e) => {
     e.preventDefault();
 
     try {
-      // Lấy thông tin xe
-      const vehicleResponse = await fetch(
-        `http://localhost:3000/vehicles/${purchaseData.vehicleId}`
-      );
-      const vehicle = await vehicleResponse.json();
-
-      // Lấy thông tin khách hàng
-      const customerResponse = await fetch(
-        `http://localhost:3000/users/${purchaseData.customerId}`
-      );
-      const customer = await customerResponse.json();
-
-      // Lấy thông tin nhân viên
-      const employeeResponse = await fetch(
-        `http://localhost:3000/Nhanvien/${purchaseData.employeeId}`
-      );
-      const employee = await employeeResponse.json();
-
-      // Tạo thông tin mua xe
       const purchaseInfo = {
-        vehicleId: purchaseData.vehicleId,
-        customerId: purchaseData.customerId,
-        employeeId: purchaseData.employeeId,
-        purchaseDate: purchaseData.purchaseDate,
-        details: purchaseData.details,
-        vehicle, // Lưu thông tin chi tiết xe
-        customer, // Lưu thông tin chi tiết khách hàng
-        employee, // Lưu thông tin chi tiết nhân viên
+        customerid: purchaseData.customerid,
+        employeeid: purchaseData.employeeid,
+        date: purchaseData.date,
+        detail: purchaseData.detail,
       };
 
-      // Gửi yêu cầu lưu vào API
-      await fetch("http://localhost:3000/purchases", {
+      await fetch("http://localhost:8081/contact/addcontact", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -152,14 +129,14 @@ function Cars() {
       });
 
       alert("Mua xe thành công!");
-      setIsPurchaseModalOpen(false); // Đóng modal mua
+      setIsPurchaseModalOpen(false);
       setPurchaseData({
-        vehicleId: "",
-        customerId: "",
-        employeeId: "",
-        purchaseDate: "",
-        details: "",
-      }); // Reset form
+        vehicleid: "",
+        customerid: "",
+        employeeid: "",
+        purchasedate: "",
+        detail: "",
+      });
     } catch (error) {
       console.error("Lỗi khi mua xe:", error);
       alert("Đã xảy ra lỗi. Vui lòng thử lại.");
@@ -169,17 +146,17 @@ function Cars() {
   const handleEditVehicle = (id) => {
     const vehicle = vehicles.find((v) => v.id === id);
     setFormData({
-      Name: vehicle.Name,
-      Brand: vehicle.Brand,
-      Releaseyear: vehicle.Releaseyear,
-      Price: vehicle.Price,
-      Type: vehicle.Type,
+      name: vehicle.name,
+      brand: vehicle.brand,
+      releaseyear: vehicle.releaseyear,
+      price: vehicle.price,
+      type: vehicle.type,
       img: vehicle.img,
-      Battery_capacity: vehicle.Battery_capacity,
-      Range_per_charge: vehicle.Range_per_charge,
-      Fuel_tank_capacity: vehicle.Fuel_tank_capacity,
-      Fuel_efficiency: vehicle.Fuel_efficiency,
-      Enginetype: vehicle.Enginetype,
+      battery_capacity: vehicle.battery_capacity,
+      range_per_charge: vehicle.range_per_charge,
+      fuel_tank_capacity: vehicle.fuel_tank_capacity,
+      fuel_efficiency: vehicle.fuel_efficiency,
+      enginetype: vehicle.enginetype,
     });
     setEditingId(id);
     setModalCar(true);
@@ -225,142 +202,128 @@ function Cars() {
         <button onClick={handleopenModal} style={{ cursor: "pointer" }}>
           + Xe mới
         </button>
-        {ModalCar && (
+        {modalCar && (
           <form onSubmit={handleAddOrUpdateVehicle} className="form-vehicle">
-            {/* Tên xe */}
             <input
-              name="Name"
+              name="name"
               placeholder="Tên xe"
-              value={formData.Name}
+              value={formData.name}
               onChange={handleInputChange}
               required
             />
-            {/* URL hình ảnh */}
             <input
-              name="img"
+              name="image"
               placeholder="URL hình ảnh"
-              value={formData.img}
+              value={formData.image}
               onChange={handleInputChange}
             />
-            {/* Hãng xe */}
             <input
-              name="Brand"
+              name="brand"
               placeholder="Hãng xe"
-              value={formData.Brand}
+              value={formData.brand}
               onChange={handleInputChange}
               required
             />
-            {/* Năm sản xuất */}
             <input
-              name="Releaseyear"
+              name="releaseyear"
               placeholder="Năm sản xuất"
-              value={formData.Releaseyear}
+              value={formData.releaseyear}
               onChange={handleInputChange}
               required
             />
-            {/* Giá bán */}
             <input
-              name="Price"
+              name="price"
               placeholder="Giá bán"
-              value={formData.Price}
+              value={formData.price}
               onChange={handleInputChange}
               required
             />
-            {/* Loại xe */}
             <input
-              name="Type"
+              name="type"
               placeholder="Loại xe"
-              value={formData.Type}
+              value={formData.type}
               onChange={handleInputChange}
               required
             />
-            {/* Loại động cơ */}
             <select
-              name="Enginetype"
-              value={formData.Enginetype}
+              name="enginetype"
+              value={formData.enginetype}
               onChange={handleInputChange}
               required
             >
               <option value="">Chọn loại động cơ</option>
-              <option value="ELECTRIC">ELECTRIC</option>
-              <option value="GASOLINE">GASOLINE</option>
+              <option value="electric">ELECTRIC</option>
+              <option value="gasoline">GASOLINE</option>
             </select>
-
-            {/* Các trường động theo loại động cơ */}
-            {formData.Enginetype === "ELECTRIC" && (
+            {formData.enginetype === "electric" && (
               <>
                 <input
-                  name="Battery_capacity"
+                  name="battery_capacity"
                   placeholder="Dung lượng pin (kWh)"
-                  value={formData.Battery_capacity}
+                  value={formData.battery_capacity}
                   onChange={handleInputChange}
                   required
                 />
                 <input
-                  name="Range_per_charge"
+                  name="range_per_charge"
                   placeholder="Tầm hoạt động mỗi lần sạc (km)"
-                  value={formData.Range_per_charge}
+                  value={formData.range_per_charge}
                   onChange={handleInputChange}
                   required
                 />
               </>
             )}
-
-            {formData.Enginetype === "GASOLINE" && (
+            {formData.enginetype === "gasoline" && (
               <>
                 <input
-                  name="Fuel_tank_capacity"
+                  name="fuel_tank_capacity"
                   placeholder="Dung tích bình xăng (lít)"
-                  value={formData.Fuel_tank_capacity}
+                  value={formData.fuel_tank_capacity}
                   onChange={handleInputChange}
                   required
                 />
                 <input
-                  name="Fuel_efficiency"
+                  name="fuel_efficiency"
                   placeholder="Hiệu suất nhiên liệu (km/lít)"
-                  value={formData.Fuel_efficiency}
+                  value={formData.fuel_efficiency}
                   onChange={handleInputChange}
                   required
                 />
               </>
             )}
-
             <button type="submit">
               {editingId ? "Cập nhật xe" : "Thêm xe mới"}
             </button>
           </form>
         )}
-
         <div className="info-box">
           <h3>Danh sách xe</h3>
           <table>
             <thead>
               <tr>
-                <th>STT</th>
+                <th>Mã Xe</th>
                 <th>Hình ảnh</th>
                 <th>Tên xe</th>
                 <th>Hãng xe</th>
                 <th>Năm sản xuất</th>
                 <th>Giá bán</th>
                 <th>Loại xe</th>
-
                 <th>Dung lượng pin</th>
                 <th>Tầm hoạt động mỗi lần sạc</th>
                 <th>Dung tích bình xăng</th>
                 <th>Hiệu suất nhiên liệu</th>
-
                 <th>Thao tác</th>
               </tr>
             </thead>
             <tbody>
-              {vehicles.map((vehicle, index) => (
+              {vehicles.map((vehicle) => (
                 <tr key={vehicle.id}>
-                  <td>{index + 1}</td>
+                  <td>{vehicle.id}</td>
                   <td>
-                    {vehicle.img ? (
+                    {vehicle.image ? (
                       <img
-                        src={vehicle.img}
-                        alt={vehicle.Name}
+                        src={vehicle.image}
+                        alt={vehicle.name}
                         style={{ width: "100px", height: "60px" }}
                         onClick={() => handleSelectVehicle(vehicle.id)}
                       />
@@ -368,16 +331,15 @@ function Cars() {
                       "Không có hình ảnh"
                     )}
                   </td>
-                  <td>{vehicle.Name}</td>
-                  <td>{vehicle.Brand}</td>
-                  <td>{vehicle.Releaseyear}</td>
-                  <td>{vehicle.Price}</td>
-                  <td>{vehicle.Type}</td>
-                  <td>{vehicle.Battery_capacity}</td>
-                  <td>{vehicle.Range_per_charge}</td>
-                  <td>{vehicle.Fuel_tank_capacity}</td>
-                  <td>{vehicle.Fuel_efficiency}</td>
-
+                  <td>{vehicle.name}</td>
+                  <td>{vehicle.brand}</td>
+                  <td>{vehicle.releaseyear}</td>
+                  <td>{vehicle.price}</td>
+                  <td>{vehicle.type}</td>
+                  <td>{vehicle.battery_capacity}</td>
+                  <td>{vehicle.range_per_charge}</td>
+                  <td>{vehicle.fuel_tank_capacity}</td>
+                  <td>{vehicle.fuel_efficiency}</td>
                   <td>
                     <button onClick={() => handleEditVehicle(vehicle.id)}>
                       Sửa
@@ -395,11 +357,9 @@ function Cars() {
           </table>
         </div>
       </div>
-
       {isModalOpen && selectedVehicle && (
         <div className="modal">
-          <div className="modal-overlay" onClick={closeModal} />{" "}
-          {/* Overlay để đóng modal */}
+          <div className="modal-overlay" onClick={closeModal} />
           <div className="modal-content" tabIndex="0">
             <span className="close" onClick={closeModal}>
               &times;
@@ -407,8 +367,8 @@ function Cars() {
             <h3>Thông tin xe đã chọn:</h3>
             {selectedVehicle.img && (
               <img
-                src={selectedVehicle.img}
-                alt={selectedVehicle.Name}
+                src={selectedVehicle.image}
+                alt={selectedVehicle.name}
                 style={{
                   width: "100%",
                   maxHeight: "200px",
@@ -416,37 +376,36 @@ function Cars() {
                 }}
               />
             )}
-
             <p>
-              <b>Tên xe:</b> {selectedVehicle.Name}
+              <b>Tên xe:</b> {selectedVehicle.name}
             </p>
             <p>
-              <b>Hãng xe:</b> {selectedVehicle.Brand}
+              <b>Hãng xe:</b> {selectedVehicle.brand}
             </p>
             <p>
-              <b>Năm sản xuất:</b> {selectedVehicle.Releaseyear}
+              <b>Năm sản xuất:</b> {selectedVehicle.releaseyear}
             </p>
             <p>
-              <b>Giá bán:</b> {selectedVehicle.Price}
+              <b>Giá bán:</b> {selectedVehicle.price}
             </p>
             <p>
-              <b>Loại xe:</b> {selectedVehicle.Type}
+              <b>Loại xe:</b> {selectedVehicle.type}
             </p>
             <p>
-              <b>Dung lượng pin:</b> {selectedVehicle.Battery_capacity}
+              <b>Dung lượng pin:</b> {selectedVehicle.battery_capacity}
             </p>
             <p>
               <b>Tầm hoạt động mỗi lần sạc:</b>
-              {selectedVehicle.Range_per_charge}
+              {selectedVehicle.range_per_charge}
             </p>
             <p>
-              <b>Dung tích bình xăng:</b> {selectedVehicle.Fuel_tank_capacity}
+              <b>Dung tích bình xăng:</b> {selectedVehicle.fuel_tank_capacity}
             </p>
             <p>
-              <b>Hiệu suất nhiên liệu:</b> {selectedVehicle.Fuel_efficiency}
+              <b>Hiệu suất nhiên liệu:</b> {selectedVehicle.fuel_efficiency}
             </p>
             <p>
-              <b>Loại động cơ:</b> {selectedVehicle.Enginetype}
+              <b>Loại động cơ:</b> {selectedVehicle.enginetype}
             </p>
           </div>
         </div>
@@ -465,91 +424,80 @@ function Cars() {
               &times;
             </span>
             <h3>Thông tin mua xe</h3>
-
             <form onSubmit={handlePurchase}>
-              {/* Nhập ID xe */}
               <div>
                 <label>ID Xe:</label>
                 <input
                   type="text"
-                  name="vehicleId"
-                  value={purchaseData.vehicleId}
+                  name="carid"
+                  value={purchaseData.carid}
                   onChange={(e) =>
                     setPurchaseData({
                       ...purchaseData,
-                      vehicleId: e.target.value,
+                      carid: e.target.value,
                     })
                   }
                   required
                 />
               </div>
-
-              {/* Nhập ID khách hàng */}
               <div>
                 <label>ID Khách hàng:</label>
                 <input
                   type="text"
-                  name="customerId"
-                  value={purchaseData.customerId}
+                  name="customerid"
+                  value={purchaseData.customerid}
                   onChange={(e) =>
                     setPurchaseData({
                       ...purchaseData,
-                      customerId: e.target.value,
+                      customerid: e.target.value,
                     })
                   }
                   required
                 />
               </div>
-
-              {/* Nhập ID nhân viên */}
               <div>
                 <label>ID Nhân viên:</label>
                 <input
                   type="text"
-                  name="employeeId"
-                  value={purchaseData.employeeId}
+                  name="employeeid"
+                  value={purchaseData.employeeid}
                   onChange={(e) =>
                     setPurchaseData({
                       ...purchaseData,
-                      employeeId: e.target.value,
+                      employeeid: e.target.value,
                     })
                   }
                   required
                 />
               </div>
-
-              {/* Ngày mua */}
               <div>
                 <label>Ngày mua:</label>
                 <input
                   type="date"
-                  name="purchaseDate"
-                  value={purchaseData.purchaseDate}
+                  name="date"
+                  value={purchaseData.date}
                   onChange={(e) =>
                     setPurchaseData({
                       ...purchaseData,
-                      purchaseDate: e.target.value,
+                      date: e.target.value,
                     })
                   }
                   required
                 />
               </div>
-
-              {/* Ghi chú */}
               <div>
                 <label>Thêm chi tiết:</label>
                 <textarea
-                  name="details"
-                  value={purchaseData.details}
+                  name="detail"
+                  value={purchaseData.detail}
                   onChange={(e) =>
                     setPurchaseData({
                       ...purchaseData,
-                      details: e.target.value,
+                      detail: e.target.value,
                     })
                   }
                 ></textarea>
               </div>
-
               <button type="submit">Xác nhận mua</button>
             </form>
           </div>
