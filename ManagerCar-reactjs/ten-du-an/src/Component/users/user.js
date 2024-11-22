@@ -74,7 +74,6 @@ function Users() {
       });
   };
 
-  // Hàm xử lý xóa khách hàng
   const handleDelete = (id) => {
     fetch(`http://localhost:8081/customer/deletecustomer/${id}`, {
       method: "DELETE",
@@ -90,11 +89,10 @@ function Users() {
       });
   };
 
-  // Hàm xử lý chỉnh sửa khách hàng
   const handleEdit = (user) => {
     setEditMode(true);
     setEditUser(user);
-    setNewusers(user); // Load thông tin khách hàng vào form
+    setNewusers(user);
     setmodal(true);
   };
 
@@ -138,7 +136,7 @@ function Users() {
 
   return (
     <div className="customer-table">
-      <h2>Bảng Khách Hàng</h2>
+      <h2>Thông Tin Khách Hàng</h2>
       <button onClick={handleOpen} style={{ cursor: "pointer" }}>
         + Khách hàng mới
       </button>

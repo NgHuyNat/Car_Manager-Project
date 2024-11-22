@@ -21,7 +21,6 @@ function Cars() {
   const [selectedVehicle, setSelectedVehicle] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalCar, setModalCar] = useState();
-  const [filterEnginetype, setFilterEnginetype] = useState(""); // Lưu trạng thái loại động cơ được lọc
   const [carId, setCarId] = useState("");
   const handleopenModal = () => {
     setModalCar(!modalCar);
@@ -80,6 +79,7 @@ function Cars() {
         console.error("Lỗi khi thêm xe mới:", error);
       }
     }
+
     setFormData({
       id: "",
       name: "",
@@ -97,6 +97,7 @@ function Cars() {
   };
 
   const [isPurchaseModalOpen, setIsPurchaseModalOpen] = useState(false);
+
   const [purchaseData, setPurchaseData] = useState({
     customerid: "",
     employeeid: "",
@@ -104,14 +105,13 @@ function Cars() {
     date: "",
     detail: "",
   });
+
   const handleOpenPurchaseModal = async (id) => {
     await setIsPurchaseModalOpen(true);
     setCarId(id);
   };
 
-  const handlePurchase = async (e) => {
-    // e.preventDefault();
-
+  const handlePurchase = async () => {
     try {
       const purchaseInfo = {
         carid: carId,
@@ -120,7 +120,6 @@ function Cars() {
         date: purchaseData.date,
         detail: purchaseData.detail,
       };
-      console.log("purchaseInfo", JSON.stringify(purchaseInfo));
 
       await fetch("http://localhost:8081/contact/addcontact", {
         method: "POST",
@@ -201,6 +200,7 @@ function Cars() {
           },
         }
       );
+
       if (!response.ok) {
         throw new Error(`Lỗi cập nhật trạng thái xe: ${response.statusText}`);
       }
@@ -337,10 +337,6 @@ function Cars() {
                 <th>Năm sản xuất</th>
                 <th>Giá bán</th>
                 <th>Loại xe</th>
-                <th>Dung lượng pin</th>
-                <th>Tầm hoạt động mỗi lần sạc</th>
-                <th>Dung tích bình xăng</th>
-                <th>Hiệu suất nhiên liệu</th>
                 <th>Thao tác</th>
               </tr>
             </thead>
@@ -365,10 +361,7 @@ function Cars() {
                   <td>{vehicle.releaseyear}</td>
                   <td>{vehicle.price}</td>
                   <td>{vehicle.type}</td>
-                  <td>{vehicle.battery_capacity}</td>
-                  <td>{vehicle.range_per_charge}</td>
-                  <td>{vehicle.fuel_tank_capacity}</td>
-                  <td>{vehicle.fuel_efficiency}</td>
+
                   <td>
                     <button onClick={() => handleEditVehicle(vehicle.id)}>
                       Sửa
@@ -386,6 +379,7 @@ function Cars() {
           </table>
         </div>
       </div>
+
       {isModalOpen && selectedVehicle && (
         <div className="modal">
           <div className="modal-overlay" onClick={closeModal} />
@@ -420,19 +414,33 @@ function Cars() {
             <p>
               <b>Loại xe:</b> {selectedVehicle.type}
             </p>
-            <p>
-              <b>Dung lượng pin:</b> {selectedVehicle.battery_capacity}
-            </p>
-            <p>
-              <b>Tầm hoạt động mỗi lần sạc:</b>
-              {selectedVehicle.range_per_charge}
-            </p>
-            <p>
-              <b>Dung tích bình xăng:</b> {selectedVehicle.fuel_tank_capacity}
-            </p>
-            <p>
-              <b>Hiệu suất nhiên liệu:</b> {selectedVehicle.fuel_efficiency}
-            </p>
+            {selectedVehicle.battery_capacity &&
+              selectedVehicle.range_per_charge && (
+                <>
+                  {" "}
+                  <p>
+                    <b>Dung lượng pin:</b> {selectedVehicle.battery_capacity}
+                  </p>
+                  <p>
+                    <b>Tầm hoạt động mỗi lần sạc:</b>
+                    {selectedVehicle.range_per_charge}
+                  </p>
+                </>
+              )}
+            {selectedVehicle.fuel_tank_capacity &&
+              selectedVehicle.fuel_efficiency && (
+                <>
+                  {" "}
+                  <p>
+                    <b>Dung tích bình xăng:</b>{" "}
+                    {selectedVehicle.fuel_tank_capacity}
+                  </p>
+                  <p>
+                    <b>Hiệu suất nhiên liệu:</b>{" "}
+                    {selectedVehicle.fuel_efficiency}
+                  </p>
+                </>
+              )}
           </div>
         </div>
       )}
