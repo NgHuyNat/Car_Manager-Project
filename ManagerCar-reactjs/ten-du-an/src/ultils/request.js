@@ -1,46 +1,168 @@
-const API = "http://localhost:3000/";
+const API = "http://localhost:8080/";
+const getCookie = (name) => {
+  const value = `; ${document.cookie}`;
+  const parts = value.split(`; ${name}=`);
+  if (parts.length === 2) return parts.pop().split(';').shift();
+  return null;
+};
 
+// Hàm GET
 export const get = async (path) => {
   try {
-    const response = await fetch(API + path);
+    const response = await fetch(API + path, {
+      method: "GET",
+      headers: {
+        Accept: "application/json",
+      },
+    });
+
+    if (!response.ok) {
+      const errorText = await response.text();
+      throw new Error(`HTTP error! Status: ${response.status}, Message: ${errorText}`);
+    }
+
     const result = await response.json();
     return result;
-  } catch (e) {
-    console.log(e);
-    return e;
+  } catch (error) {
+    console.error("Error in GET request:", error.message);
+    throw error;
   }
 };
 
+// Hàm POST
 export const post = async (path, data) => {
-  const response = await fetch(API + path, {
-    method: "POST",
-    headers: {
-      Accept: "application/json",
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(data),
-  });
-  const result = await response.json();
-  return result;
+  try {
+    const response = await fetch(API + path, {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    });
+
+    if (!response.ok) {
+      const errorText = await response.text();
+      throw new Error(`HTTP error! Status: ${response.status}, Message: ${errorText}`);
+    }
+
+    const result = await response.text();
+    return result;
+  } catch (error) {
+    console.error("Error in POST request:", error.message);
+
+    throw error;
+  }
 };
 
+
+export const fetchWithAuth = async (path, method = "GET", body = null) => {
+  let username = localStorage.getItem("username");
+  let password = localStorage.getItem("password");
+
+  if (!username || !password) {
+    username = getCookie("username");
+    password = getCookie("password");
+  }
+
+  if (!username || !password) {
+    console.error("Username hoặc password không tồn tại trong localStorage hoặc cookie.");
+    throw new Error("Thông tin đăng nhập không hợp lệ.");
+  }
+
+  const authHeader = "Basic " + btoa(`${username}:${password}`);
+
+  const headers = {
+    "Authorization": authHeader,
+    "Content-Type": "application/json",
+  };
+
+  const options = {
+    method,
+    headers,
+  };
+
+  if (body) {
+    options.body = JSON.stringify(body);
+  }
+
+  const response = await fetch(`http://localhost:8080${path}`, options);
+
+  if (!response.ok) {
+    const errorText = await response.text();
+    throw new Error(`HTTP error! Status: ${response.status}, Message: ${errorText}`);
+  }
+
+  return await response.json();
+};
+
+
+export const register = async (options) => {
+  try {
+    const response = await fetch(`${API}api/auth/register`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(options),
+    });
+
+    if (!response.ok) {
+      const errorText = await response.text();
+      throw new Error(`HTTP error! Status: ${response.status}, Message: ${errorText}`);
+    }
+
+    return await response.json(); // Phân tích dữ liệu JSON từ phản hồi
+  } catch (error) {
+    console.error("Lỗi khi gửi yêu cầu đăng ký:", error.message);
+    throw error; // Ném lỗi ra ngoài để xử lý
+  }
+};
+
+// Hàm PUT
 export const put = async (path, data) => {
-  const response = await fetch(API + path, {
-    method: "PUT",
-    headers: {
-      Accept: "application/json",
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(data),
-  });
-  const result = await response.json();
-  return result;
+  try {
+    const response = await fetch(API + path, {
+      method: "PUT",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    });
+
+    if (!response.ok) {
+      const errorText = await response.text();
+      throw new Error(`HTTP error! Status: ${response.status}, Message: ${errorText}`);
+    }
+
+    const result = await response.json();
+    return result;
+  } catch (error) {
+    console.error("Error in PUT request:", error.message);
+    throw error;
+  }
 };
 
+// Hàm DELETE
 export const remove = async (path) => {
-  const response = await fetch(API + path, {
-    method: "DELETE",
-  });
-  const result = await response.json();
-  return result;
+  try {
+    const response = await fetch(API + path, {
+      method: "DELETE",
+      headers: {
+        Accept: "application/json",
+      },
+    });
+
+    if (!response.ok) {
+      const errorText = await response.text();
+      throw new Error(`HTTP error! Status: ${response.status}, Message: ${errorText}`);
+    }
+
+    const result = await response.json();
+    return result;
+  } catch (error) {
+    console.error("Error in DELETE request:", error.message);
+    throw error;
+  }
 };

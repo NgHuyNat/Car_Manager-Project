@@ -21,7 +21,7 @@ function Users() {
   };
 
   useEffect(() => {
-    fetch("http://localhost:3000/users")
+    fetch("http://localhost:8081/customer")
       .then((response) => {
         if (!response.ok) {
           throw new Error("Network response was not ok");
@@ -45,7 +45,7 @@ function Users() {
 
   const handleAddUser = (e) => {
     e.preventDefault();
-    fetch("http://localhost:3000/users", {
+    fetch("http://localhost:8081/customer/addcustomer", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -67,15 +67,15 @@ function Users() {
           email: "",
           address: "",
         });
+        setmodal(false);
       })
       .catch((error) => {
         setError(error);
       });
   };
 
-  // Hàm xử lý xóa khách hàng
   const handleDelete = (id) => {
-    fetch(`http://localhost:3000/users/${id}`, {
+    fetch(`http://localhost:8081/customer/deletecustomer/${id}`, {
       method: "DELETE",
     })
       .then((response) => {
@@ -89,17 +89,16 @@ function Users() {
       });
   };
 
-  // Hàm xử lý chỉnh sửa khách hàng
   const handleEdit = (user) => {
     setEditMode(true);
     setEditUser(user);
-    setNewusers(user); // Load thông tin khách hàng vào form
+    setNewusers(user);
     setmodal(true);
   };
 
   const handleUpdateUser = (e) => {
     e.preventDefault();
-    fetch(`http://localhost:3000/users/${editUser.id}`, {
+    fetch(`http://localhost:8081/customer/updatecustomer/${editUser.id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -116,8 +115,8 @@ function Users() {
         setCustomers(
           customers.map((user) => (user.id == editUser.id ? data : user))
         );
-        setEditMode(false);
         setEditUser(null);
+        setEditMode(false);
         setNewusers({
           id: "",
           name: "",
@@ -125,6 +124,7 @@ function Users() {
           email: "",
           address: "",
         });
+        setmodal(false);
       })
       .catch((error) => {
         setError(error);
@@ -136,7 +136,7 @@ function Users() {
 
   return (
     <div className="customer-table">
-      <h2>Bảng Khách Hàng</h2>
+      <h2>Thông Tin Khách Hàng</h2>
       <button onClick={handleOpen} style={{ cursor: "pointer" }}>
         + Khách hàng mới
       </button>

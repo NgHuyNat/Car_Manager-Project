@@ -3,7 +3,7 @@ import { NavLink, Outlet } from "react-router-dom";
 import { getCookie } from "../helper/cookies.js";
 import { useSelector } from "react-redux";
 function Layoutdefault() {
-  const token = getCookie("token");
+  const username = getCookie("username");
   const isLogin = useSelector((state) => state.loginReducer);
   console.log(isLogin);
   return (
@@ -16,7 +16,7 @@ function Layoutdefault() {
           />
         </div>
         <div className="header-users">
-          {token ? (
+          {username ? (
             <>
               <div className="header-users--avatar">
                 <img

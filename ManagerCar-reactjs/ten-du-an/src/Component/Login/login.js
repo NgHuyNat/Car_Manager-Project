@@ -20,21 +20,23 @@ const LoginComponent = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     console.log(e);
-    const email = e.target[0].value;
+    const username = e.target[0].value;
     const password = e.target[1].value;
-    const respon = await login(email, password);
+    const respon = await login(username, password);
     if (respon.length > 0) {
-      console.log(respon);
-      setCookie("id", respon[0].id, 1);
-      setCookie("email", respon[0].email, 1);
-      setCookie("password", respon[0].password, 1);
-      setCookie("token", respon[0].token, 1);
+      console.log("aaaaaa"+respon);
+      
+      setCookie("username", username, 1);
+      setCookie("password", password, 1);
+      localStorage.setItem("user", JSON.stringify(respon));
+      
       dispatch(checkLogin(true));
       navigate("/");
     } else {
       alert("Sai tên đăng nhập hoặc mật khẩu");
     }
   };
+  
   return (
     <>
       {/* <div onClick={handlelogin}>Đăng nhập</div>

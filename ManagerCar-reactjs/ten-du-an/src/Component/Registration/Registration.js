@@ -1,93 +1,129 @@
 import "./Registration.css";
 import { useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
-import { login } from "../../services/userService";
-import { checkExit } from "../../services/userService";
-import { useDispatch } from "react-redux";
-import { checkLogin } from "../../actions/login";
-import { generratedToken } from "../../helper/generatetoken";
-import { register } from "../../services/userService";
+import { register } from "../../services/userService"; // Đảm bảo hàm `register` được export từ userService
+
 function Registration() {
+  // State để lưu thông tin form
   const [registermodal, setregister] = useState();
+  const [formData, setFormData] = useState({
+    fullName: "",
+    username: "",
+    password: "",
+    confirmPassword: "",
+    role: "",
+  });
+
   const handleClose = () => {
     setregister(false);
   };
-  const handleregister = () => {
-    setregister(true);
-  };
+
   const navigate = useNavigate();
-  const handlechange = () => {
-    navigate("/login2");
+
+  // Hàm xử lý thay đổi dữ liệu trong form
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({
+      ...formData,
+      [name]: value, // Cập nhật đúng trường dữ liệu
+    });
   };
 
-  const dispatch = useDispatch();
+  // Hàm xử lý khi người dùng bấm nút Submit
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(e);
-    const fullName = e.target[0].value;
-    const email = e.target[1].value;
-    const password = e.target[2].value;
-    const checkExitemail = await checkExit("email", email);
-    if (checkExitemail.length > 0) {
-      alert("Email đã tồn tại");
+  
+    if (formData.password !== formData.confirmPassword) {
+      alert("Mật khẩu không khớp!");
+      return;
     }
-    const options = {
-      fullName: fullName,
-      email: email,
-      password: password,
-      token: generratedToken(),
-    };
-    const response = await register(options);
-    if (response) {
-      console.log(response);
-      dispatch(checkLogin(true));
-      navigate("/login2");
-    } else {
-      alert("Đăng ký thất bại");
+  
+    try {
+      const response = await register({
+        name: formData.fullName,
+        username: formData.username,
+        password: formData.password,
+        role: formData.role,
+      });
+  
+      console.log("Response from server:", response);
+  
+      alert(response);
+  
+      if (response === "Đăng ký thành công!") {
+        navigate("/login2");
+      }
+    } catch (error) {
+      console.error("Đăng ký thất bại:", error.message);
+      alert("Đăng ký thất bại: " + error.message);
     }
   };
+  
+  
+
   return (
-    <>
-      {/* <div onClick={handleregister}>Đăng ký</div> */}
-      {/* {registermodal && ()} */}
-      <div className="general">
-        <div className="register-form">
-          <h2>Đăng ký</h2>
-          <form onSubmit={handleSubmit} action="" method="POST">
-            <input
-              type="fullName"
-              name="username"
-              placeholder="Nhập họ và tên"
-              required
-            />
-            <input type="email" name="email" placeholder="Email" required />
-            <input
-              type="password"
-              name="password"
-              placeholder="Password"
-              required
-            />
-            <input
-              type="password"
-              name="password"
-              placeholder="Confirm Password"
-              required
-            />
-            <button type="submit" className="btn">
-              Register
-            </button>
-            <NavLink to="/">
-              <button onClick={handleClose} type="close" className="btn-close">
-                Close
-              </button>
-            </NavLink>
-            <p onClick={handlechange} className="btn-text">
-              Bạn đã có tài khoản
-            </p>
-          </form>
-        </div>
+    <div className="general">
+      <div className="register-form">
+        <h2>Đăng ký</h2>
+        <form onSubmit={handleSubmit} method="POST">
+          <input
+            type="text"
+            name="fullName"
+            placeholder="Nhập họ và tên"
+            value={formData.fullName}
+            onChange={handleChange} 
+            required
+          />
+          <input
+            type="text"
+            name="username"
+            placeholder="Username"
+            value={formData.username}
+            onChange={handleChange} 
+            required
+          />
+          <input
+            type="password"
+            name="password"
+            placeholder="Password"
+            value={formData.password}
+            onChange={handleChange} 
+            required
+          />
+          <input
+            type="password"
+            name="confirmPassword"
+            placeholder="Confirm Password"
+            value={formData.confirmPassword}
+            onChange={handleChange} 
+            required
+          />
+          <input
+            type="text"
+            name="role"
+            placeholder="Role"
+            value={formData.role}
+            onChange={handleChange} 
+            required
+          />
+          <button type="submit" className="btn">
+            Register
+          </button>
+          <NavLink  onClick={handleClose} type="close" className="btn-close">
+            Close
+          </NavLink>
+          <p
+            onClick={() => navigate("/login2")}
+            className="btn-text"
+            style={{ cursor: "pointer" }}
+          >
+            Bạn đã có tài khoản?
+          </p>
+        </form>
       </div>
-    </>
+    </div>
   );
 }
+
 export default Registration;
+  

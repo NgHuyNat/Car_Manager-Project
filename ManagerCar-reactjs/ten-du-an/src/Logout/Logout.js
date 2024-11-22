@@ -10,7 +10,7 @@ function Logout() {
   deleteAllCookies();
   useEffect(() => {
     dispatch(checkLogin(false));
-    navigate("/login2");
+    navigate("/");
   });
   return <></>;
 }

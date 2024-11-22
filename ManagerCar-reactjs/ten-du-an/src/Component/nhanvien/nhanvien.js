@@ -1,5 +1,8 @@
+
 import React, { useEffect, useState } from "react";
 import "./nhanvien.css";
+import { getAllEmployees, addEmployee, updateEmployee, deleteEmployee } from "../../services/userService";
+
 
 function Nhanvien() {
   const [customers, setCustomers] = useState([]);
@@ -26,13 +29,7 @@ function Nhanvien() {
   };
 
   useEffect(() => {
-    fetch("http://localhost:3000/Nhanvien")
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error("Network response was not ok");
-        }
-        return response.json();
-      })
+    getAllEmployees()
       .then((data) => {
         setCustomers(data);
         setLoading(false);
@@ -51,19 +48,7 @@ function Nhanvien() {
 
   const handleAddUser = (e) => {
     e.preventDefault();
-    fetch("http://localhost:3000/Nhanvien", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(newusers),
-    })
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error("Network response was not ok");
-        }
-        return response.json();
-      })
+    addEmployee(newusers)
       .then((data) => {
         setCustomers([...customers, data]);
         setNewusers({
@@ -87,14 +72,9 @@ function Nhanvien() {
   // Hàm xử lý xóa khách hàng
   const handleDelete = (id) => {
     console.log(id);
-    fetch(`http://localhost:3000/Nhanvien/${id}`, {
-      method: "DELETE",
-    })
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error("Network response was not ok");
-        }
-        setCustomers(customers.filter((user) => user.id != id));
+    deleteEmployee(id)
+      .then(() => {
+        setCustomers(customers.filter((user) => user.id !== id));
       })
       .catch((error) => {
         setError(error);
@@ -111,22 +91,10 @@ function Nhanvien() {
 
   const handleUpdateUser = (e) => {
     e.preventDefault();
-    fetch(`http://localhost:3000/Nhanvien/${editUser.id}`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(newusers),
-    })
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error("Network response was not ok");
-        }
-        return response.json();
-      })
+    updateEmployee(editUser.id, newusers)
       .then((data) => {
         setCustomers(
-          customers.map((user) => (user.id == editUser.id ? data : user))
+          customers.map((user) => (user.id === editUser.id ? data : user))
         );
         setEditMode(false);
         setEditUser(null);
@@ -188,7 +156,7 @@ function Nhanvien() {
               required
             />
             <input
-              type="Email"
+              type="email"
               name="email"
               placeholder="email"
               value={newusers.email}
