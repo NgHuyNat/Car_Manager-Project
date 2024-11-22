@@ -21,7 +21,7 @@ function Users() {
   };
 
   useEffect(() => {
-    fetch("http://localhost:3000/users")
+    fetch("http://localhost:8081/customer")
       .then((response) => {
         if (!response.ok) {
           throw new Error("Network response was not ok");
@@ -45,7 +45,7 @@ function Users() {
 
   const handleAddUser = (e) => {
     e.preventDefault();
-    fetch("http://localhost:3000/users", {
+    fetch("http://localhost:8081/customer/addcustomer", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -67,6 +67,7 @@ function Users() {
           email: "",
           address: "",
         });
+        setmodal(false);
       })
       .catch((error) => {
         setError(error);
@@ -75,7 +76,7 @@ function Users() {
 
   // Hàm xử lý xóa khách hàng
   const handleDelete = (id) => {
-    fetch(`http://localhost:3000/users/${id}`, {
+    fetch(`http://localhost:8081/customer/deletecustomer/${id}`, {
       method: "DELETE",
     })
       .then((response) => {
@@ -99,7 +100,7 @@ function Users() {
 
   const handleUpdateUser = (e) => {
     e.preventDefault();
-    fetch(`http://localhost:3000/users/${editUser.id}`, {
+    fetch(`http://localhost:8081/customer/updatecustomer/${editUser.id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -116,8 +117,8 @@ function Users() {
         setCustomers(
           customers.map((user) => (user.id == editUser.id ? data : user))
         );
-        setEditMode(false);
         setEditUser(null);
+        setEditMode(false);
         setNewusers({
           id: "",
           name: "",
@@ -125,6 +126,7 @@ function Users() {
           email: "",
           address: "",
         });
+        setmodal(false);
       })
       .catch((error) => {
         setError(error);
