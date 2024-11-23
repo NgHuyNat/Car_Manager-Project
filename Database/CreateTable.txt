@@ -1,0 +1,41 @@
+CREATE TABLE `contact` (
+   `id` int NOT NULL AUTO_INCREMENT,
+   `carid` int DEFAULT NULL,
+   `employeeid` int DEFAULT NULL,
+   `customerid` int DEFAULT NULL,
+   `detail` varchar(500) NOT NULL,
+   `date` date DEFAULT NULL,
+   PRIMARY KEY (`id`),
+   KEY `contact_ibfk` (`carid`),
+   KEY `contact_ibfk_2` (`employeeid`),
+   KEY `contact_ibfk_3` (`customerid`),
+   CONSTRAINT `contact_ibfk_1` FOREIGN KEY (`carid`) REFERENCES `car` (`id`) ON DELETE SET NULL,
+   CONSTRAINT `contact_ibfk_2` FOREIGN KEY (`employeeid`) REFERENCES `employee` (`id`) ON DELETE SET NULL,
+   CONSTRAINT `contact_ibfk_3` FOREIGN KEY (`customerid`) REFERENCES `customer` (`id`) ON DELETE SET NULL
+ ) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci
+
+CREATE TABLE `car` (
+   `id` int NOT NULL AUTO_INCREMENT,
+   `brand` varchar(255) DEFAULT NULL,
+   `name` varchar(255) DEFAULT NULL,
+   `type` varchar(255) DEFAULT NULL,
+   `releaseyear` int DEFAULT NULL,
+   `price` varchar(255) DEFAULT NULL,
+   `sold` int DEFAULT '0',
+   `battery_capacity` int DEFAULT NULL,
+   `range_per_charge` int DEFAULT NULL,
+   `fuel_tank_capacity` int DEFAULT NULL,
+   `fuel_efficiency` int DEFAULT NULL,
+   `enginetype` varchar(31) NOT NULL,
+   `image` varchar(255) DEFAULT NULL,
+   PRIMARY KEY (`id`)
+ ) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci
+
+CREATE TABLE `customer` (
+   `id` int NOT NULL AUTO_INCREMENT,
+   `name` varchar(255) DEFAULT NULL,
+   `email` varchar(255) DEFAULT NULL,
+   `phonenumber` varchar(255) DEFAULT NULL,
+   `address` varchar(255) DEFAULT NULL,
+   PRIMARY KEY (`id`)
+ ) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci
