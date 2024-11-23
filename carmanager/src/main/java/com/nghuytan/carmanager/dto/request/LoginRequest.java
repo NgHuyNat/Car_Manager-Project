@@ -11,6 +11,9 @@ public class LoginRequest {
     @NotBlank(message = "Tên người dùng không được để trống!")
     private String username;
 
+//    @NotBlank(message = "Tên người dùng không được để trống!")
+//    private S
+
     @NotBlank(message = "Mật khẩu không được để trống!")
     private String password;
 

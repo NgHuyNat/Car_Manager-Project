@@ -87,4 +87,8 @@ public class EmployeeService {
     public Employee save(Employee existingEmployee) {
         return employeeRepository.save(existingEmployee);
     }
+
+    public void deleteById(int id) {
+        employeeRepository.deleteById(id);
+    }
 }

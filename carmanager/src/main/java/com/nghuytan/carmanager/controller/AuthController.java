@@ -12,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 
 @RestController
 @RequestMapping("/api/auth")
+@CrossOrigin(origins = "http://localhost:3000")
 public class AuthController {
 
     private final ManagerRepository managerRepository;
@@ -24,7 +25,7 @@ public class AuthController {
         this.passwordEncoder = passwordEncoder;
     }
 
-
+    @CrossOrigin(origins = "http://localhost:3000")
     @PostMapping("/register")
     public ResponseEntity<?> register(@RequestBody RegisterRequest request) {
         // Kiểm tra nếu username đã tồn tại trong cả hai bảng
@@ -70,6 +71,7 @@ public class AuthController {
         return ResponseEntity.ok("Đăng ký thành công!");
     }
 
+    @CrossOrigin(origins = "http://localhost:3000")
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody LoginRequest loginRequest) {
         var managerOpt = managerRepository.findByUsername(loginRequest.getUsername());
