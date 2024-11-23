@@ -1,0 +1,14 @@
+.employee-profile{
+    width: 80%;
+    margin: 20px auto;
+    text-align: left;
+    background: #ece9e9;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+.profile__img{
+    border-radius: 50%;
+    width: 100px;
+    height: 100px;
+}
