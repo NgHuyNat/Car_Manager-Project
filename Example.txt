@@ -1,0 +1,110 @@
+{
+    "id": 1,
+    "image": "tesla_model_s.jpg",
+    "name": "Tesla Model S",
+    "type": "Electric",
+    "brand": "Tesla",
+    "color": "Red",
+    "engine": "Electric",
+    "information": "High-performance electric sedan",
+    "kmPerCharge": 600
+}
+{
+    "id": 2,
+    "image": "nissan_leaf.jpg",
+    "name": "Nissan Leaf",
+    "type": "Electric",
+    "brand": "Nissan",
+    "color": "Blue",
+    "engine": "Electric",
+    "information": "Compact electric vehicle",
+    "kmPerCharge": 300
+}
+{
+    "id": 3,
+    "image": "bmw_i3.jpg",
+    "name": "BMW i3",
+    "type": "Electric",
+    "brand": "BMW",
+    "color": "White",
+    "engine": "Electric",
+    "information": "Eco-friendly city car",
+    "kmPerCharge": 350
+}
+{
+    "id": 4,
+    "image": "audi_e_tron.jpg",
+    "name": "Audi e-Tron",
+    "type": "Electric",
+    "brand": "Audi",
+    "color": "Silver",
+    "engine": "Electric",
+    "information": "Luxury electric SUV",
+    "kmPerCharge": 400
+}
+{
+    "id": 5,
+    "image": "chevy_bolt.jpg",
+    "name": "Chevrolet Bolt",
+    "type": "Electric",
+    "brand": "Chevrolet",
+    "color": "Black",
+    "engine": "Electric",
+    "information": "Affordable long-range electric car",
+    "kmPerCharge": 380
+}
+{
+    "id": 6,
+    "image": "toyota_camry.jpg",
+    "name": "Toyota Camry",
+    "type": "Fuel",
+    "brand": "Toyota",
+    "color": "White",
+    "engine": "Hybrid",
+    "information": "Efficient and reliable mid-size sedan",
+    "kmPerFullfill": 700
+}
+{
+    "id": 7,
+    "image": "ford_mustang.jpg",
+    "name": "Ford Mustang",
+    "type": "Fuel",
+    "brand": "Ford",
+    "color": "Blue",
+    "engine": "V8",
+    "information": "High-performance muscle car",
+    "kmPerFullfill": 450
+}
+{
+    "id": 8,
+    "image": "honda_civic.jpg",
+    "name": "Honda Civic",
+    "type": "Fuel",
+    "brand": "Honda",
+    "color": "Gray",
+    "engine": "Inline-4",
+    "information": "Compact and fuel-efficient sedan",
+    "kmPerFullfill": 800
+}
+{
+    "id": 9,
+    "image": "mercedes_benz_c_class.jpg",
+    "name": "Mercedes-Benz C-Class",
+    "type": "Fuel",
+    "brand": "Mercedes-Benz",
+    "color": "Silver",
+    "engine": "V6",
+    "information": "Luxury sedan with excellent comfort",
+    "kmPerFullfill": 650
+}
+{
+    "id": 10,
+    "image": "bmw_3_series.jpg",
+    "name": "BMW 3 Series",
+    "type": "Fuel",
+    "brand": "BMW",
+    "color": "Black",
+    "engine": "Inline-6",
+    "information": "Sporty luxury sedan",
+    "kmPerFullfill": 600
+}
