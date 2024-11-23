@@ -39,7 +39,5 @@ public class EmployeeRequest {
 
     private int carsSoldTotal;
 
-    @NotNull(message = "Manager ID không được để trống")
-    private Integer managerId;
 
 }

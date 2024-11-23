@@ -3,7 +3,6 @@ package com.nghuytan.carmanager.controller;
 import com.nghuytan.carmanager.dto.request.EmployeeRequest;
 import com.nghuytan.carmanager.dto.response.EmployeeResponse;
 import com.nghuytan.carmanager.model.Employee;
-import com.nghuytan.carmanager.model.Manager;
 import com.nghuytan.carmanager.service.EmployeeService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -30,12 +29,13 @@ public class EmployeeController {
     }
 
     @PostMapping
-    public Employee createEmployee(@RequestBody EmployeeRequest request, Authentication authentication) {
-        // Lấy thông tin manager từ Authentication
+    public EmployeeResponse createEmployee(@RequestBody EmployeeRequest request, Authentication authentication) {
         String managerUsername = authentication.getName();
         int managerId = employeeService.findManagerIdByUsername(managerUsername);
-        return employeeService.createEmployee(request, managerId);
+        Employee employee = employeeService.createEmployee(request, managerId);
+        return employeeService.mapToResponse(employee);
     }
+
 
     @PutMapping("/{id}")
     public ResponseEntity<Employee> updateEmployee(@PathVariable Integer id, @RequestBody Employee updatedEmployee, Authentication authentication) {

@@ -30,13 +30,13 @@ public class SecurityConfig {
         http
                 .csrf().disable()
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/**").permitAll() // Không yêu cầu đăng nhập
-                        .requestMatchers("/api/employees/**").hasRole("MANAGER") // Chỉ Manager có quyền quản lý nhân viên
-                        .requestMatchers("/api/customers/**").hasAnyRole("MANAGER", "EMPLOYEE") // Cả Manager và Employee được xem khách hàng
+                        .requestMatchers("/**").permitAll()
+                        .requestMatchers("/api/employees/**").hasRole("MANAGER")
+                        .requestMatchers("/car/**").hasAnyRole("MANAGER", "EMPLOYEE")
                         .requestMatchers("/api/managers/**").hasRole("MANAGER")
-                        .anyRequest().authenticated() // Các endpoint khác yêu cầu xác thực
+                        .anyRequest().authenticated()
                 )
-                .httpBasic(); // Sử dụng Basic Authentication
+                .httpBasic();
 
         return http.build();
     }

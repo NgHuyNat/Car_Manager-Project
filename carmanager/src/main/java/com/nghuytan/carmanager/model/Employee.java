@@ -1,5 +1,6 @@
 package com.nghuytan.carmanager.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -48,6 +49,7 @@ public class Employee {
     private int carsSoldTotal;
 
     @ManyToOne
+    @JsonIgnore
     @JoinColumn(name = "manager_id")
     private Manager manager;
 

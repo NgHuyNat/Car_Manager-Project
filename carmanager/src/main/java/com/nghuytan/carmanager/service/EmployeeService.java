@@ -91,4 +91,24 @@ public class EmployeeService {
     public void deleteById(int id) {
         employeeRepository.deleteById(id);
     }
+
+    public Employee updateEmployee(int id, EmployeeRequest request) {
+        Employee employee = employeeRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Employee not found with ID: " + id));
+
+        if (request.getUserName() != null) employee.setUsername(request.getUserName());
+        if (request.getPassword() != null) employee.setPassword(passwordEncoder.encode(request.getPassword()));
+        if (request.getRole() != null) employee.setRole(request.getRole());
+        if (request.getName() != null) employee.setName(request.getName());
+        if (request.getPhoneNumber() != null) employee.setPhoneNumber(request.getPhoneNumber());
+        if (request.getEmail() != null) employee.setEmail(request.getEmail());
+        if (request.getAddress() != null) employee.setAddress(request.getAddress());
+        if (request.getSalary() != null) employee.setSalary(request.getSalary());
+        if (request.getBonusSalary() != null) employee.setBonusSalary(request.getBonusSalary());
+        if (request.getDefaultSalary() != null) employee.setDefaultSalary(request.getDefaultSalary());
+        employee.setCarsSoldTotal(request.getCarsSoldTotal());
+
+        return employeeRepository.save(employee);
+    }
+
 }
