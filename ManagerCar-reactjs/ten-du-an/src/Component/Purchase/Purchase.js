@@ -11,7 +11,7 @@ function Purchases() {
 
   const fetchPurchases = async () => {
     try {
-      const response = await fetch("http://localhost:8081/contact"); // API endpoint
+      const response = await fetch("http://localhost:3000/contact"); // API endpoint
       const data = await response.json();
 
       // Sanitize data
@@ -32,7 +32,7 @@ function Purchases() {
   };
 
   const handleDeletePurchase = (id) => {
-    fetch(`http://localhost:8081/contact/deletecontact/${id}`, {
+    fetch(`http://localhost:3000/contact/${id}`, {
       method: "DELETE",
     })
       .then((response) => response.json())

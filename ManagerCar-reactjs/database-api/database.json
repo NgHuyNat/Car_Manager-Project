@@ -1,270 +1,197 @@
 {
-  "usersprofile": [
+    "car": [
     {
-      "id": "1",
-      "fullName": "Nguyen Van A",
-      "email": "a@example.com",
-      "password": "password123",
-      "token": "token_1"
+      "id": "9",
+      "brand": "Porches",
+      "name": "911",
+      "type": "sedan",
+      "releaseyear": 2022,
+      "price": "1000000",
+      "sold": 1,
+      "image": null,
+      "fuel_tank_capacity": 12321,
+      "fuel_efficiency": 12312
     },
     {
-      "id": "2",
-      "fullName": "Le Thi B",
-      "email": "b@example.com",
-      "password": "password456",
-      "token": "token_2"
+      "id": "11",
+      "brand": "Porches",
+      "name": "911",
+      "type": "sedan",
+      "releaseyear": 2022,
+      "price": "1000000",
+      "sold": 1,
+      "image": null,
+      "fuel_tank_capacity": 12321,
+      "fuel_efficiency": 12312
     },
     {
-      "id": "7df5",
-      "fullName": "Nguyễn Quốc Cường",
-      "email": "cuongnguyen2k5s@gmail.com",
-      "password": "quoccuong2005",
-      "token": "OtK57WLcD2S7mGxh0bSv"
+      "name": "Lamboghini",
+      "brand": "HEHEHEHE",
+      "releaseyear": 2018,
+      "price": "1000000",
+      "type": "sedan",
+      "image": "https://i.pinimg.com/236x/c6/7e/4d/c67e4d865febc63b4a7b493a78738acb.jpg",
+      "battery_capacity": 123123,
+      "range_per_charge": 34543,
+      "enginetype": "ELECTRIC",
+      "id": "15"
     },
     {
-      "id": "99aa",
-      "fullName": "Nguyễn Mạnh Hùng",
-      "email": "manhhung@gmail.com",
-      "password": "hung123",
-      "token": "FikTLv9Jp5Ux1OdpoT2F"
+      "id": "18",
+      "brand": "Lamborghini",
+      "name": "ádsadsad",
+      "type": "Sedan",
+      "releaseyear": 2024,
+      "price": "100000000000000",
+      "sold": 1,
+      "image": "https://i.pinimg.com/236x/6a/2b/30/6a2b30bce37311d0e454a1c21ee0750f.jpg",
+      "fuel_tank_capacity": 123,
+      "fuel_efficiency": 123
     },
     {
-      "id": "3668",
-      "fullName": "Lại Duy Tiến",
-      "email": "Tien@gmail.com",
-      "password": "Tienhihi",
-      "token": "h3ReKkyfEa32BCSmmeL1"
+      "id": "19",
+      "brand": "Lamborghini",
+      "name": "Tan Sieu Beo",
+      "type": "Sedan",
+      "releaseyear": 2024,
+      "price": "100000000000000",
+      "sold": null,
+      "image": "https://i.pinimg.com/236x/6a/2b/30/6a2b30bce37311d0e454a1c21ee0750f.jpg",
+      "fuel_tank_capacity": 123,
+      "fuel_efficiency": 123
     },
     {
-      "id": "6dea",
-      "fullName": "Nguyễn Huy Tân ",
-      "email": "tanruoidomino@gmail.com",
-      "password": "huytan22",
-      "token": "kwpqNYtw3keGLEiCcWV2"
+      "id": "20",
+      "brand": "Bugati",
+      "name": "Tan ",
+      "type": "Couple",
+      "releaseyear": 2022,
+      "price": "123123123",
+      "sold": 0,
+      "image": "https://i.pinimg.com/236x/6a/2b/30/6a2b30bce37311d0e454a1c21ee0750f.jpg",
+      "fuel_tank_capacity": 11111,
+      "fuel_efficiency": 11111
+    },
+    {
+      "id": "21",
+      "brand": "Lamborghini",
+      "name": "Nguyễn Huy Tân",
+      "type": "Couple",
+      "releaseyear": 2024,
+      "price": "55555555555",
+      "sold": 1,
+      "image": "https://i.pinimg.com/236x/6a/2b/30/6a2b30bce37311d0e454a1c21ee0750f.jpg",
+      "fuel_tank_capacity": 123123,
+      "fuel_efficiency": 123123
+    },
+    {
+      "id": "22",
+      "brand": "Bugati",
+      "name": "Tan ",
+      "type": "Couple",
+      "releaseyear": 2024,
+      "price": "123123",
+      "sold": null,
+      "image": "https://i.pinimg.com/236x/6a/2b/30/6a2b30bce37311d0e454a1c21ee0750f.jpg",
+      "battery_capacity": 12231,
+      "range_per_charge": 123123
     }
   ],
-  "vehicles": [
+  "contact": [
     {
-      "id": "1",
-      "Name": "Nguyễn Quốc Cường",
-      "Brand": "Toyota",
-      "Releaseyear": "2020",
-      "Price": "30000",
-      "Type": "Sedan",
-      "Battery_capacity": "Ha Nam",
-      "Range_per_charge": "2",
-      "Fuel_tank_capacity": "500",
-      "Fuel_efficiency": "4",
-      "Enginetype": "ELECTRIC",
-      "img": "https://th.bing.com/th?id=OIF.ikyo9q%2b4Yb4AznkjW8iNmA&rs=1&pid=ImgDetMain"
-    },
-    {
-      "id": "2",
-      "Name": "Toyota Camry",
-      "Brand": "Toyota",
-      "Releaseyear": "2020",
-      "Price": "30000",
-      "Type": "Sedan",
-      "Battery_capacity": "11111",
-      "Range_per_charge": "2",
-      "Fuel_tank_capacity": "",
-      "Fuel_efficiency": "",
-      "Enginetype": "ELECTRIC",
-      "img": "https://img4.thuthuatphanmem.vn/uploads/2020/12/26/hinh-nen-sieu-xe-ngau_020259124.jpg"
-    }
-  ],
-  "Nhanvien": [
-    {
-      "id": "1",
-      "MaNV": 1,
-      "name": "Nguyễn Quốc Cường",
-      "role": "Tư vấn",
-      "phonenumber": "0383605017",
-      "email": "Cuongnguyen2k5s@gmail.com",
-      "address": "Hà Nội",
-      "salary": "10000000",
-      "salarybonus": "5000000",
-      "defaultsalary": "10000000",
-      "carsoldtotal": "10"
-    }
-  ],
-  "users": [
-    {
-      "MaKH": 1,
-      "name": "Nguyễn Văn A",
-      "phonenumber": "0123456789",
-      "email": "a@gmail.com",
-      "address": "Hà Nội",
-      "id": "1",
-      "SDT": "0123456789s"
-    }
-  ],
-  "purchases": [
-    {
-      "id": "1",
-      "vehicleId": 101,
-      "customerName": "KH001",
-      "employeeName": "NV001",
-      "purchaseDate": "2024-01-15",
-      "details": "Khách hàng mua kèm bảo hiểm 1 năm.",
-      "vehicle": {
-        "name": "Toyota Corolla",
-        "brand": "Toyota",
-        "releaseyear": "2023",
-        "price": "800000000",
+      "id": 25,
+      "car": {
+        "id": 35,
+        "brand": "Lamborghini",
+        "name": "Tan Sieu Beo",
         "type": "Sedan",
-        "img": "https://example.com/toyota-corolla.jpg"
-      }
-    },
+        "releaseyear": 2024,
+        "price": "100000000000000",
+        "sold": 1,
+        "image": "https://i.pinimg.com/236x/6a/2b/30/6a2b30bce37311d0e454a1c21ee0750f.jpg",
+        "battery_capacity": 1111111,
+        "range_per_charge": 1111111
+      },
+      "employee": {
+        "id": 2,
+        "name": "Jane Doe",
+        "role": "Employee",
+        "username": "janedoe",
+        "password": "password456",
+        "phonenumber": "987654321",
+        "email": "jane.doe@example.com",
+        "address": "456 Elm St",
+        "salary": "5000",
+        "bonussalary": "500",
+        "defaultsalary": "5500",
+        "carsoldtotal": 7,
+        "manager_id": {
+          "id": 1,
+          "name": "Michael Scott",
+          "role": "Manager",
+          "username": "michaels",
+          "password": "password123",
+          "phonenumber": "123123123",
+          "email": "michael.scott@example.com",
+          "address": "Scranton, PA",
+          "salary": "8000",
+          "bonussalary": "1000",
+          "defaultsalary": "9000"
+        }
+      },
+      "customer": {
+        "id": 1,
+        "name": "Bui Hoang ákdksadkas",
+        "phonenumber": "123123123123",
+        "email": "buihoangduy123@1234455",
+        "address": "hahahahaha"
+      },
+      "detail": "ádasdsaddas",
+      "date": "2024-10-30"
+    }
+  ],
+  "customers": [
     {
-      "id": "2",
-      "vehicleId": 102,
-      "customerName": "KH002",
-      "employeeName": "NV001",
-      "purchaseDate": "2024-02-10",
-      "details": "Thanh toán bằng hình thức trả góp.",
-      "vehicle": {
-        "name": "Honda Civic",
-        "brand": "Honda",
-        "releaseyear": "2022",
-        "price": "900000000",
-        "type": "Sedan",
-        "img": "https://example.com/honda-civic.jpg"
-      }
+      "id": "1",
+      "name": "Bui Hoang ákdksadkas",
+      "phonenumber": "123123123123",
+      "email": "buihoangduy123@1234455",
+      "address": "hahahahaha"
     },
     {
       "id": "3",
-      "vehicleId": 103,
-      "customerName": "KH003",
-      "employeeName": "NV001",
-      "purchaseDate": "2024-03-05",
-      "details": "Khách hàng yêu cầu giao xe vào ngày 2024-03-15.",
-      "vehicle": {
-        "name": "Ford Ranger",
-        "brand": "Ford",
-        "releaseyear": "2023",
-        "price": "1200000000",
-        "type": "Pickup",
-        "img": "https://example.com/ford-ranger.jpg"
-      }
+      "name": "tân béo",
+      "phonenumber": "09234234423",
+      "email": "tnadb123@db123.com",
+      "address": "hehehuhu"
     },
     {
       "id": "4",
-      "vehicleId": 104,
-      "customerName": "KH004",
-      "employeeName": "NV001",
-      "purchaseDate": "2024-04-01",
-      "details": "Mua kèm phụ kiện camera hành trình.",
-      "vehicle": {
-        "name": "Mazda CX-5",
-        "brand": "Mazda",
-        "releaseyear": "2023",
-        "price": "950000000",
-        "type": "SUV",
-        "img": "https://example.com/mazda-cx5.jpg"
-      }
+      "name": "Bùi Hoàng Duy",
+      "phonenumber": "1231212321321",
+      "email": "hrhrhrhrhrhr@fsadfds",
+      "address": "1231232"
     },
     {
-      "id": "5",
-      "vehicleId": 105,
-      "customerName": "KH005",
-      "employeeName": "NV001",
-      "purchaseDate": "2024-05-20",
-      "details": "Khách hàng muốn giao xe tại nhà.",
-      "vehicle": {
-        "name": "Kia Seltos",
-        "brand": "Kia",
-        "releaseyear": "2023",
-        "price": "750000000",
-        "type": "SUV",
-        "img": "https://example.com/kia-seltos.jpg"
-      }
+      "id": "8",
+      "name": "Bùi Hoàng Duy",
+      "phonenumber": "0931587809",
+      "email": "hoangduygala@gmail.com",
+      "address": "Khong Muon Cung Cap"
     },
     {
-      "id": "bebe",
-      "vehicleId": null,
-      "customerName": "123",
-      "employeeName": "NV001",
-      "purchaseDate": "2024-11-18",
-      "details": "hihi",
-      "vehicle": {
-        "id": "1",
-        "name": "Toyota Camry",
-        "brand": "Toyota",
-        "releaseyear": "2020",
-        "price": "30000",
-        "type": "Sedan",
-        "img": "https://img4.thuthuatphanmem.vn/uploads/2020/12/26/hinh-nen-sieu-xe-ngau_020259124.jpg"
-      }
+      "id": "9",
+      "name": "Bùi Hoàng Duy",
+      "phonenumber": "0931587809",
+      "email": "hoangduygala@gmail.com",
+      "address": "Khong Muon Cung Cap"
     },
     {
-      "id": "a8d6",
-      "vehicleId": "2",
-      "customerName": "1233444",
-      "employeeName": "NV001",
-      "purchaseDate": "2024-11-18",
-      "details": "hahahahaha",
-      "vehicle": {
-        "id": "2",
-        "name": "Honda Civic",
-        "brand": "Honda",
-        "releaseyear": "2019",
-        "price": "25000",
-        "type": "Sedan",
-        "img": "https://img4.thuthuatphanmem.vn/uploads/2020/12/26/hinh-nen-sieu-xe-ngau_020259124.jpg"
-      }
-    },
-    {
-      "id": "eb48",
-      "vehicleId": "1",
-      "customerId": "1",
-      "employeeId": "1",
-      "purchaseDate": "2024-11-21",
-      "details": "hihihi"
-    },
-    {
-      "id": "65fc",
-      "vehicleId": "1",
-      "customerId": "1",
-      "employeeId": "1",
-      "purchaseDate": "2024-11-21",
-      "details": "Ngày nhà giáo Việt Nam",
-      "vehicle": {
-        "id": "1",
-        "Name": "Nguyễn Quốc Cường",
-        "Brand": "Toyota",
-        "Releaseyear": "2020",
-        "Price": "30000",
-        "Type": "Sedan",
-        "Battery_capacity": "Ha Nam",
-        "Range_per_charge": "2",
-        "Fuel_tank_capacity": "500",
-        "Fuel_efficiency": "4",
-        "Enginetype": "ELECTRIC",
-        "img": "https://th.bing.com/th?id=OIF.ikyo9q%2b4Yb4AznkjW8iNmA&rs=1&pid=ImgDetMain"
-      },
-      "customer": {
-        "MaKH": 1,
-        "name": "Nguyễn Văn A",
-        "phonenumber": "0123456789",
-        "email": "a@gmail.com",
-        "address": "Hà Nội",
-        "id": "1",
-        "SDT": "0123456789s"
-      },
-      "employee": {
-        "id": "1",
-        "MaNV": 1,
-        "name": "Nguyễn Quốc Cường",
-        "role": "Tư vấn",
-        "phonenumber": "0383605017",
-        "email": "Cuongnguyen2k5s@gmail.com",
-        "address": "Hà Nội",
-        "salary": "10000000",
-        "salarybonus": "5000000",
-        "defaultsalary": "10000000",
-        "carsoldtotal": "10"
-      }
+      "id": "10",
+      "name": "Bùi Hoàng Duy",
+      "phonenumber": "0931587809",
+      "email": "hoangduygala@gmail.com",
+      "address": "Khong Muon Cung Cap"
     }
   ]
 }

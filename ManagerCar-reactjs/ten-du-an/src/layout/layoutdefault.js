@@ -13,6 +13,7 @@ function Layoutdefault() {
           <img
             src="https://leakandassociates.com/files/2019/04/Leak_logo_white_transp.png"
             alt="logo"
+            className="logo"
           />
         </div>
         <div className="header-users">
@@ -47,7 +48,7 @@ function Layoutdefault() {
           )}
         </div>
       </div>
-      <div className="index">
+      <div className="index has-tab">
         <div className="tab">
           <ul className="tab-menu">
             <li className="tab-menu--home ">
