@@ -82,25 +82,25 @@
 
 /* Submit and Close Buttons */
 .add-customer-form button {
-  background-color: #17153B;
-  color: #C8ACD6;
-  border-radius: 4px;
-  font-size: 13px;
-  cursor: pointer;
-  width: 100px;
-  border: #001529;
-  height: 40px;
-  margin-left: 69%;
-  outline-style: auto;
-  outline-color: #C8ACD6;
-  font-weight: 700;
+  background-color: #17153B !important;
+  color: #C8ACD6  !important;
+  border-radius: 4px  !important;
+  font-size: 13px  !important;
+  cursor: pointer  !important;
+  width: 100px  !important;
+  border: #001529  !important;
+  height: 40px  !important;
+  margin-left: 69%  !important;
+  outline-style: auto  !important;
+  outline-color: #C8ACD6  !important;
+  font-weight: 700  !important;
 }
 
 .add-customer-form button:hover {
-  background-color: #C8ACD6;
-  color: #17153B;
-  outline-style: auto;
-  outline-color: #17153B;
+  background-color: #C8ACD6  !important;
+  color: #17153B  !important;
+  outline-style: auto  !important;
+  outline-color: #17153B  !important;
 }
 
 /* Close Button Style */
