@@ -32,12 +32,12 @@ function Registration() {
   // Hàm xử lý khi người dùng bấm nút Submit
   const handleSubmit = async (e) => {
     e.preventDefault();
-  
+
     if (formData.password !== formData.confirmPassword) {
       alert("Mật khẩu không khớp!");
       return;
     }
-  
+
     try {
       const response = await register({
         name: formData.fullName,
@@ -45,11 +45,11 @@ function Registration() {
         password: formData.password,
         role: formData.role,
       });
-  
+
       console.log("Response from server:", response);
-  
+
       alert(response);
-  
+
       if (response === "Đăng ký thành công!") {
         navigate("/login2");
       }
@@ -58,8 +58,6 @@ function Registration() {
       alert("Đăng ký thất bại: " + error.message);
     }
   };
-  
-  
 
   return (
     <div className="general">
@@ -71,7 +69,7 @@ function Registration() {
             name="fullName"
             placeholder="Nhập họ và tên"
             value={formData.fullName}
-            onChange={handleChange} 
+            onChange={handleChange}
             required
           />
           <input
@@ -79,7 +77,7 @@ function Registration() {
             name="username"
             placeholder="Username"
             value={formData.username}
-            onChange={handleChange} 
+            onChange={handleChange}
             required
           />
           <input
@@ -87,7 +85,7 @@ function Registration() {
             name="password"
             placeholder="Password"
             value={formData.password}
-            onChange={handleChange} 
+            onChange={handleChange}
             required
           />
           <input
@@ -95,7 +93,7 @@ function Registration() {
             name="confirmPassword"
             placeholder="Confirm Password"
             value={formData.confirmPassword}
-            onChange={handleChange} 
+            onChange={handleChange}
             required
           />
           <input
@@ -103,15 +101,19 @@ function Registration() {
             name="role"
             placeholder="Role"
             value={formData.role}
-            onChange={handleChange} 
+            onChange={handleChange}
             required
           />
-          <button type="submit" className="btn">
-            Register
-          </button>
-          <NavLink  onClick={handleClose} type="close" className="btn-close">
-            Close
-          </NavLink>
+          <div className="register-form--btn">
+            <button type="submit" className="btn">
+              Register
+            </button>
+            <NavLink to={"/"}>
+              <button onClick={handleClose} type="close" className="btn-closee">
+                Close
+              </button>
+            </NavLink>
+          </div>
           <p
             onClick={() => navigate("/login2")}
             className="btn-text"
@@ -126,4 +128,3 @@ function Registration() {
 }
 
 export default Registration;
-  

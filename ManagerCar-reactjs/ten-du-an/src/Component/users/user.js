@@ -148,6 +148,7 @@ function Users() {
         setCustomers(
           customers.map((user) => (user.id == editUser.id ? data : user))
         );
+        console.log(data);
         setEditUser(null);
         setEditMode(false);
         setNewusers({
@@ -170,7 +171,11 @@ function Users() {
   return (
     <div className="customer-table">
       <h2>Thông Tin Khách Hàng</h2>
-      <button onClick={handleOpen} style={{ cursor: "pointer" }}>
+      <button
+        className="add-car"
+        onClick={handleOpen}
+        style={{ cursor: "pointer" }}
+      >
         + Khách hàng mới
       </button>
       {openmodal && (
@@ -242,6 +247,49 @@ function Users() {
             </div>
           </form>
         </div>
+
+        // <form onSubmit={editMode ? handleUpdateUser : handleAddUser} className="add-customer-form">
+        //   <h3>Thêm khách hàng</h3>
+        //     <input
+        //       type="text"
+        //       name="name"
+        //       placeholder="Tên khách hàng"
+        //       value={newusers.name}
+        //       onChange={handleInputChange}
+        //       required
+        //     />
+        //     <input
+        //       type="text"
+        //       name="phonenumber"
+        //       placeholder="Số điện thoại"
+        //       value={newusers.phonenumber}
+        //       onChange={handleInputChange}
+        //       required
+        //     />
+        //     <input
+        //       type="email"
+        //       name="email"
+        //       placeholder="Email"
+        //       value={newusers.email}
+        //       onChange={handleInputChange}
+        //       required
+        //       style={{
+        //         padding:"10px",
+        //         width: "379px"
+        //       }}
+        //     />
+        //     <input
+        //       type="text"
+        //       name="address"
+        //       placeholder="Địa chỉ"
+        //       value={newusers.address}
+        //       onChange={handleInputChange}
+        //       required
+        //     />
+        //     <button type="submit">
+        //       {editMode ? "Cập nhật" : "Thêm"}
+        //     </button>
+        // </form>
       )}
 
       <table>
@@ -269,9 +317,21 @@ function Users() {
               <td>{user.email}</td>
               <td>{user.address}</td>
 
-              <td>
-                <button onClick={() => handleEdit(user)}>Sửa</button>
-                <button onClick={() => handleDelete(user.id)}>Xóa</button>
+              <td className="add_car_button">
+                <div className="pen">
+                  <img
+                    className="add_car_button--items"
+                    onClick={() => handleEdit(user)}
+                    src="sửa.png"
+                  ></img>
+                </div>
+                <div className="delete">
+                  <img
+                    className="add_car_button--items"
+                    onClick={() => handleDelete(user.id)}
+                    src="thùng-rác.png"
+                  ></img>
+                </div>
               </td>
             </tr>
           ))}

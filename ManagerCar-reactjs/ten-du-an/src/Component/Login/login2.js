@@ -43,19 +43,20 @@ const LoginComponent = () => {
         <div className="register-form">
           <h2>Đăng nhập</h2>
           <form onSubmit={handleSubmit} action="" method="POST">
-            <input type="text" name="username" placeholder="Username" />
+          <input className="input_user" type="text" name="username" placeholder="Username" />
+          <input className="input_pass" type="password" name="password" placeholder="Password" />
 
-            <input type="password" name="password" placeholder="Password" />
-
-            <button type="submit" className="btn">
-              Đăng nhập
-            </button>
-            <NavLink to="/">
-              {" "}
-              <button onClick={handleClose} type="close" className="btn-close">
-                Close
+          <div className="register-form--btn">
+              <button type="submit" className="btn">
+                Đăng nhập
               </button>
-            </NavLink>
+              <NavLink to="/">
+              {" "}
+                <button onClick={handleClose} type="close" className="btn-close">
+                    Close
+                </button>
+              </NavLink>
+            </div>
           </form>
         </div>
       </div>

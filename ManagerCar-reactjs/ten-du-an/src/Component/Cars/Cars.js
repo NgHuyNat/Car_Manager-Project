@@ -252,62 +252,78 @@ function Cars() {
             </label>
           </div>
         </div>
-        <button onClick={handleopenModal} style={{ cursor: "pointer" }}>
+        <button
+          className="add_car"
+          onClick={handleopenModal}
+          style={{ cursor: "pointer" }}
+        >
           + Xe mới
         </button>
         {modalCar && (
           <form onSubmit={handleAddOrUpdateVehicle} className="form-vehicle">
-            <input
-              name="name"
-              placeholder="Tên xe"
-              value={formData.name}
-              onChange={handleInputChange}
-              required
-            />
-            <input
-              name="image"
-              placeholder="URL hình ảnh"
-              value={formData.image}
-              onChange={handleInputChange}
-              required
-            />
-            <input
-              name="brand"
-              placeholder="Hãng xe"
-              value={formData.brand}
-              onChange={handleInputChange}
-              required
-            />
-            <input
-              name="releaseyear"
-              placeholder="Năm sản xuất"
-              value={formData.releaseyear}
-              onChange={handleInputChange}
-              required
-            />
-            <input
-              name="price"
-              placeholder="Giá bán"
-              value={formData.price}
-              onChange={handleInputChange}
-              required
-            />
-            <input
-              name="type"
-              placeholder="Loại xe"
-              value={formData.type}
-              onChange={handleInputChange}
-              required
-            />
+            <h3>Thêm xe mới</h3>
+            <div className="form-vehicle__list">
+              <div className="form-vehicle__items">
+                <input
+                  name="name"
+                  placeholder="Tên xe"
+                  value={formData.name}
+                  onChange={handleInputChange}
+                  required
+                />
+                <input
+                  name="image"
+                  placeholder="URL hình ảnh"
+                  value={formData.image}
+                  onChange={handleInputChange}
+                  required
+                />
+                <input
+                  name="brand"
+                  placeholder="Hãng xe"
+                  value={formData.brand}
+                  onChange={handleInputChange}
+                  required
+                />
+              </div>
+              <div className="form-vehicle__items">
+                <input
+                  name="releaseyear"
+                  placeholder="Năm sản xuất"
+                  value={formData.releaseyear}
+                  onChange={handleInputChange}
+                  required
+                />
+                <input
+                  name="price"
+                  placeholder="Giá bán"
+                  value={formData.price}
+                  onChange={handleInputChange}
+                  required
+                />
+                <input
+                  name="type"
+                  placeholder="Loại xe"
+                  value={formData.type}
+                  onChange={handleInputChange}
+                  required
+                />
+              </div>
+            </div>
             <select
               name="enginetype"
               value={formData.enginetype}
               onChange={handleInputChange}
               required
+              className="kind_of"
             >
-              <option value="">Chọn loại động cơ</option>
-              <option value="ELECTRIC">ELECTRIC</option>
-              <option value="GASOLINE">GASOLINE</option>
+              {/* <option className="add_car" value="">Chọn loại động cơ</option> */}
+              <option className="add_car" value="ELECTRIC">
+                ELECTRIC
+              </option>
+              <option className="add_car" value="GASOLINE">
+                GASOLINE
+              </option>
             </select>
             {formData.enginetype === "ELECTRIC" && (
               <>
@@ -350,73 +366,81 @@ function Cars() {
             </button>
           </form>
         )}
-        <div className="info-box">
-          <h3>Danh sách xe</h3>
-          <div className="search-bar">
-            <input
-              type="text"
-              placeholder="Tìm kiếm theo tên xe hoặc hãng xe..."
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)} // Cập nhật giá trị tìm kiếm
-            />
-          </div>
 
-          <table>
-            <thead>
-              <tr>
-                <th>Mã Xe</th>
-                <th>Hình ảnh</th>
-                <th>Tên xe</th>
-                <th>Hãng xe</th>
-                <th>Năm sản xuất</th>
-                <th>Giá bán</th>
-                <th>Loại xe</th>
-                <th>Thao tác</th>
-              </tr>
-            </thead>
-            <tbody>
-              {filteredVehicles.map((vehicle) => (
-                <tr key={vehicle.id}>
-                  <td>{vehicle.id}</td>
-                  <td>
-                    {vehicle.image ? (
-                      <img
-                        src={vehicle.image}
-                        alt={vehicle.name}
-                        style={{
-                          width: "100px",
-                          height: "60px",
-                          cursor: "pointer",
-                        }}
-                        onClick={() => handleSelectVehicle(vehicle.id)}
-                      />
-                    ) : (
-                      "Không có hình ảnh"
-                    )}
-                  </td>
-                  <td>{vehicle.name}</td>
-                  <td>{vehicle.brand}</td>
-                  <td>{vehicle.releaseyear}</td>
-                  <td>{vehicle.price}</td>
-                  <td>{vehicle.type}</td>
-
-                  <td>
-                    <button onClick={() => handleEditVehicle(vehicle.id)}>
-                      Sửa
-                    </button>
-
-                    <button onClick={() => handleDeleteVehicle(vehicle.id)}>
-                      Xóa
-                    </button>
-
-                    <button onClick={() => handleOpenPurchaseModal(vehicle.id)}>
-                      Mua
-                    </button>
-                  </td>
+        <h3 className="list-heading">Danh sách xe </h3>
+        <div className="search-bar">
+          <input
+            type="text"
+            placeholder="Tìm kiếm theo tên xe hoặc hãng xe..."
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)} // Cập nhật giá trị tìm kiếm
+          />
+        </div>
+        <div className="info-box-header">
+          <div className="info-box">
+            <table>
+              <thead>
+                <tr className="tr">
+                  <th>Mã Xe</th>
+                  <th>Hình ảnh</th>
+                  <th>Tên xe</th>
+                  <th>Hãng xe</th>
+                  <th>Năm sản xuất</th>
+                  <th>Giá bán</th>
+                  <th>Loại xe</th>
+                  <th>Thao tác</th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
+              </thead>
+              <tbody>
+                {filteredVehicles.map((vehicle) => (
+                  <tr key={vehicle.id}>
+                    <td>{vehicle.id}</td>
+                    <td>
+                      {vehicle.image ? (
+                        <img
+                          src={vehicle.image}
+                          alt={vehicle.name}
+                          style={{ width: "100px", height: "60px" }}
+                          onClick={() => handleSelectVehicle(vehicle.id)}
+                        />
+                      ) : (
+                        "Không có hình ảnh"
+                      )}
+                    </td>
+                    <td>{vehicle.name}</td>
+                    <td>{vehicle.brand}</td>
+                    <td>{vehicle.releaseyear}</td>
+                    <td>{vehicle.price}</td>
+                    <td>{vehicle.type}</td>
+
+                    <td className="add_car_button">
+                      <div className="pen">
+                        <img
+                          className="add_car_button--items"
+                          onClick={() => handleEditVehicle(vehicle.id)}
+                          src="sửa.png"
+                        ></img>
+                      </div>
+                      <div className="delete">
+                        <img
+                          className="add_car_button--items"
+                          onClick={() => handleDeleteVehicle(vehicle.id)}
+                          src="thùng-rác.png"
+                        ></img>
+                      </div>
+                      <div className="buy">
+                        <img
+                          className="add_car_button--items"
+                          onClick={() => handleOpenPurchaseModal(vehicle.id)}
+                          src="mua.png"
+                        ></img>
+                      </div>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
 
@@ -427,60 +451,59 @@ function Cars() {
             <span className="close" onClick={closeModal}>
               &times;
             </span>
-            <h3>Thông tin xe đã chọn:</h3>
-            {selectedVehicle.image && (
-              <img
-                src={selectedVehicle.image}
-                alt={selectedVehicle.name}
-                style={{
-                  width: "100%",
-                  maxHeight: "200px",
-                  objectFit: "cover",
-                }}
-              />
-            )}
-            <p>
-              <b>Tên xe:</b> {selectedVehicle.name}
-            </p>
-            <p>
-              <b>Hãng xe:</b> {selectedVehicle.brand}
-            </p>
-            <p>
-              <b>Năm sản xuất:</b> {selectedVehicle.releaseyear}
-            </p>
-            <p>
-              <b>Giá bán:</b> {selectedVehicle.price}
-            </p>
-            <p>
-              <b>Loại xe:</b> {selectedVehicle.type}
-            </p>
-            {selectedVehicle.battery_capacity &&
-              selectedVehicle.range_per_charge && (
-                <>
-                  {" "}
-                  <p>
-                    <b>Dung lượng pin:</b> {selectedVehicle.battery_capacity}
-                  </p>
-                  <p>
-                    <b>Tầm hoạt động mỗi lần sạc:</b>
-                    {selectedVehicle.range_per_charge}
-                  </p>
-                </>
-              )}
-            {selectedVehicle.fuel_tank_capacity &&
-              selectedVehicle.fuel_efficiency && (
-                <>
-                  {" "}
-                  <p>
-                    <b>Dung tích bình xăng:</b>{" "}
-                    {selectedVehicle.fuel_tank_capacity}
-                  </p>
-                  <p>
-                    <b>Hiệu suất nhiên liệu:</b>{" "}
-                    {selectedVehicle.fuel_efficiency}
-                  </p>
-                </>
-              )}
+            <h3>Thông tin xe đã chọn</h3>
+            <div className="info_car--list">
+              <div>
+                {selectedVehicle.image && (
+                  <img src={selectedVehicle.image} alt={selectedVehicle.name} />
+                )}
+              </div>
+              <div className="info_car--items">
+                <p>
+                  <b>Tên xe:</b> {selectedVehicle.name}
+                </p>
+                <p>
+                  <b>Hãng xe:</b> {selectedVehicle.brand}
+                </p>
+                <p>
+                  <b>Năm sản xuất:</b> {selectedVehicle.releaseyear}
+                </p>
+                <p>
+                  <b>Giá bán:</b> {selectedVehicle.price}
+                </p>
+                <p>
+                  <b>Loại xe:</b> {selectedVehicle.type}
+                </p>
+                {selectedVehicle.battery_capacity &&
+                  selectedVehicle.range_per_charge && (
+                    <>
+                      {" "}
+                      <p>
+                        <b>Dung lượng pin:</b>{" "}
+                        {selectedVehicle.battery_capacity}
+                      </p>
+                      <p>
+                        <b>Tầm hoạt động mỗi lần sạc: </b>
+                        {selectedVehicle.range_per_charge}
+                      </p>
+                    </>
+                  )}
+                {selectedVehicle.fuel_tank_capacity &&
+                  selectedVehicle.fuel_efficiency && (
+                    <>
+                      {" "}
+                      <p>
+                        <b>Dung tích bình xăng:</b>{" "}
+                        {selectedVehicle.fuel_tank_capacity}
+                      </p>
+                      <p>
+                        <b>Hiệu suất nhiên liệu:</b>{" "}
+                        {selectedVehicle.fuel_efficiency}
+                      </p>
+                    </>
+                  )}
+              </div>
+            </div>
           </div>
         </div>
       )}
@@ -499,7 +522,7 @@ function Cars() {
             </span>
             <h3>Thông tin mua xe</h3>
             <form onSubmit={handlePurchase}>
-              <div>
+              <div className="modal-content__items">
                 <label>ID Khách hàng:</label>
                 <input
                   type="text"
@@ -514,7 +537,7 @@ function Cars() {
                   required
                 />
               </div>
-              <div>
+              <div className="modal-content__items">
                 <label>ID Nhân viên:</label>
                 <input
                   type="text"
@@ -529,7 +552,7 @@ function Cars() {
                   required
                 />
               </div>
-              <div>
+              <div className="modal-content__items">
                 <label>Ngày mua:</label>
                 <input
                   type="date"
@@ -544,7 +567,7 @@ function Cars() {
                   required
                 />
               </div>
-              <div>
+              <div className="modal-content__items">
                 <label>Thêm chi tiết:</label>
                 <textarea
                   name="detail"
@@ -557,7 +580,9 @@ function Cars() {
                   }
                 ></textarea>
               </div>
-              <button type="submit">Xác nhận mua</button>
+              <button className="modal-btn" type="submit">
+                Xác nhận mua
+              </button>
             </form>
           </div>
         </div>

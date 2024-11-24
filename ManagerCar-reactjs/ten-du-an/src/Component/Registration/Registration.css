@@ -18,13 +18,18 @@
     width: 350px;
    
 }
+
+.register-form p{
+    margin-top: 30px;
+}
+
 .register-form h2 {
     margin-bottom: 20px;
     text-align: center;
-    color: #575454;
+    color: #17153B !important;
 }
 .register-form input {
-    width: 90%;
+    width: 92%;
     padding: 10px;
     margin: 10px 0;
     border: 1px solid #ccc;
@@ -39,19 +44,19 @@
     border-radius: 5px;
     cursor: pointer;
 }
-.btn-close{
+
+
+.btn-closee {
+    width: 120px !important;
+    height: 40px;
+    background-color: #17153B !important;
+    color: #C8ACD6 !important;
+    border-radius: 4px !important;
+    font-size: 13px;
+    cursor: pointer;
+    border: #001529 !important;
+    outline-style: auto;
+    outline-color: #C8ACD6;
+    font-weight: 700;
     margin-top: 10px;
-    background-color: #f44336!important;
-  }
-.register-form button:hover {
-    background-color: #45a049;
-}
-.register-form p {
-    text-align: center;
-}
-.btn-text{
-    color: #575454;
-}
-.btn-text:hover{
-    color: #a7a0a0;
 }

@@ -10,10 +10,7 @@ function Layoutdefault() {
     <>
       <div className="header">
         <div className="header-logo">
-          <img
-            src="https://leakandassociates.com/files/2019/04/Leak_logo_white_transp.png"
-            alt="logo"
-          />
+          <img src="car.png" alt="logo" className="logo" />
         </div>
         <div className="header-users">
           {username ? (
@@ -47,7 +44,7 @@ function Layoutdefault() {
           )}
         </div>
       </div>
-      <div className="index">
+      <div className="index has-tab">
         <div className="tab">
           <ul className="tab-menu">
             <li className="tab-menu--home ">
@@ -64,9 +61,6 @@ function Layoutdefault() {
             </li>
             <li className="tab-menu--warehouse">
               <NavLink to="/purchase">Hợp đồng </NavLink>
-            </li>
-            <li className="tab-menu--calendar">
-              <NavLink to="/calendar">Calendar</NavLink>
             </li>
             <li className="tab-menu--profile">
               <NavLink to="/profile">Profile</NavLink>

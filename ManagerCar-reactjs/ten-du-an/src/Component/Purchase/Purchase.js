@@ -7,7 +7,6 @@ function Purchases() {
   const [modalOpen, setModalOpen] = useState(false); // Trạng thái modal
   const [selectedCustomer, setSelectedCustomer] = useState(null); // Lưu thông tin khách hàng khi nhấn vào tên
 
-  // Fetch data from API when component renders the first time
   useEffect(() => {
     fetchPurchases();
   }, []);
@@ -16,8 +15,6 @@ function Purchases() {
     try {
       const response = await fetch("http://localhost:3000/contact"); // API endpoint
       const data = await response.json();
-
-      // Sanitize data
       const sanitizedData = data.map((item) => ({
         ...item,
         id: item.id,
@@ -107,10 +104,14 @@ function Purchases() {
                 <td>{purchase.date}</td>
                 <td>{purchase.detail}</td>
                 <td>{purchase.car?.price}</td>
-                <td>
-                  <button onClick={() => handleDeletePurchase(purchase.id)}>
-                    Xóa
-                  </button>
+                <td className="add_car_button">
+                  <div className="delete">
+                    <img
+                      className="add_car_button--items"
+                      onClick={() => handleDeletePurchase(purchase.id)}
+                      src="thùng-rác.png"
+                    ></img>
+                  </div>
                 </td>
               </tr>
             ))}
@@ -142,5 +143,4 @@ function Purchases() {
     </div>
   );
 }
-
 export default Purchases;
