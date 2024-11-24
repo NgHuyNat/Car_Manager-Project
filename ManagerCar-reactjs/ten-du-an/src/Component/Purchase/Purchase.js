@@ -31,17 +31,15 @@ function Purchases() {
     }
   };
 
-  const handleDeletePurchase = (id) => {
-    fetch(`http://localhost:8081/contact/deletecontact/${id}`, {
-      method: "DELETE",
-    })
-      .then((response) => response.json())
-      .then(() => {
-        setPurchases(purchases.filter((purchase) => purchase.id !== id));
-      })
-      .catch((error) => {
-        console.error("Lỗi khi xóa giao dịch:", error);
+  const handleDeletePurchase = async (id) => {
+    try {
+      await fetch(`http://localhost:8081/contact/deletecontact/${id}`, {
+        method: "DELETE",
       });
+      fetchPurchases();
+    } catch (error) {
+      alert("Lỗi khi xoắ xe");
+    }
   };
 
   return (

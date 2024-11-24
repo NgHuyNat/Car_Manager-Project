@@ -32,7 +32,9 @@ function Cars() {
 
   const fetchVehicles = async () => {
     try {
-      const response = await fetch("http://localhost:8081/car/sold?sold = 0");
+      const response = await fetch(
+        "http://localhost:8081/car/soldcar?sold = 0"
+      );
       const data = await response.json();
       setVehicles(data);
     } catch (error) {
