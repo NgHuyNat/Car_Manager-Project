@@ -4,17 +4,15 @@ import "./Purchases.css";
 function Purchases() {
   const [purchases, setPurchases] = useState([]);
 
-  // Fetch data from API when component renders the first time
   useEffect(() => {
     fetchPurchases();
   }, []);
 
   const fetchPurchases = async () => {
     try {
-      const response = await fetch("http://localhost:8081/contact"); // API endpoint
+      const response = await fetch("http://localhost:3000/contact");
       const data = await response.json();
 
-      // Sanitize data
       const sanitizedData = data.map((item) => ({
         ...item,
         id: item.id,
@@ -31,15 +29,17 @@ function Purchases() {
     }
   };
 
-  const handleDeletePurchase = async (id) => {
-    try {
-      await fetch(`http://localhost:8081/contact/deletecontact/${id}`, {
-        method: "DELETE",
+  const handleDeletePurchase = (id) => {
+    fetch(`http://localhost:3000/contact/${id}`, {
+      method: "DELETE",
+    })
+      .then((response) => response.json())
+      .then(() => {
+        setPurchases(purchases.filter((purchase) => purchase.id !== id));
+      })
+      .catch((error) => {
+        console.error("Lỗi khi xóa giao dịch:", error);
       });
-      fetchPurchases();
-    } catch (error) {
-      alert("Lỗi khi xoắ xe");
-    }
   };
 
   return (
@@ -84,5 +84,4 @@ function Purchases() {
     </div>
   );
 }
-
 export default Purchases;

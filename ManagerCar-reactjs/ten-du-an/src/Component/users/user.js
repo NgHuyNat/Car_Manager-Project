@@ -21,7 +21,7 @@ function Users() {
   };
 
   useEffect(() => {
-    fetch("http://localhost:8081/customer")
+    fetch("http://localhost:3000/customers")
       .then((response) => {
         if (!response.ok) {
           throw new Error("Network response was not ok");
@@ -45,7 +45,7 @@ function Users() {
 
   const handleAddUser = (e) => {
     e.preventDefault();
-    fetch("http://localhost:8081/customer/addcustomer", {
+    fetch("http://localhost:3000/customers", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -75,7 +75,7 @@ function Users() {
   };
 
   const handleDelete = (id) => {
-    fetch(`http://localhost:8081/customer/deletecustomer/${id}`, {
+    fetch(`http://localhost:3000/customers/${id}`, {
       method: "DELETE",
     })
       .then((response) => {
@@ -98,7 +98,7 @@ function Users() {
 
   const handleUpdateUser = (e) => {
     e.preventDefault();
-    fetch(`http://localhost:8081/customer/updatecustomer/${editUser.id}`, {
+    fetch(`http://localhost:3000/customers/${editUser.id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -138,15 +138,12 @@ function Users() {
   return (
     <div className="customer-table">
       <h2>Thông Tin Khách Hàng</h2>
-      <button onClick={handleOpen} style={{ cursor: "pointer" }}>
+      <button className="add-car" onClick={handleOpen} style={{ cursor: "pointer" }}>
         + Khách hàng mới
       </button>
       {openmodal && (
-        <form
-          onSubmit={editMode ? handleUpdateUser : handleAddUser}
-          className="add-customer-form"
-        >
-          <div className="add-customer-form--body">
+        <form onSubmit={editMode ? handleUpdateUser : handleAddUser} className="add-customer-form">
+          <h3>Thêm khách hàng</h3>
             <input
               type="text"
               name="name"
@@ -170,6 +167,10 @@ function Users() {
               value={newusers.email}
               onChange={handleInputChange}
               required
+              style={{
+                padding:"10px",
+                width: "379px"
+              }}
             />
             <input
               type="text"
@@ -179,11 +180,9 @@ function Users() {
               onChange={handleInputChange}
               required
             />
-
-            <div className="group-btn">
-              <button type="submit">{editMode ? "Cập nhật" : "Thêm"}</button>
-            </div>
-          </div>
+            <button type="submit">
+              {editMode ? "Cập nhật" : "Thêm"}
+            </button>
         </form>
       )}
 
