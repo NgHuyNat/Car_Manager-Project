@@ -4,17 +4,15 @@ import "./Purchases.css";
 function Purchases() {
   const [purchases, setPurchases] = useState([]);
 
-  // Fetch data from API when component renders the first time
   useEffect(() => {
     fetchPurchases();
   }, []);
 
   const fetchPurchases = async () => {
     try {
-      const response = await fetch("http://localhost:3000/contact"); // API endpoint
+      const response = await fetch("http://localhost:3000/contact");
       const data = await response.json();
 
-      // Sanitize data
       const sanitizedData = data.map((item) => ({
         ...item,
         id: item.id,
@@ -86,5 +84,4 @@ function Purchases() {
     </div>
   );
 }
-
 export default Purchases;

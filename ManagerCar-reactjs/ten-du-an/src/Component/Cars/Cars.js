@@ -32,7 +32,9 @@ function Cars() {
 
   const fetchVehicles = async () => {
     try {
-      const response = await fetch("http://localhost:3000/car");
+      const response = await fetch(
+        "http://localhost:8081/car/soldcar?sold = 0"
+      );
       const data = await response.json();
       setVehicles(data);
     } catch (error) {
@@ -227,7 +229,11 @@ function Cars() {
             </label>
           </div>
         </div>
-        <button className="add_car" onClick={handleopenModal} style={{ cursor: "pointer" }}>
+        <button
+          className="add_car"
+          onClick={handleopenModal}
+          style={{ cursor: "pointer" }}
+        >
           + Xe mới
         </button>
         {modalCar && (
@@ -289,8 +295,12 @@ function Cars() {
               className="kind_of"
             >
               {/* <option className="add_car" value="">Chọn loại động cơ</option> */}
-                <option className="add_car" value="ELECTRIC">ELECTRIC</option>
-                <option className="add_car" value="GASOLINE">GASOLINE</option>
+              <option className="add_car" value="ELECTRIC">
+                ELECTRIC
+              </option>
+              <option className="add_car" value="GASOLINE">
+                GASOLINE
+              </option>
             </select>
             {formData.enginetype === "ELECTRIC" && (
               <>
@@ -401,10 +411,7 @@ function Cars() {
             <div className="info_car--list">
               <div>
                 {selectedVehicle.image && (
-                  <img
-                    src={selectedVehicle.image}
-                    alt={selectedVehicle.name}
-                  />
+                  <img src={selectedVehicle.image} alt={selectedVehicle.name} />
                 )}
               </div>
               <div className="info_car--items">
@@ -428,7 +435,8 @@ function Cars() {
                     <>
                       {" "}
                       <p>
-                        <b>Dung lượng pin:</b> {selectedVehicle.battery_capacity}
+                        <b>Dung lượng pin:</b>{" "}
+                        {selectedVehicle.battery_capacity}
                       </p>
                       <p>
                         <b>Tầm hoạt động mỗi lần sạc: </b>
@@ -470,7 +478,7 @@ function Cars() {
             </span>
             <h3>Thông tin mua xe</h3>
             <form onSubmit={handlePurchase}>
-              <div className="modal-content__items" >
+              <div className="modal-content__items">
                 <label>ID Khách hàng:</label>
                 <input
                   type="text"
@@ -500,7 +508,7 @@ function Cars() {
                   required
                 />
               </div>
-              <div className="modal-content__items" >
+              <div className="modal-content__items">
                 <label>Ngày mua:</label>
                 <input
                   type="date"
@@ -528,7 +536,9 @@ function Cars() {
                   }
                 ></textarea>
               </div>
-              <button className="modal-btn"  type="submit">Xác nhận mua</button>
+              <button className="modal-btn" type="submit">
+                Xác nhận mua
+              </button>
             </form>
           </div>
         </div>

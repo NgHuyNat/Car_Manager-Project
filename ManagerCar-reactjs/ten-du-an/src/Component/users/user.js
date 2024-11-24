@@ -115,6 +115,7 @@ function Users() {
         setCustomers(
           customers.map((user) => (user.id == editUser.id ? data : user))
         );
+        console.log(data);
         setEditUser(null);
         setEditMode(false);
         setNewusers({
