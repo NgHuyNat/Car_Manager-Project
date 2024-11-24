@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from "react";
 import "./Cars.css";
-
+import { getCookie } from "../../helper/cookies";
+import Swal from "sweetalert2/dist/sweetalert2.js";
+import "sweetalert2/src/sweetalert2.scss";
 function Cars() {
+  const username = getCookie("username");
   const [vehicles, setVehicles] = useState([]);
   const [formData, setFormData] = useState({
     id: "",
@@ -18,6 +21,7 @@ function Cars() {
   });
 
   const [editingId, setEditingId] = useState(null);
+  const [searchTerm, setSearchTerm] = useState(""); // Lưu giá trị tìm kiếm
   const [selectedVehicle, setSelectedVehicle] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalCar, setModalCar] = useState();
@@ -25,6 +29,11 @@ function Cars() {
   const handleopenModal = () => {
     setModalCar(!modalCar);
   };
+  const filteredVehicles = vehicles.filter(
+    (vehicle) =>
+      vehicle.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      vehicle.brand.toLowerCase().includes(searchTerm.toLowerCase())
+  );
 
   useEffect(() => {
     fetchVehicles();
@@ -32,7 +41,7 @@ function Cars() {
 
   const fetchVehicles = async () => {
     try {
-      const response = await fetch("http://localhost:8081/car/sold?sold = 0");
+      const response = await fetch("http://localhost:3000/car");
       const data = await response.json();
       setVehicles(data);
     } catch (error) {
@@ -51,7 +60,7 @@ function Cars() {
     e.preventDefault();
     if (editingId) {
       try {
-        await fetch(`http://localhost:8081/car/updatecar/${editingId}`, {
+        await fetch(`http://localhost:3000/car/${editingId}`, {
           method: "PUT",
           headers: {
             "Content-Type": "application/json",
@@ -66,7 +75,7 @@ function Cars() {
       }
     } else {
       try {
-        await fetch("http://localhost:8081/car/addcar", {
+        await fetch("http://localhost:3000/car", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -121,7 +130,7 @@ function Cars() {
         detail: purchaseData.detail,
       };
 
-      await fetch("http://localhost:8081/contact/addcontact", {
+      await fetch("http://localhost:8081/contact", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -168,8 +177,27 @@ function Cars() {
 
   const handleDeleteVehicle = async (id) => {
     try {
-      await fetch(`http://localhost:8081/car/${id}`, {
-        method: "DELETE",
+      Swal.fire({
+        title: "Are you sure?",
+        text: "You won't be able to revert this!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, delete it!",
+      }).then(async (result) => {
+        if (result.isConfirmed) {
+          await fetch(`http://localhost:3000/car/${id}`, {
+            method: "DELETE",
+          });
+          Swal.fire({
+            title: "Deleted!",
+            text: "Your file has been deleted.",
+            icon: "success",
+          });
+          fetchVehicles();
+          setIsModalOpen(false);
+        }
       });
       fetchVehicles();
       setIsModalOpen(false);
@@ -191,15 +219,12 @@ function Cars() {
 
   const soldCar = async (id) => {
     try {
-      const response = await fetch(
-        `http://localhost:8081/car/updatesoldcar/${id}`,
-        {
-          method: "PUT",
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
+      const response = await fetch(`http://localhost:3000/car/${id}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
 
       if (!response.ok) {
         throw new Error(`Lỗi cập nhật trạng thái xe: ${response.statusText}`);
@@ -327,6 +352,15 @@ function Cars() {
         )}
         <div className="info-box">
           <h3>Danh sách xe</h3>
+          <div className="search-bar">
+            <input
+              type="text"
+              placeholder="Tìm kiếm theo tên xe hoặc hãng xe..."
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)} // Cập nhật giá trị tìm kiếm
+            />
+          </div>
+
           <table>
             <thead>
               <tr>
@@ -341,7 +375,7 @@ function Cars() {
               </tr>
             </thead>
             <tbody>
-              {vehicles.map((vehicle) => (
+              {filteredVehicles.map((vehicle) => (
                 <tr key={vehicle.id}>
                   <td>{vehicle.id}</td>
                   <td>
@@ -349,7 +383,11 @@ function Cars() {
                       <img
                         src={vehicle.image}
                         alt={vehicle.name}
-                        style={{ width: "100px", height: "60px" }}
+                        style={{
+                          width: "100px",
+                          height: "60px",
+                          cursor: "pointer",
+                        }}
                         onClick={() => handleSelectVehicle(vehicle.id)}
                       />
                     ) : (
@@ -366,9 +404,11 @@ function Cars() {
                     <button onClick={() => handleEditVehicle(vehicle.id)}>
                       Sửa
                     </button>
+
                     <button onClick={() => handleDeleteVehicle(vehicle.id)}>
                       Xóa
                     </button>
+
                     <button onClick={() => handleOpenPurchaseModal(vehicle.id)}>
                       Mua
                     </button>

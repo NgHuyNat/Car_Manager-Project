@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from "react";
 import "./Purchases.css";
-
+import Swal from "sweetalert2/dist/sweetalert2.js";
+import "sweetalert2/src/sweetalert2.scss";
 function Purchases() {
   const [purchases, setPurchases] = useState([]);
+  const [modalOpen, setModalOpen] = useState(false); // Trạng thái modal
+  const [selectedCustomer, setSelectedCustomer] = useState(null); // Lưu thông tin khách hàng khi nhấn vào tên
 
   // Fetch data from API when component renders the first time
   useEffect(() => {
@@ -11,7 +14,7 @@ function Purchases() {
 
   const fetchPurchases = async () => {
     try {
-      const response = await fetch("http://localhost:8081/contact"); // API endpoint
+      const response = await fetch("http://localhost:3000/contact"); // API endpoint
       const data = await response.json();
 
       // Sanitize data
@@ -32,16 +35,42 @@ function Purchases() {
   };
 
   const handleDeletePurchase = (id) => {
-    fetch(`http://localhost:8081/contact/deletecontact/${id}`, {
-      method: "DELETE",
-    })
-      .then((response) => response.json())
-      .then(() => {
-        setPurchases(purchases.filter((purchase) => purchase.id !== id));
-      })
-      .catch((error) => {
-        console.error("Lỗi khi xóa giao dịch:", error);
-      });
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        fetch(`http://localhost:3000/contact/${id}`, {
+          method: "DELETE",
+        })
+          .then((response) => response.json())
+          .then(() => {
+            setPurchases(purchases.filter((purchase) => purchase.id !== id));
+            Swal.fire({
+              title: "Deleted!",
+              text: "Your file has been deleted.",
+              icon: "success",
+            });
+          })
+          .catch((error) => {
+            console.error("Lỗi khi xóa giao dịch:", error);
+          });
+      }
+    });
+  };
+
+  const handleCustomerClick = (customer) => {
+    setSelectedCustomer(customer); // Lưu thông tin khách hàng khi nhấn
+    setModalOpen(true); // Mở modal
+  };
+
+  const handleCloseModal = () => {
+    setModalOpen(false); // Đóng modal
   };
 
   return (
@@ -67,7 +96,12 @@ function Purchases() {
             {purchases.map((purchase, id) => (
               <tr key={id}>
                 <td>{purchase.id}</td>
-                <td>{purchase.customer?.name}</td>
+                <td
+                  onClick={() => handleCustomerClick(purchase.customer)}
+                  style={{ cursor: "pointer" }}
+                >
+                  {purchase.customer?.name}
+                </td>
                 <td>{purchase.employee?.name}</td>
                 <td>{purchase.car?.name}</td>
                 <td>{purchase.date}</td>
@@ -82,6 +116,28 @@ function Purchases() {
             ))}
           </tbody>
         </table>
+      )}
+
+      {/* Modal hiển thị thông tin chi tiết khách hàng */}
+      {modalOpen && selectedCustomer && (
+        <div className="modal">
+          <div className="modal-content">
+            <h3>Thông Tin Khách Hàng</h3>
+            <p>
+              <strong>Tên khách hàng:</strong> {selectedCustomer.name}
+            </p>
+            <p>
+              <strong>Số điện thoại:</strong> {selectedCustomer.phonenumber}
+            </p>
+            <p>
+              <strong>Email:</strong> {selectedCustomer.email}
+            </p>
+            <p>
+              <strong>Địa chỉ:</strong> {selectedCustomer.address}
+            </p>
+            <button onClick={handleCloseModal}>Đóng</button>
+          </div>
+        </div>
       )}
     </div>
   );

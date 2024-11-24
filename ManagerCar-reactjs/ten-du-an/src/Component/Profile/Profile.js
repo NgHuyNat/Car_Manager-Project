@@ -1,7 +1,7 @@
 import { getCookie } from "../../helper/cookies";
 import "./Profile.css";
 function Profile() {
-  const token = getCookie("token");
+  const username = getCookie("username");
   const employeeData = {
     img: "https://th.bing.com/th/id/OIP.QVHuq09v2mLB_3xUgEpOlwHaE8?rs=1&pid=ImgDetMain",
     MaNH: "12345",
@@ -14,7 +14,7 @@ function Profile() {
   };
   return (
     <>
-      {token ? (
+      {username ? (
         <div className="employee-profile">
           <h2>Thông Tin Nhân Viên</h2>
           <div className="profile">

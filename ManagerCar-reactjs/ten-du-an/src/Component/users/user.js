@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./user.css";
-
+import Swal from "sweetalert2/dist/sweetalert2.js";
+import "sweetalert2/src/sweetalert2.scss";
 function Users() {
   const [customers, setCustomers] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -15,13 +16,27 @@ function Users() {
   const [editMode, setEditMode] = useState(false); // Chế độ chỉnh sửa
   const [editUser, setEditUser] = useState(null); // Khách hàng đang chỉnh sửa
   const [openmodal, setmodal] = useState(false);
+  const [viewMode, setViewMode] = useState(false); // Chế độ xem thông tin chi tiết
 
   const handleOpen = () => {
     setmodal(!openmodal);
   };
 
+  const handleViewUser = (user) => {
+    setEditMode(false); // Tắt chế độ chỉnh sửa
+    setViewMode(true); // Bật chế độ xem thông tin chi tiết
+    setEditUser(user);
+    setmodal(true); // Mở modal
+  };
+
+  const handleCloseModal = () => {
+    setmodal(false);
+    setViewMode(false); // Đóng chế độ xem chi tiết
+    setEditMode(false); // Đóng chế độ chỉnh sửa
+  };
+
   useEffect(() => {
-    fetch("http://localhost:8081/customer")
+    fetch("http://localhost:3000/customers")
       .then((response) => {
         if (!response.ok) {
           throw new Error("Network response was not ok");
@@ -45,7 +60,7 @@ function Users() {
 
   const handleAddUser = (e) => {
     e.preventDefault();
-    fetch("http://localhost:8081/customer/addcustomer", {
+    fetch("http://localhost:3000/customers", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -75,30 +90,48 @@ function Users() {
   };
 
   const handleDelete = (id) => {
-    fetch(`http://localhost:8081/customer/deletecustomer/${id}`, {
-      method: "DELETE",
-    })
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error("Network response was not ok");
-        }
-        setCustomers(customers.filter((user) => user.id != id));
-      })
-      .catch((error) => {
-        setError(error);
-      });
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        fetch(`http://localhost:3000/customers/${id}`, {
+          method: "DELETE",
+        })
+          .then((response) => {
+            if (!response.ok) {
+              throw new Error("Network response was not ok");
+            }
+            setCustomers(customers.filter((user) => user.id != id));
+            Swal.fire({
+              title: "Deleted!",
+              text: "Your file has been deleted.",
+              icon: "success",
+            });
+          })
+          .catch((error) => {
+            setError(error);
+          });
+      }
+    });
   };
 
   const handleEdit = (user) => {
     setEditMode(true);
+    setViewMode(false); // Đóng chế độ xem
     setEditUser(user);
     setNewusers(user);
-    setmodal(true);
+    setmodal(true); // Mở modal
   };
 
   const handleUpdateUser = (e) => {
     e.preventDefault();
-    fetch(`http://localhost:8081/customer/updatecustomer/${editUser.id}`, {
+    fetch(`http://localhost:3000/customers/${editUser.id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -141,49 +174,74 @@ function Users() {
         + Khách hàng mới
       </button>
       {openmodal && (
-        <form
-          onSubmit={editMode ? handleUpdateUser : handleAddUser}
-          className="add-customer-form"
-        >
-          <div className="add-customer-form--body">
-            <input
-              type="text"
-              name="name"
-              placeholder="Tên khách hàng"
-              value={newusers.name}
-              onChange={handleInputChange}
-              required
-            />
-            <input
-              type="text"
-              name="phonenumber"
-              placeholder="Số điện thoại"
-              value={newusers.phonenumber}
-              onChange={handleInputChange}
-              required
-            />
-            <input
-              type="email"
-              name="email"
-              placeholder="Email"
-              value={newusers.email}
-              onChange={handleInputChange}
-              required
-            />
-            <input
-              type="text"
-              name="address"
-              placeholder="Địa chỉ"
-              value={newusers.address}
-              onChange={handleInputChange}
-              required
-            />
+        <div className="modal">
+          <form
+            onSubmit={editMode ? handleUpdateUser : handleAddUser}
+            className="add-customer-form"
+          >
+            <div className="add-customer-form--body">
+              {viewMode ? (
+                <div>
+                  <h3>Thông Tin Khách Hàng</h3>
+                  <p>
+                    <strong>Tên khách hàng:</strong> {editUser?.name}
+                  </p>
+                  <p>
+                    <strong>Số điện thoại:</strong> {editUser?.phonenumber}
+                  </p>
+                  <p>
+                    <strong>Email:</strong> {editUser?.email}
+                  </p>
+                  <p>
+                    <strong>Địa chỉ:</strong> {editUser?.address}
+                  </p>
+                  <button onClick={handleCloseModal}>Đóng</button>
+                </div>
+              ) : (
+                <>
+                  <input
+                    type="text"
+                    name="name"
+                    placeholder="Tên khách hàng"
+                    value={newusers.name}
+                    onChange={handleInputChange}
+                    required
+                  />
+                  <input
+                    type="text"
+                    name="phonenumber"
+                    placeholder="Số điện thoại"
+                    value={newusers.phonenumber}
+                    onChange={handleInputChange}
+                    required
+                  />
+                  <input
+                    type="email"
+                    name="email"
+                    placeholder="Email"
+                    value={newusers.email}
+                    onChange={handleInputChange}
+                    required
+                  />
+                  <input
+                    type="text"
+                    name="address"
+                    placeholder="Địa chỉ"
+                    value={newusers.address}
+                    onChange={handleInputChange}
+                    required
+                  />
 
-            <div className="group-btn">
-              <button type="submit">{editMode ? "Cập nhật" : "Thêm"}</button>
+                  <div className="group-btn">
+                    <button type="submit">
+                      {editMode ? "Cập nhật" : "Thêm"}
+                    </button>
+                  </div>
+                </>
+              )}
             </div>
-          </div>
-        </form>
+          </form>
+        </div>
       )}
 
       <table>
@@ -201,7 +259,12 @@ function Users() {
           {customers.map((user) => (
             <tr key={user.id}>
               <td>{user.id}</td>
-              <td>{user.name}</td>
+              <td
+                onClick={() => handleViewUser(user)}
+                style={{ cursor: "pointer" }}
+              >
+                {user.name}
+              </td>
               <td>{user.phonenumber}</td>
               <td>{user.email}</td>
               <td>{user.address}</td>
