@@ -73,10 +73,10 @@ function Purchases() {
                 <td>{purchase.date}</td>
                 <td>{purchase.detail}</td>
                 <td>{purchase.car?.price}</td>
-                <td>
-                  <button onClick={() => handleDeletePurchase(purchase.id)}>
-                    Xóa
-                  </button>
+                <td className="add_car_button" >
+                  <div className="delete">
+                    <img className="add_car_button--items" onClick={() => handleDeletePurchase(purchase.id)} src="thùng-rác.png" ></img>
+                  </div>
                 </td>
               </tr>
             ))}

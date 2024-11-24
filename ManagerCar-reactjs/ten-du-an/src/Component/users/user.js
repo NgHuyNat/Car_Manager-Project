@@ -205,9 +205,13 @@ function Users() {
               <td>{user.email}</td>
               <td>{user.address}</td>
 
-              <td>
-                <button onClick={() => handleEdit(user)}>Sửa</button>
-                <button onClick={() => handleDelete(user.id)}>Xóa</button>
+              <td className="add_car_button">
+                <div className="pen">
+                  <img className="add_car_button--items" onClick={() => handleEdit(user)}  src="sửa.png" ></img>  
+                </div>
+                <div className="delete">
+                  <img className="add_car_button--items" onClick={() => handleDelete(user.id)} src="thùng-rác.png"></img>
+                </div>
               </td>
             </tr>
           ))}

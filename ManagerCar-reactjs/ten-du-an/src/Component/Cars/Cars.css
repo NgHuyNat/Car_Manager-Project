@@ -72,6 +72,13 @@ img{
 }
 
 .add_car_button{
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  justify-content: space-around;
+  border-bottom: none;
+  border-left: none;
+  border-right: none;
   
 }
 
@@ -86,6 +93,42 @@ img{
   cursor: pointer;
 }
 
+.pen {
+  width: 40px;
+  height: 40px;
+  background-color:#feee0a;
+  border-radius: 6px;
+}
+
+.pen img {
+  padding: 10px;
+  margin: auto;
+}
+
+.delete {
+  width: 40px;
+  height: 40px;
+  background-color:#f93c07;
+  border-radius: 6px;
+}
+
+.delete img {
+  padding: 10px;
+  margin: auto;
+}
+
+.buy {
+  width: 40px;
+  height: 40px;
+  background-color:#2bf907;
+  border-radius: 6px;
+}
+
+.buy img {
+  padding: 10px;
+  margin: auto;
+}
+
 .add_carr {
   background-color: #17153B;
   color: #C8ACD6;
@@ -94,6 +137,12 @@ img{
   border-radius: 4px;
   border: 2px solid #C8ACD6;
   cursor: pointer;
+}
+
+.add_car_button--items {
+  filter: invert(84%) sepia(100%) saturate(1%) hue-rotate(131deg) brightness(108%) contrast(99%);
+  width: 20px;
+  height: 20px;
 }
 
 

@@ -1,5 +1,5 @@
 {
-    "car": [
+  "car": [
     {
       "id": "9",
       "brand": "Porches",
@@ -95,103 +95,103 @@
       "image": "https://i.pinimg.com/236x/6a/2b/30/6a2b30bce37311d0e454a1c21ee0750f.jpg",
       "battery_capacity": 12231,
       "range_per_charge": 123123
+    },
+    {
+      "id": "",
+      "name": "N",
+      "brand": "dsd",
+      "releaseyear": "sadsad",
+      "price": "sad",
+      "type": "dsad",
+      "battery_capacity": "",
+      "range_per_charge": "",
+      "fuel_tank_capacity": "s",
+      "fuel_efficiency": "d",
+      "image": "sdasdsds",
+      "enginetype": "GASOLINE"
     }
   ],
   "contact": [
     {
       "id": 25,
       "car": {
-        "id": 35,
-        "brand": "Lamborghini",
-        "name": "Tan Sieu Beo",
-        "type": "Sedan",
-        "releaseyear": 2024,
-        "price": "100000000000000",
-        "sold": 1,
-        "image": "https://i.pinimg.com/236x/6a/2b/30/6a2b30bce37311d0e454a1c21ee0750f.jpg",
-        "battery_capacity": 1111111,
-        "range_per_charge": 1111111
+          "id": 35,
+          "brand": "Lamborghini",
+          "name": "Tan Sieu Beo",
+          "type": "Sedan",
+          "releaseyear": 2024,
+          "price": "100000000000000",
+          "sold": 1,
+          "image": "https://i.pinimg.com/236x/6a/2b/30/6a2b30bce37311d0e454a1c21ee0750f.jpg",
+          "battery_capacity": 1111111,
+          "range_per_charge": 1111111
       },
       "employee": {
-        "id": 2,
-        "name": "Jane Doe",
-        "role": "Employee",
-        "username": "janedoe",
-        "password": "password456",
-        "phonenumber": "987654321",
-        "email": "jane.doe@example.com",
-        "address": "456 Elm St",
-        "salary": "5000",
-        "bonussalary": "500",
-        "defaultsalary": "5500",
-        "carsoldtotal": 7,
-        "manager_id": {
-          "id": 1,
-          "name": "Michael Scott",
-          "role": "Manager",
-          "username": "michaels",
-          "password": "password123",
-          "phonenumber": "123123123",
-          "email": "michael.scott@example.com",
-          "address": "Scranton, PA",
-          "salary": "8000",
-          "bonussalary": "1000",
-          "defaultsalary": "9000"
-        }
+          "id": 2,
+          "name": "Jane Doe",
+          "role": "Employee",
+          "username": "janedoe",
+          "password": "password456",
+          "phonenumber": "987654321",
+          "email": "jane.doe@example.com",
+          "address": "456 Elm St",
+          "salary": "5000",
+          "bonussalary": "500",
+          "defaultsalary": "5500",
+          "carsoldtotal": 7,
+          "manager_id": {
+              "id": 1,
+              "name": "Michael Scott",
+              "role": "Manager",
+              "username": "michaels",
+              "password": "password123",
+              "phonenumber": "123123123",
+              "email": "michael.scott@example.com",
+              "address": "Scranton, PA",
+              "salary": "8000",
+              "bonussalary": "1000",
+              "defaultsalary": "9000"
+          }
       },
       "customer": {
-        "id": 1,
-        "name": "Bui Hoang ákdksadkas",
-        "phonenumber": "123123123123",
-        "email": "buihoangduy123@1234455",
-        "address": "hahahahaha"
+          "id": 1,
+          "name": "Bui Hoang ákdksadkas",
+          "phonenumber": "123123123123",
+          "email": "buihoangduy123@1234455",
+          "address": "hahahahaha"
       },
       "detail": "ádasdsaddas",
       "date": "2024-10-30"
-    }
+  }
   ],
   "customers": [
     {
-      "id": "1",
-      "name": "Bui Hoang ákdksadkas",
-      "phonenumber": "123123123123",
-      "email": "buihoangduy123@1234455",
-      "address": "hahahahaha"
-    },
-    {
       "id": "3",
-      "name": "tân béo",
+      "name": "tân béo0000000",
       "phonenumber": "09234234423",
       "email": "tnadb123@db123.com",
       "address": "hehehuhu"
     },
     {
       "id": "4",
-      "name": "Bùi Hoàng Duy",
+      "name": "duy béo",
       "phonenumber": "1231212321321",
       "email": "hrhrhrhrhrhr@fsadfds",
       "address": "1231232"
     },
     {
-      "id": "8",
-      "name": "Bùi Hoàng Duy",
-      "phonenumber": "0931587809",
-      "email": "hoangduygala@gmail.com",
-      "address": "Khong Muon Cung Cap"
+      "id": "",
+      "name": "duy nguuu",
+      "phonenumber": "8728263821",
+      "email": "8932729872938729sdasjdhwajs@gmail.sex",
+      "address": "hải phòng"
     },
     {
-      "id": "9",
-      "name": "Bùi Hoàng Duy",
-      "phonenumber": "0931587809",
-      "email": "hoangduygala@gmail.com",
-      "address": "Khong Muon Cung Cap"
-    },
-    {
-      "id": "10",
-      "name": "Bùi Hoàng Duy",
-      "phonenumber": "0931587809",
-      "email": "hoangduygala@gmail.com",
-      "address": "Khong Muon Cung Cap"
+      "id": "",
+      "name": "duy nguuu vkl",
+      "phonenumber": "8728263821",
+      "email": "8932729872938729sdasjdhwajs@gmail.sex",
+      "address": "hải phòng"
     }
   ]
 }

@@ -11,7 +11,7 @@ function Layoutdefault() {
       <div className="header">
         <div className="header-logo">
           <img
-            src="https://leakandassociates.com/files/2019/04/Leak_logo_white_transp.png"
+            src="car.png"
             alt="logo"
             className="logo"
           />

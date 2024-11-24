@@ -106,12 +106,16 @@ function Registration() {
             onChange={handleChange} 
             required
           />
-          <button type="submit" className="btn">
-            Register
-          </button>
-          <NavLink  onClick={handleClose} type="close" className="btn-close">
-            Close
-          </NavLink>
+          <div  className="register-form--btn">
+            <button type="submit" className="btn">
+              Register
+            </button>
+            <NavLink>
+              <button  onClick={handleClose} type="close" className="btn-closee">
+                Close
+              </button>
+            </NavLink>
+          </div>
           <p
             onClick={() => navigate("/login2")}
             className="btn-text"

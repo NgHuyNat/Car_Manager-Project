@@ -371,16 +371,16 @@ function Cars() {
                     <td>{vehicle.price}</td>
                     <td>{vehicle.type}</td>
 
-                    <td className="add_car_button"  >
-                      <button className="add_carr" onClick={() => handleEditVehicle(vehicle.id)}>
-                        Sửa
-                      </button>
-                      <button className="add_carr" onClick={() => handleDeleteVehicle(vehicle.id)}>
-                        Xóa
-                      </button>
-                      <button className="add_carr" onClick={() => handleOpenPurchaseModal(vehicle.id)}>
-                        Mua
-                      </button>
+                    <td className="add_car_button">
+                      <div className="pen">
+                        <img className="add_car_button--items" onClick={() => handleEditVehicle(vehicle.id)} src="sửa.png" ></img>
+                      </div>
+                      <div className="delete">
+                        <img className="add_car_button--items" onClick={() => handleDeleteVehicle(vehicle.id)} src="thùng-rác.png" ></img>
+                      </div>
+                      <div className="buy">
+                        <img className="add_car_button--items" onClick={() => handleOpenPurchaseModal(vehicle.id)} src="mua.png" ></img>
+                      </div>
                     </td>
                   </tr>
                 ))}
