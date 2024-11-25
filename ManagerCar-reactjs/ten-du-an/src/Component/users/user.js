@@ -179,15 +179,12 @@ function Users() {
         + Khách hàng mới
       </button>
       {openmodal && (
-        <div className="modal">
-          <form
-            onSubmit={editMode ? handleUpdateUser : handleAddUser}
-            className="add-customer-form"
-          >
+        <div >
+          <form onSubmit={editMode ? handleUpdateUser : handleAddUser} className="add-customer-form" >
             <div className="add-customer-form--body">
               {viewMode ? (
-                <div>
-                  <h3>Thông Tin Khách Hàng</h3>
+                <div className="add-customer-form--container">
+                  <h3>Thông tin chi tiết</h3>
                   <p>
                     <strong>Tên khách hàng:</strong> {editUser?.name}
                   </p>
@@ -204,6 +201,7 @@ function Users() {
                 </div>
               ) : (
                 <>
+                  <h3 className="heading">Thêm khách hàng</h3>
                   <input
                     type="text"
                     name="name"
@@ -227,6 +225,10 @@ function Users() {
                     value={newusers.email}
                     onChange={handleInputChange}
                     required
+                    style={{
+                      padding: "10px",
+                      width: "379px"
+                    }}
                   />
                   <input
                     type="text"
@@ -236,12 +238,9 @@ function Users() {
                     onChange={handleInputChange}
                     required
                   />
-
-                  <div className="group-btn">
-                    <button type="submit">
-                      {editMode ? "Cập nhật" : "Thêm"}
-                    </button>
-                  </div>
+                  <button type="submit">
+                    {editMode ? "Cập nhật" : "Thêm"}
+                  </button>
                 </>
               )}
             </div>
@@ -251,7 +250,7 @@ function Users() {
         // <form onSubmit={editMode ? handleUpdateUser : handleAddUser} className="add-customer-form">
         //   <h3>Thêm khách hàng</h3>
         //     <input
-        //       type="text"
+        //  type="text"
         //       name="name"
         //       placeholder="Tên khách hàng"
         //       value={newusers.name}
@@ -294,7 +293,7 @@ function Users() {
 
       <table>
         <thead>
-          <tr>
+          <tr className="list-item">
             <th>ID</th>
             <th>TenKH</th>
             <th>SDT</th>

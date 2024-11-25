@@ -252,13 +252,25 @@ function Cars() {
             </label>
           </div>
         </div>
-        <button
-          className="add_car"
-          onClick={handleopenModal}
-          style={{ cursor: "pointer" }}
-        >
-          + Xe mới
-        </button>
+        <div className="bar__search">
+          <button
+            className="add_car"
+            onClick={handleopenModal}
+            style={{ cursor: "pointer" }}
+          >
+            + Xe mới
+          </button>
+          <div className="search-bar">
+            <input
+              className="search"
+              type="text"
+              placeholder="Tìm kiếm theo tên xe hoặc hãng xe..."
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)} // Cập nhật giá trị tìm kiếm
+            />
+            <img className="search-img" src="search.png"></img>
+          </div>
+        </div>
         {modalCar && (
           <form onSubmit={handleAddOrUpdateVehicle} className="form-vehicle">
             <h3>Thêm xe mới</h3>
@@ -368,19 +380,11 @@ function Cars() {
         )}
 
         <h3 className="list-heading">Danh sách xe </h3>
-        <div className="search-bar">
-          <input
-            type="text"
-            placeholder="Tìm kiếm theo tên xe hoặc hãng xe..."
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)} // Cập nhật giá trị tìm kiếm
-          />
-        </div>
         <div className="info-box-header">
           <div className="info-box">
             <table>
               <thead>
-                <tr className="tr">
+                <tr className="trr">
                   <th>Mã Xe</th>
                   <th>Hình ảnh</th>
                   <th>Tên xe</th>

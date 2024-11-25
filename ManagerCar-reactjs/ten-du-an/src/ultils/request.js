@@ -56,45 +56,79 @@ export const post = async (path, data) => {
 };
 
 
-export const fetchWithAuth = async (path, method = "GET", body = null) => {
+export const fetchWithAuth = async (
+  path,
+  method = "GET",
+  body = null,
+  additionalHeaders = {}
+) => {
+  // Lấy thông tin đăng nhập từ localStorage hoặc cookie
   let username = localStorage.getItem("username");
   let password = localStorage.getItem("password");
 
   if (!username || !password) {
+    console.warn("Không tìm thấy thông tin đăng nhập trong localStorage. Kiểm tra cookie...");
     username = getCookie("username");
     password = getCookie("password");
   }
 
   if (!username || !password) {
-    console.error("Username hoặc password không tồn tại trong localStorage hoặc cookie.");
     throw new Error("Thông tin đăng nhập không hợp lệ.");
   }
 
+  // Tạo header Authorization
   const authHeader = "Basic " + btoa(`${username}:${password}`);
 
+  // Headers mặc định
   const headers = {
-    "Authorization": authHeader,
+    Authorization: authHeader,
     "Content-Type": "application/json",
+    ...additionalHeaders, // Headers bổ sung
   };
 
-  const options = {
-    method,
-    headers,
-  };
+  // Cấu hình yêu cầu
+  const options = { method, headers };
+  if (body) options.body = JSON.stringify(body);
 
-  if (body) {
-    options.body = JSON.stringify(body);
+  try {
+    // Gửi yêu cầu đến API
+    const response = await fetch(`http://localhost:8080${path}`, options);
+
+    // Kiểm tra trạng thái HTTP
+    if (!response.ok) {
+      let errorData = { message: "Đã xảy ra lỗi không xác định.", statusCode: response.status };
+
+      // Thử parse JSON nếu phản hồi lỗi có nội dung
+      try {
+        const errorText = await response.text();
+        if (errorText) {
+          const errorJson = JSON.parse(errorText);
+          errorData = { ...errorData, ...errorJson }; // Kết hợp với lỗi từ backend
+        }
+      } catch (e) {
+        console.warn("Không thể parse lỗi từ backend:", e.message);
+      }
+
+      // Ném lỗi với cấu trúc tương tự Axios
+      throw { response: { data: errorData } };
+    }
+
+    // Xử lý phản hồi rỗng
+    const responseText = await response.text();
+    if (!responseText || response.status === 204) {
+      console.warn("Phản hồi rỗng từ API.");
+      return null;
+    }
+
+    // Trả về JSON nếu phản hồi có nội dung
+    return JSON.parse(responseText);
+  } catch (error) {
+    console.error("Lỗi khi gọi API:", error.message);
+    throw error;
   }
-
-  const response = await fetch(`http://localhost:8080${path}`, options);
-
-  if (!response.ok) {
-    const errorText = await response.text();
-    throw new Error(`HTTP error! Status: ${response.status}, Message: ${errorText}`);
-  }
-
-  return await response.json();
 };
+
+
 
 
 export const register = async (options) => {

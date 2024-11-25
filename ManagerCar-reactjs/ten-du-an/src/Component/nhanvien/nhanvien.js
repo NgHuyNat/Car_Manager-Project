@@ -1,16 +1,16 @@
-
 import React, { useEffect, useState } from "react";
 import "./nhanvien.css";
-import { getAllEmployees, addEmployee, updateEmployee, deleteEmployee } from "../../services/userService";
-
+import { fetchWithAuth } from "../../ultils/request";
 
 function Nhanvien() {
-  const [customers, setCustomers] = useState([]);
+  const [employees, setEmployees] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [newusers, setNewusers] = useState({
+  const [employeeForm, setEmployeeForm] = useState({
     id: "",
     name: "",
+    username: "",
+    password: "",
     role: "",
     phonenumber: "",
     email: "",
@@ -20,154 +20,162 @@ function Nhanvien() {
     defaultsalary: "",
     carsoldtotal: "",
   });
-  const [editMode, setEditMode] = useState(false); // Chế độ chỉnh sửa
-  const [editUser, setEditUser] = useState(null); // Khách hàng đang chỉnh sửa
-  const [openmodal, setmodal] = useState(false);
+  const [editMode, setEditMode] = useState(false);
+  const [openModal, setOpenModal] = useState(false);
 
-  const handleOpen = () => {
-    setmodal(!openmodal);
+  // Fetch all employees
+  const fetchEmployees = async () => {
+    setLoading(true);
+    try {
+      const data = await fetchWithAuth("/api/employees");
+      setEmployees(data || []);
+    } catch (error) {
+      setError(error.message);
+    } finally {
+      setLoading(false);
+    }
   };
 
   useEffect(() => {
-    getAllEmployees()
-      .then((data) => {
-        setCustomers(data);
-        setLoading(false);
-      })
-      .catch((error) => {
-        setError(error);
-        setLoading(false);
-      });
+    fetchEmployees();
   }, []);
 
+  // Handle input changes
   const handleInputChange = (e) => {
-    console.log(e);
     const { name, value } = e.target;
-    setNewusers({ ...newusers, [name]: value });
+    setEmployeeForm({ ...employeeForm, [name]: value });
   };
 
-  const handleAddUser = (e) => {
+  // Add or update employee
+  const handleAddOrUpdateEmployee = async (e) => {
     e.preventDefault();
-    addEmployee(newusers)
-      .then((data) => {
-        setCustomers([...customers, data]);
-        setNewusers({
-          id: "",
-          name: "",
-          role: "",
-          phonenumber: "",
-          email: "",
-          address: "",
-          salary: "",
-          salarybonus: "",
-          defaultsalary: "",
-          carsoldtotal: "",
-        });
-      })
-      .catch((error) => {
-        setError(error);
-      });
+  
+    const url = editMode
+      ? `/api/employees/${employeeForm.id}`
+      : "/api/employees";
+    const method = editMode ? "PUT" : "POST";
+  
+    try {
+      await fetchWithAuth(url, method, employeeForm);
+      await fetchEmployees(); // Làm mới danh sách nhân viên
+      resetForm();
+      setOpenModal(false);
+    } catch (error) {
+      let errorMessage = "Đã xảy ra lỗi không xác định."; // Thông báo mặc định
+  
+      // Kiểm tra phản hồi từ backend
+      if (error.response && error.response.data && error.response.data.message) {
+        errorMessage = error.response.data.message;
+      }
+  
+      // Hiển thị lỗi qua alert
+      alert(errorMessage);
+    }
+  };
+  
+  
+  // Delete employee
+  const handleDelete = async (id) => {
+    try {
+      await fetchWithAuth(`/api/employees/${id}`, "DELETE");
+      await fetchEmployees(); // Refresh employee list
+    } catch (error) {
+      setError(error.message);
+    }
   };
 
-  // Hàm xử lý xóa khách hàng
-  const handleDelete = (id) => {
-    console.log(id);
-    deleteEmployee(id)
-      .then(() => {
-        setCustomers(customers.filter((user) => user.id !== id));
-      })
-      .catch((error) => {
-        setError(error);
-      });
-  };
-
-  // Hàm xử lý chỉnh sửa khách hàng
-  const handleEdit = (user) => {
+  // Edit employee
+  const handleEdit = (employee) => {
     setEditMode(true);
-    setEditUser(user);
-    setNewusers(user); // Load thông tin khách hàng vào form
-    setmodal(true);
+    setEmployeeForm(employee);
+    setOpenModal(true);
   };
 
-  const handleUpdateUser = (e) => {
-    e.preventDefault();
-    updateEmployee(editUser.id, newusers)
-      .then((data) => {
-        setCustomers(
-          customers.map((user) => (user.id === editUser.id ? data : user))
-        );
-        setEditMode(false);
-        setEditUser(null);
-        setNewusers({
-          id: "",
-          name: "",
-          role: "",
-          phonenumber: "",
-          email: "",
-          address: "",
-          salary: "",
-          salarybonus: "",
-          defaultsalary: "",
-          carsoldtotal: "",
-        });
-      })
-      .catch((error) => {
-        setError(error);
-      });
+  // Reset form
+  const resetForm = () => {
+    setEmployeeForm({
+      id: "",
+      name: "",
+      username: "",
+      password: "",
+      role: "",
+      phonenumber: "",
+      email: "",
+      address: "",
+      salary: "",
+      salarybonus: "",
+      defaultsalary: "",
+      carsoldtotal: "",
+    });
+    setEditMode(false);
   };
 
   if (loading) return <p>Loading...</p>;
-  if (error) return <p>Error: {error.message}</p>;
 
   return (
     <div className="customer-table">
       <h2>Bảng Nhân Viên</h2>
-      <button onClick={handleOpen} style={{ cursor: "pointer" }}>
-        + Nhân viên mới
+      <button onClick={() => setOpenModal(true)} style={{ cursor: "pointer" }}>
+        + Nhân viên mới
       </button>
-      {openmodal && (
-        <form
-          onSubmit={editMode ? handleUpdateUser : handleAddUser}
-          className="add-customer-form"
-        >
-          <div className="add-customer-form--body">
+      {openModal && (
+        <form onSubmit={handleAddOrUpdateEmployee} className="add-employee-form">
+          <div className="add-employee-form--body">
             <input
               type="text"
               name="name"
               placeholder="Tên nhân viên"
-              value={newusers.name}
+              value={employeeForm.name}
               onChange={handleInputChange}
               required
             />
             <input
               type="text"
+              name="username"
+              placeholder="Tên đăng nhập"
+              value={employeeForm.username}
+              onChange={handleInputChange}
+              required
+            />
+            {!editMode && (
+              <input
+                type="password"
+                name="password"
+                placeholder="Mật khẩu"
+                value={employeeForm.password}
+                onChange={handleInputChange}
+                required
+              />
+            )}
+            <input
+              type="text"
               name="role"
-              placeholder="Chức vụ"
-              value={newusers.role}
+              placeholder="Chức vụ"
+              value={employeeForm.role}
               onChange={handleInputChange}
               required
             />
             <input
               type="text"
               name="phonenumber"
-              placeholder="Số điện thoại"
-              value={newusers.phonenumber}
+              placeholder="Số điện thoại"
+              value={employeeForm.phonenumber}
               onChange={handleInputChange}
               required
             />
             <input
               type="email"
               name="email"
-              placeholder="email"
-              value={newusers.email}
+              placeholder="Email"
+              value={employeeForm.email}
               onChange={handleInputChange}
               required
             />
             <input
               type="text"
               name="address"
-              placeholder="Địa chỉ"
-              value={newusers.address}
+              placeholder="Địa chỉ"
+              value={employeeForm.address}
               onChange={handleInputChange}
               required
             />
@@ -175,79 +183,85 @@ function Nhanvien() {
               type="text"
               name="salary"
               placeholder="Lương"
-              value={newusers.salary}
+              value={employeeForm.salary}
               onChange={handleInputChange}
               required
             />
             <input
               type="text"
               name="salarybonus"
-              placeholder="Lương thưởng"
-              value={newusers.salarybonus}
+              placeholder="Lương thưởng"
+              value={employeeForm.salarybonus}
               onChange={handleInputChange}
               required
             />
             <input
               type="text"
               name="defaultsalary"
-              placeholder="Lương mặc định"
-              value={newusers.defaultsalary}
+              placeholder="Lương mặc định"
+              value={employeeForm.defaultsalary}
               onChange={handleInputChange}
               required
             />
             <input
               type="text"
               name="carsoldtotal"
-              placeholder="Số xe bán được"
-              value={newusers.carsoldtotal}
+              placeholder="Số xe bán được"
+              value={employeeForm.carsoldtotal}
               onChange={handleInputChange}
               required
             />
             <div className="group-btn">
               <button type="submit">{editMode ? "Cập nhật" : "Thêm"}</button>
+              <button
+                type="button"
+                onClick={() => {
+                  resetForm();
+                  setOpenModal(false);
+                }}
+              >
+                Hủy
+              </button>
             </div>
           </div>
         </form>
       )}
-
       <table>
         <thead>
           <tr>
-            <th>ID</th>
-            <th>TenNV</th>
-            <th>ChucVu</th>
-            <th>SDT</th>
+            <th>Tên nhân viên</th>
+            <th>Chức vụ</th>
+            <th>Số điện thoại</th>
             <th>Email</th>
-            <th>DiaChi</th>
-            <th>Luong</th>
-            <th>Luongthuong</th>
-            <th>Luongmacdinh</th>
-            <th>SoXeBanDuoc</th>
-            <th>Thay đổi</th>
+            <th>Địa chỉ</th>
+            <th>Lương</th>
+            <th>Lương thưởng</th>
+            <th>Lương mặc định</th>
+            <th>Số xe bán được</th>
+            <th>Hành động</th>
           </tr>
         </thead>
         <tbody>
-          {customers.map((user) => (
-            <tr key={user.id}>
-              <td>{user.id}</td>
-              <td>{user.name}</td>
-              <td>{user.role}</td>
-              <td>{user.phonenumber}</td>
-              <td>{user.email}</td>
-              <td>{user.address}</td>
-              <td>{user.salary}</td>
-              <td>{user.salarybonus}</td>
-              <td>{user.defaultsalary}</td>
-              <td>{user.carsoldtotal}</td>
-
+          {employees.map((employee) => (
+            <tr key={employee.id}>
+              <td>{employee.name}</td>
+              <td>{employee.role}</td>
+              <td>{employee.phonenumber}</td>
+              <td>{employee.email}</td>
+              <td>{employee.address}</td>
+              <td>{employee.salary}</td>
+              <td>{employee.salarybonus}</td>
+              <td>{employee.defaultsalary}</td>
+              <td>{employee.carsoldtotal}</td>
               <td>
-                <button onClick={() => handleEdit(user)}>Sửa</button>
-                <button onClick={() => handleDelete(user.id)}>Xóa</button>
+                <button onClick={() => handleEdit(employee)}>Sửa</button>
+                <button onClick={() => handleDelete(employee.id)}>Xóa</button>
               </td>
             </tr>
           ))}
         </tbody>
       </table>
+      {error && <p className="error">{error}</p>}
     </div>
   );
 }

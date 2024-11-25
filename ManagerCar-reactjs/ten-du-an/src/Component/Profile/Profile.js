@@ -22,28 +22,35 @@ function Profile() {
       <div className="employee-profile">
         <h2>Thông Tin Nhân Viên</h2>
         <div className="profile">
-          <img className="profile__img" src={employeeData.img} alt="employee" />
-          <p>
-            <strong>Mã Nhân Viên:</strong> {employeeData.MaNH}
-          </p>
-          <p>
-            <strong>Tên Nhân Viên:</strong> {employeeData.TenNV}
-          </p>
-          <p>
-            <strong>Chức Vụ:</strong> {employeeData.ChucVu}
-          </p>
-          <p>
-            <strong>Số Điện Thoại:</strong> {employeeData.SDT}
-          </p>
-          <p>
-            <strong>Email:</strong> {employeeData.Email}
-          </p>
-          <p>
-            <strong>Địa Chỉ:</strong> {employeeData.DiaChi}
-          </p>
-          <p>
-            <strong>Ngày Vào Làm:</strong> {employeeData.NgayVaoLam}
-          </p>
+          <h3>Sơ yếu lý lịch</h3>
+          <div className="profile__nv">
+            <div className="profile__avt">
+              <img className="profile__img" src={employeeData.img} alt="employee" />
+            </div>
+            <div className="profile__tt">
+              <p>
+                <strong>Mã Nhân Viên:</strong> {employeeData.MaNH}
+              </p>
+              <p>
+                <strong>Tên Nhân Viên:</strong> {employeeData.TenNV}
+              </p>
+              <p>
+                <strong>Chức Vụ:</strong> {employeeData.ChucVu}
+              </p>
+              <p>
+                <strong>Số Điện Thoại:</strong> {employeeData.SDT}
+              </p>
+              <p>
+                <strong>Email:</strong> {employeeData.Email}
+              </p>
+              <p>
+                <strong>Địa Chỉ:</strong> {employeeData.DiaChi}
+              </p>
+              <p>
+                <strong>Ngày Vào Làm:</strong> {employeeData.NgayVaoLam}
+              </p>
+            </div>
+          </div>
         </div>
       </div>
     </>

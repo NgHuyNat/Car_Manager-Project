@@ -78,7 +78,7 @@ function Purchases() {
       ) : (
         <table className="purchases-table">
           <thead>
-            <tr>
+            <tr className="tr_purchase">
               <th>STT</th>
               <th>Tên khách hàng</th>
               <th>Tên nhân viên</th>
@@ -121,9 +121,9 @@ function Purchases() {
 
       {/* Modal hiển thị thông tin chi tiết khách hàng */}
       {modalOpen && selectedCustomer && (
-        <div className="modal">
-          <div className="modal-content">
-            <h3>Thông Tin Khách Hàng</h3>
+        <div className="purchase__detail">
+          <div className="purchase__detail--container">
+            <h3>Thông tin chi tiết</h3>
             <p>
               <strong>Tên khách hàng:</strong> {selectedCustomer.name}
             </p>
