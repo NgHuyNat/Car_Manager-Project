@@ -1,0 +1,267 @@
+{
+  "car": [
+    {
+      "id": "9",
+      "brand": "Porches",
+      "name": "911",
+      "type": "sedan",
+      "releaseyear": 2022,
+      "price": "1000000",
+      "sold": 1,
+      "image": null,
+      "fuel_tank_capacity": 12321,
+      "fuel_efficiency": 12312
+    },
+    {
+      "id": "11",
+      "brand": "Porches",
+      "name": "911",
+      "type": "sedan",
+      "releaseyear": 2022,
+      "price": "1000000",
+      "sold": 1,
+      "image": null,
+      "fuel_tank_capacity": 12321,
+      "fuel_efficiency": 12312
+    },
+    {
+      "name": "Lamboghini",
+      "brand": "HEHEHEHE",
+      "releaseyear": 2018,
+      "price": "1000000",
+      "type": "sedan",
+      "image": "https://i.pinimg.com/236x/c6/7e/4d/c67e4d865febc63b4a7b493a78738acb.jpg",
+      "battery_capacity": 123123,
+      "range_per_charge": 34543,
+      "enginetype": "ELECTRIC",
+      "id": "15"
+    },
+    {
+      "id": "18",
+      "brand": "Lamborghini",
+      "name": "ádsadsad",
+      "type": "Sedan",
+      "releaseyear": 2024,
+      "price": "100000000000000",
+      "sold": 1,
+      "image": "https://i.pinimg.com/236x/6a/2b/30/6a2b30bce37311d0e454a1c21ee0750f.jpg",
+      "fuel_tank_capacity": 123,
+      "fuel_efficiency": 123
+    },
+    {
+      "id": "19",
+      "brand": "Lamborghini",
+      "name": "Tan Sieu Beo",
+      "type": "Sedan",
+      "releaseyear": 2024,
+      "price": "100000000000000",
+      "sold": null,
+      "image": "https://i.pinimg.com/236x/6a/2b/30/6a2b30bce37311d0e454a1c21ee0750f.jpg",
+      "fuel_tank_capacity": 123,
+      "fuel_efficiency": 123
+    },
+    {
+      "id": "20",
+      "brand": "Bugati",
+      "name": "Tan ",
+      "type": "Couple",
+      "releaseyear": 2022,
+      "price": "123123123",
+      "sold": 0,
+      "image": "https://i.pinimg.com/236x/6a/2b/30/6a2b30bce37311d0e454a1c21ee0750f.jpg",
+      "fuel_tank_capacity": 11111,
+      "fuel_efficiency": 11111
+    },
+    {
+      "id": "21",
+      "brand": "Lamborghini",
+      "name": "Nguyễn Huy Tân",
+      "type": "Couple",
+      "releaseyear": 2024,
+      "price": "55555555555",
+      "sold": 1,
+      "image": "https://i.pinimg.com/236x/6a/2b/30/6a2b30bce37311d0e454a1c21ee0750f.jpg",
+      "fuel_tank_capacity": 123123,
+      "fuel_efficiency": 123123
+    },
+    {
+      "id": "22",
+      "brand": "Bugati",
+      "name": "Tan ",
+      "type": "Couple",
+      "releaseyear": 2024,
+      "price": "123123",
+      "sold": null,
+      "image": "https://i.pinimg.com/236x/6a/2b/30/6a2b30bce37311d0e454a1c21ee0750f.jpg",
+      "battery_capacity": 12231,
+      "range_per_charge": 123123
+    },
+    {
+      "id": "",
+      "name": "N",
+      "brand": "dsd",
+      "releaseyear": "sadsad",
+      "price": "sad",
+      "type": "dsad",
+      "battery_capacity": "",
+      "range_per_charge": "",
+      "fuel_tank_capacity": "s",
+      "fuel_efficiency": "d",
+      "image": "sdasdsds",
+      "enginetype": "GASOLINE"
+    }
+  ],
+  "contact": [
+    {
+      "id": "25",
+      "car": {
+        "id": 35,
+        "brand": "Lamborghini",
+        "name": "Tan Sieu Beo",
+        "type": "Sedan",
+        "releaseyear": 2024,
+        "price": "100000000000000",
+        "sold": 1,
+        "image": "https://i.pinimg.com/236x/6a/2b/30/6a2b30bce37311d0e454a1c21ee0750f.jpg",
+        "battery_capacity": 1111111,
+        "range_per_charge": 1111111
+      },
+      "employee": {
+        "id": 2,
+        "name": "Jane Doe",
+        "role": "Employee",
+        "username": "janedoe",
+        "password": "password456",
+        "phonenumber": "987654321",
+        "email": "jane.doe@example.com",
+        "address": "456 Elm St",
+        "salary": "5000",
+        "bonussalary": "500",
+        "defaultsalary": "5500",
+        "carsoldtotal": 7,
+        "manager_id": {
+          "id": 1,
+          "name": "Michael Scott",
+          "role": "Manager",
+          "username": "michaels",
+          "password": "password123",
+          "phonenumber": "123123123",
+          "email": "michael.scott@example.com",
+          "address": "Scranton, PA",
+          "salary": "8000",
+          "bonussalary": "1000",
+          "defaultsalary": "9000"
+        }
+      },
+      "customer": {
+        "id": 1,
+        "name": "Bui Hoang ákdksadkas",
+        "phonenumber": "123123123123",
+        "email": "buihoangduy123@1234455",
+        "address": "hahahahaha"
+      },
+      "detail": "ádasdsaddas",
+      "date": "2024-10-30"
+    }
+  ],
+  "customers": [
+    {
+      "id": "",
+      "name": "duy nguuu",
+      "phonenumber": "8728263821",
+      "email": "8932729872938729sdasjdhwajs@gmail.sex",
+      "address": "hải phòng"
+    },
+    {
+      "id": "",
+      "name": "duy nguuu vkl",
+      "phonenumber": "8728263821",
+      "email": "8932729872938729sdasjdhwajs@gmail.sex",
+      "address": "hải phòng"
+    },
+    {
+      "id": "",
+      "name": "duy nguuu vkl",
+      "phonenumber": "8728263821",
+      "email": "8932729872938729sdasjdhwajs@gmail.sex",
+      "address": "hải phòng"
+    },
+    {
+      "id": "",
+      "name": "duy nguuu",
+      "phonenumber": "8728263821",
+      "email": "8932729872938729sdasjdhwajs@gmail.sex",
+      "address": "hải phòng"
+    },
+    {
+      "id": "",
+      "name": "duy nguuu",
+      "phonenumber": "8728263821",
+      "email": "8932729872938729sdasjdhwajs@gmail.sex",
+      "address": "hải phòng"
+    },
+    {
+      "id": "",
+      "name": "duy nguuu",
+      "phonenumber": "8728263821",
+      "email": "8932729872938729sdasjdhwajs@gmail.sex",
+      "address": "hải phòng"
+    },
+    {
+      "id": "",
+      "name": "duy nguuu",
+      "phonenumber": "8728263821",
+      "email": "8932729872938729sdasjdhwajs@gmail.sex",
+      "address": "hải phòng"
+    },
+    {
+      "id": "",
+      "name": "duy nguuu",
+      "phonenumber": "8728263821",
+      "email": "8932729872938729sdasjdhwajs@gmail.sex",
+      "address": "hải phòng"
+    },
+    {
+      "id": "",
+      "name": "duy nguuu",
+      "phonenumber": "8728263821",
+      "email": "8932729872938729sdasjdhwajs@gmail.sex",
+      "address": "hải phòng"
+    },
+    {
+      "id": "",
+      "name": "duy nguuu vkl",
+      "phonenumber": "8728263821",
+      "email": "8932729872938729sdasjdhwajs@gmail.sex",
+      "address": "hải phòng"
+    },
+    {
+      "id": "",
+      "name": "duy nguuu vkl",
+      "phonenumber": "8728263821",
+      "email": "8932729872938729sdasjdhwajs@gmail.sex",
+      "address": "hải phòng"
+    },
+    {
+      "id": "",
+      "name": "duy nguuu vkl",
+      "phonenumber": "8728263821",
+      "email": "8932729872938729sdasjdhwajs@gmail.sex",
+      "address": "hải phòng"
+    },
+    {
+      "id": "",
+      "name": "duy nguuu vkl",
+      "phonenumber": "8728263821",
+      "email": "8932729872938729sdasjdhwajs@gmail.sex",
+      "address": "hải phòng"
+    },
+    {
+      "id": "",
+      "name": "duy nguuu vkl",
+      "phonenumber": "8728263821",
+      "email": "8932729872938729sdasjdhwajs@gmail.sex",
+      "address": "hải phòng"
+    }
+  ]
+}

@@ -1,0 +1,143 @@
+.customer-table {
+  width: 90% !important;
+  height: 735px !important;
+  margin: 2px 0px 0px 238px !important;
+  text-align: left;
+  background: #ece9e9;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.add-car {
+  margin-top: 20px;
+  background-color: #17153B;
+  color: #C8ACD6;
+  height: 40px;
+  width: 150px;
+  border-radius: 4px;
+  border: 2px solid #C8ACD6;
+  cursor: pointer;
+  margin-bottom: 20px;
+}
+
+.customer-table h2 {
+  margin: 0px 0px 20px 0px;
+}
+
+.customer-table table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.tr {
+  position:static;
+  z-index: 0;
+}
+
+.customer-table th, .customer-table td {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+.customer-table th {
+  background-color: #f2f2f2;
+}
+
+.add-customer-form{
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  border: 2px solid gray;
+  padding: 0px 0px 20px 0px;
+  width: 500px;
+  border-radius: 4px;
+  position: absolute;
+  background-color:#ece9e9;
+  margin-left: 289px;
+  margin-top: 50px !important;
+  top: -84px;
+  z-index: 9999;
+}
+
+.add-customer-form--body {
+
+
+}
+
+.add-customer-form--container {
+  padding: 0px 0px 10px 0px ;
+  display: flex;
+  flex-direction: column;
+  align-items: left;
+  width: 500px;
+  margin-left: 40px;
+}
+
+.add-customer-formm--container p {
+  margin-left: 50px;
+}
+
+.add-customer-formm--body h3 {
+  text-align: center;
+}
+
+
+.add-customer-form h3{
+  text-align: center;
+  color: #17153B;
+  font-size: 20px;
+  font-weight: 800;
+}
+
+/* 
+.add-customer-form--body {
+
+} */
+
+/* Input Fields */
+.add-customer-form input {
+  max-width: 400px;
+  padding: 12px;
+  margin: 8px 44px;
+  border: 1px solid gray;
+  border-radius: 4px;
+  font-size: 13px;
+  outline: gray;
+  outline-style: auto;
+  outline-color:gray;
+}
+
+
+/* Submit and Close Buttons */
+.add-customer-form button {
+  background-color: #17153B !important;
+  color: #C8ACD6  !important;
+  border-radius: 4px  !important;
+  font-size: 13px  !important;
+  cursor: pointer  !important;
+  width: 100px  !important;
+  border: #001529  !important;
+  height: 40px  !important;
+  margin-left: 69% !important;
+  outline-style: auto  !important;
+  outline-color: #C8ACD6  !important;
+  font-weight: 700  !important;
+  margin-top: 5px;
+}
+
+.add-customer-form button:hover {
+  background-color: #C8ACD6  !important;
+  color: #17153B  !important;
+  outline-style: auto  !important;
+  outline-color: #17153B  !important;
+}
+
+/* Close Button Style */
+.list-item {
+  display: fixed;
+}
+.list-item th {
+  position: static !important;
+  z-index: 0 !important;
+}

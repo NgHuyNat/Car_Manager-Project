@@ -1,0 +1,98 @@
+.general{
+  font-family: Arial, sans-serif;
+  background-color: #575454;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  position: fixed;
+  left: 0;
+}
+
+.register-form {
+  display: flex;
+  flex-direction: column;
+  background-color: #fff;
+  padding: 20px !important;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  width: 350px;
+  align-items: center;
+ 
+}
+
+.register-form h2 {
+  margin-top: 10px;
+  margin-bottom: 10px !important;
+  text-align: center;
+  color: #17153B;
+}
+
+.input_user {
+  width: 271px !important;
+}
+
+.input_pass {
+  width: 250px !important;
+}
+/* .register-form .btn {
+  width: 100%;
+  padding: 10px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+} */
+
+/* .btn-close{
+  margin-top: 10px;
+  background-color: #f44336!important;
+} */
+
+/* .register-form button:hover {
+  background-color: #45a049;
+} */
+
+.register-form p {
+  text-align: center;
+}
+
+.register-form--btn {
+  display: flex !important;
+  flex-direction: row !important;
+  justify-content: space-around;
+  gap:30px;
+
+}
+
+.btn {
+  width: 120px !important;
+  height: 40px;
+  margin-top : 10px;
+  background-color: #17153B !important;
+  color: #C8ACD6 !important;
+  border-radius: 4px !important;
+  font-size: 13px;
+  cursor: pointer;
+  border: #001529 !important;
+  outline-style: auto;
+  outline-color: #C8ACD6;
+  font-weight: 700;
+}
+
+.btn-close {
+  width: 120px !important;
+  height: 40px;
+  background-color: #17153B !important;
+  color: #C8ACD6 !important;
+  border-radius: 4px !important;
+  font-size: 13px;
+  cursor: pointer;
+  border: #001529 !important;
+  outline-style: auto;
+  outline-color: #C8ACD6;
+  font-weight: 700;
+}
