@@ -3,6 +3,7 @@ import "./nhanvien.css";
 import { fetchWithAuth } from "../../ultils/request";
 
 function Nhanvien() {
+  const [searchTerm, setSearchTerm] = useState(""); // Lưu giá trị tìm kiếm
   const [employees, setEmployees] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -22,7 +23,11 @@ function Nhanvien() {
   });
   const [editMode, setEditMode] = useState(false);
   const [openModal, setOpenModal] = useState(false);
-
+  const filteredEployees = employees.filter(
+    (employee) =>
+      employee.name?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      employee.phoneNumber?.toLowerCase().includes(searchTerm.toLowerCase())
+  );
   // Fetch all employees
   const fetchEmployees = async () => {
     setLoading(true);
@@ -65,7 +70,11 @@ function Nhanvien() {
       let errorMessage = "Đã xảy ra lỗi không xác định."; // Thông báo mặc định
 
       // Kiểm tra phản hồi từ backend
-      if (error.response && error.response.data && error.response.data.message) {
+      if (
+        error.response &&
+        error.response.data &&
+        error.response.data.message
+      ) {
         errorMessage = error.response.data.message;
       }
 
@@ -73,7 +82,6 @@ function Nhanvien() {
       alert(errorMessage);
     }
   };
-
 
   // Delete employee
   const handleDelete = async (id) => {
@@ -116,11 +124,25 @@ function Nhanvien() {
   return (
     <div className="customer-table">
       <h2>Bảng Nhân Viên</h2>
-      <button className="customer-table__btn" onClick={() => setOpenModal(true)} style={{ cursor: "pointer" }}>
+      <button
+        className="customer-table__btn"
+        onClick={() => setOpenModal(true)}
+        style={{ cursor: "pointer" }}
+      >
         + Nhân viên mới
       </button>
+      <input
+        className="search"
+        type="text"
+        placeholder="Tìm kiếm theo tên hoặc số điện thoại nhân viên..."
+        value={searchTerm}
+        onChange={(e) => setSearchTerm(e.target.value)} // Cập nhật giá trị tìm kiếm
+      />
       {openModal && (
-        <form onSubmit={handleAddOrUpdateEmployee} className="add-employee-form">
+        <form
+          onSubmit={handleAddOrUpdateEmployee}
+          className="add-employee-form"
+        >
           <h3>Thêm nhân viên</h3>
           <div className="add-employee-form--body">
             <div className="add-employee-form--list">
@@ -217,7 +239,7 @@ function Nhanvien() {
           </tr>
         </thead>
         <tbody>
-          {employees.map((employee) => (
+          {filteredEployees.map((employee) => (
             <tr key={employee.id}>
               <td>{employee.id}</td>
               <td>{employee.name}</td>
