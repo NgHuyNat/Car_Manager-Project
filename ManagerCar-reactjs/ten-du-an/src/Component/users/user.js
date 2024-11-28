@@ -17,7 +17,12 @@ function Users() {
   const [editUser, setEditUser] = useState(null); // Khách hàng đang chỉnh sửa
   const [openmodal, setmodal] = useState(false);
   const [viewMode, setViewMode] = useState(false); // Chế độ xem thông tin chi tiết
-
+  const [searchTerm, setSearchTerm] = useState(""); // Lưu giá trị tìm kiếm
+  const filteredCustomers = customers.filter(
+    (customer) =>
+      customer.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      customer.phonenumber.toLowerCase().includes(searchTerm.toLowerCase())
+  );
   const handleOpen = () => {
     setmodal(!openmodal);
   };
@@ -178,9 +183,19 @@ function Users() {
       >
         + Khách hàng mới
       </button>
+      <input
+        className="search"
+        type="text"
+        placeholder="Tìm kiếm theo tên hoặc số điện thoại khách hàng..."
+        value={searchTerm}
+        onChange={(e) => setSearchTerm(e.target.value)} // Cập nhật giá trị tìm kiếm
+      />
       {openmodal && (
-        <div >
-          <form onSubmit={editMode ? handleUpdateUser : handleAddUser} className="add-customer-form" >
+        <div>
+          <form
+            onSubmit={editMode ? handleUpdateUser : handleAddUser}
+            className="add-customer-form"
+          >
             <div className="add-customer-form--body">
               {viewMode ? (
                 <div className="add-customer-form--container">
@@ -213,11 +228,14 @@ function Users() {
                   <input
                     type="text"
                     name="phonenumber"
-                    placeholder="Số điện thoại"
+                    placeholder="Số điện thoại (10 chữ số)"
                     value={newusers.phonenumber}
                     onChange={handleInputChange}
+                    pattern="^[0-9]{10}$"
+                    title="Số điện thoại phải là 10 chữ số"
                     required
                   />
+
                   <input
                     type="email"
                     name="email"
@@ -227,7 +245,7 @@ function Users() {
                     required
                     style={{
                       padding: "10px",
-                      width: "379px"
+                      width: "379px",
                     }}
                   />
                   <input
@@ -303,7 +321,7 @@ function Users() {
           </tr>
         </thead>
         <tbody>
-          {customers.map((user) => (
+          {filteredCustomers.map((user) => (
             <tr key={user.id}>
               <td>{user.id}</td>
               <td

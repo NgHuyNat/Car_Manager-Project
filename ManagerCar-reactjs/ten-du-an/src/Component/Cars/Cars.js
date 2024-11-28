@@ -19,13 +19,48 @@ function Cars() {
     fuel_efficiency: "",
     image: "",
   });
-
+  const [customers, setCustomers] = useState([]);
+  const [employees, setEmployees] = useState([]);
   const [editingId, setEditingId] = useState(null);
   const [searchTerm, setSearchTerm] = useState(""); // Lưu giá trị tìm kiếm
   const [selectedVehicle, setSelectedVehicle] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalCar, setModalCar] = useState();
   const [carId, setCarId] = useState("");
+
+  useEffect(() => {
+    fetchCustomers();
+    fetchEmployees();
+  }, []);
+
+  const fetchCustomers = async () => {
+    try {
+      const response = await fetch("http://localhost:8080/customer");
+      const data = await response.json();
+      if (Array.isArray(data)) {
+        setCustomers(data);
+      } else {
+        console.error("Dữ liệu không phải là mảng:", data);
+      }
+    } catch (error) {
+      console.error("Lỗi khi lấy danh sách khách hàng:", error);
+    }
+  };
+
+  const fetchEmployees = async () => {
+    try {
+      const response = await fetch("http://localhost:8080/api/employees");
+      const data = await response.json();
+      if (Array.isArray(data)) {
+        setEmployees(data);
+      } else {
+        console.error("Dữ liệu không phải là mảng:", data);
+      }
+    } catch (error) {
+      console.error("Lỗi khi lấy danh sách nhân viên:", error);
+    }
+  };
+
   const handleopenModal = () => {
     setModalCar(!modalCar);
   };
@@ -34,6 +69,12 @@ function Cars() {
       vehicle.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
       vehicle.brand.toLowerCase().includes(searchTerm.toLowerCase())
   );
+  const formatCurrency = (value) => {
+    return new Intl.NumberFormat("vi-VN", {
+      style: "currency",
+      currency: "VND",
+    }).format(value);
+  };
 
   useEffect(() => {
     fetchVehicles();
@@ -108,8 +149,8 @@ function Cars() {
   const [isPurchaseModalOpen, setIsPurchaseModalOpen] = useState(false);
 
   const [purchaseData, setPurchaseData] = useState({
-    customerid: "",
-    employeeid: "",
+    customername: "",
+    employeename: "",
     carid: "",
     date: "",
     detail: "",
@@ -122,10 +163,22 @@ function Cars() {
 
   const handlePurchase = async () => {
     try {
+      const customer = customers.find(
+        (c) => c.name === purchaseData.customername
+      );
+      const employee = employees.find(
+        (e) => e.name === purchaseData.employeename
+      );
+
+      if (!customer || !employee) {
+        alert("Chưa chọn khách hàng hoặc nhân viên.");
+        return;
+      }
+
       const purchaseInfo = {
         carid: carId,
-        customerid: Number(purchaseData.customerid),
-        employeeid: Number(purchaseData.employeeid),
+        customerid: customer.id, // Lấy ID từ tên
+        employeeid: employee.id, // Lấy ID từ tên
         date: purchaseData.date,
         detail: purchaseData.detail,
       };
@@ -138,15 +191,16 @@ function Cars() {
         body: JSON.stringify(purchaseInfo),
       });
 
-      alert("Mua xe thành công!");
+      console.log(purchaseInfo);
+      alert(`Mua xe thành công! ${purchaseInfo}`);
 
       await soldCar(purchaseInfo.carid);
 
       setIsPurchaseModalOpen(false);
       setPurchaseData({
         carid: "",
-        customerid: "",
-        employeeid: "",
+        customername: "",
+        employeename: "",
         purchasedate: "",
         detail: "",
       });
@@ -417,7 +471,7 @@ function Cars() {
                     <td>{vehicle.name}</td>
                     <td>{vehicle.brand}</td>
                     <td>{vehicle.releaseyear}</td>
-                    <td>{vehicle.price}</td>
+                    <td>{formatCurrency(vehicle.price)}</td>
                     <td>{vehicle.type}</td>
 
                     <td className="add_car_button">
@@ -476,7 +530,7 @@ function Cars() {
                   <b>Năm sản xuất:</b> {selectedVehicle.releaseyear}
                 </p>
                 <p>
-                  <b>Giá bán:</b> {selectedVehicle.price}
+                  <b>Giá bán:</b> {formatCurrency(selectedVehicle.price)}
                 </p>
                 <p>
                   <b>Loại xe:</b> {selectedVehicle.type}
@@ -530,34 +584,49 @@ function Cars() {
             <h3>Thông tin mua xe</h3>
             <form onSubmit={handlePurchase}>
               <div className="modal-content__items">
-                <label>ID Khách hàng:</label>
-                <input
-                  type="text"
-                  name="customerid"
-                  value={purchaseData.customerid}
+                <label>Tên Khách hàng:</label>
+                <select
+                  name="customername"
+                  value={purchaseData.customername}
                   onChange={(e) =>
                     setPurchaseData({
                       ...purchaseData,
-                      customerid: e.target.value,
+                      customername: e.target.value, // Lưu tên
                     })
                   }
                   required
-                />
-              </div>
-              <div className="modal-content__items">
-                <label>ID Nhân viên:</label>
-                <input
-                  type="text"
-                  name="employeeid"
-                  value={purchaseData.employeeid}
+                >
+                  <option value="">Chọn khách hàng</option>
+                  {customers.map((customer) => (
+                    <option key={customer.id} value={customer.name}>
+                      {" "}
+                      {/* Lưu tên khách hàng */}
+                      {customer.name}
+                    </option>
+                  ))}
+                </select>
+
+                <label>Tên Nhân viên:</label>
+                <select
+                  name="employeename"
+                  value={purchaseData.employeename}
                   onChange={(e) =>
                     setPurchaseData({
                       ...purchaseData,
-                      employeeid: e.target.value,
+                      employeename: e.target.value, // Lưu tên nhân viên
                     })
                   }
                   required
-                />
+                >
+                  <option value="">Tên Nhân viên</option>
+                  {employees.map((employee) => (
+                    <option key={employee.id} value={employee.name}>
+                      {" "}
+                      {/* Lưu tên nhân viên */}
+                      {employee.name}
+                    </option>
+                  ))}
+                </select>
               </div>
               <div className="modal-content__items">
                 <label>Ngày mua:</label>
