@@ -219,12 +219,15 @@ function Cars() {
 
   const soldCar = async (id) => {
     try {
-      const response = await fetch(`http://localhost:8080/car/updatesoldcar/${id}`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
+      const response = await fetch(
+        `http://localhost:8080/car/updatesoldcar/${id}`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
 
       if (!response.ok) {
         throw new Error(`Lỗi cập nhật trạng thái xe: ${response.statusText}`);
