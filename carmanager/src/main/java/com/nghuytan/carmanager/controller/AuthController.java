@@ -2,10 +2,13 @@ package com.nghuytan.carmanager.controller;
 
 import com.nghuytan.carmanager.dto.request.LoginRequest;
 import com.nghuytan.carmanager.dto.request.RegisterRequest;
+import com.nghuytan.carmanager.dto.response.EmployeeResponse;
+import com.nghuytan.carmanager.dto.response.LoginResponse;
 import com.nghuytan.carmanager.model.Employee;
 import com.nghuytan.carmanager.model.Manager;
 import com.nghuytan.carmanager.repository.EmployeeRepository;
 import com.nghuytan.carmanager.repository.ManagerRepository;
+import com.nghuytan.carmanager.service.EmployeeService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.http.ResponseEntity;
@@ -18,11 +21,14 @@ public class AuthController {
     private final ManagerRepository managerRepository;
     private final EmployeeRepository employeeRepository;
     private final PasswordEncoder passwordEncoder;
+    private final EmployeeService employeeService;
 
-    public AuthController(ManagerRepository managerRepository, EmployeeRepository employeeRepository, PasswordEncoder passwordEncoder) {
+
+    public AuthController(ManagerRepository managerRepository, EmployeeRepository employeeRepository, PasswordEncoder passwordEncoder, EmployeeService employeeService) {
         this.managerRepository = managerRepository;
         this.employeeRepository = employeeRepository;
         this.passwordEncoder = passwordEncoder;
+        this.employeeService = employeeService;
     }
 
     @CrossOrigin(origins = "http://localhost:3000")
@@ -82,7 +88,9 @@ public class AuthController {
         if (employeeOpt.isPresent()) {
             Employee employee = employeeOpt.get();
             if (passwordEncoder.matches(loginRequest.getPassword(), employee.getPassword())) {
-                return ResponseEntity.ok("Đăng nhập thành công với vai trò Nhân viên!");
+                EmployeeResponse employeeResponse = employeeService.mapToResponse(employee);
+                LoginResponse loginResponse = new LoginResponse("Đăng nhập thành công với vai trò Nhân viên", employeeResponse);
+                return ResponseEntity.ok(loginResponse);
             }
         }
 

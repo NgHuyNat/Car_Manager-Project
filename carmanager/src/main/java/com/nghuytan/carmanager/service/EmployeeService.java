@@ -98,12 +98,13 @@ public class EmployeeService {
         Employee employee = employeeRepository.findById(id)
                 .orElseThrow(() -> new CustomException("Không tìm thấy nhân viên với ID: " + id, 404));
 
+        String currentUsername = employee.getUsername();
 
-        if (request.getUserName() != null &&
-                employeeRepository.existsByUsername(request.getUserName()) &&
-                !employee.getUsername().equals(request.getUserName())) {
-            throw new CustomException("Tên đăng nhập '" + request.getUserName() + "' đã tồn tại.", 400);
+        if (request.getUserName() != null && !request.getUserName().equals(currentUsername)) {
+            throw new CustomException("Không thể thay đổi tên đăng nhập.", 400);
         }
+
+        employee.setUsername(currentUsername);
 
         if (request.getUserName() != null) employee.setUsername(request.getUserName());
         if (request.getPassword() != null) employee.setPassword(passwordEncoder.encode(request.getPassword()));
